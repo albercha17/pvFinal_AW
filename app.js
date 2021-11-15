@@ -17,10 +17,11 @@ let daoUser = new DAOUsers(pool);
 
 const path = require("path");
 const express = require("express");
+const { request } = require("http");
+const { response } = require("express");
 const app = express();
 
 app.set("view engine", "ejs");
-
 app.set("views", path.join(__dirname, "views"));
 
 let nombre = "usuario";
@@ -28,7 +29,20 @@ let password = "1234";
 let usuario_identificado = false;
 
 
-
+//MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
+//error404
+function middelware404Error(request,response,next){    
+    response.status(404);
+    response.render("error404",{url:request.url});
+};
+//error505
+function middelware500Error(error, request,response,next){    
+    response.status(500);
+    response.render("error500",{
+        mensaje:error.message,
+        pila:error.stack});
+};
+//comprobar que se esta logeado
 function identificador(request,response,next){
     if(usuario_identificado){
         next();
@@ -37,6 +51,7 @@ function identificador(request,response,next){
         response.redirect("/login");
     }
 }
+
 
 
 // rutas
@@ -62,25 +77,20 @@ app.get("/secreto",identificador, function (request, response) {
     // response.status(200);
     response.render("secreto");
 });
-app.get("/otro_secreto",identificador, function (request, response) {
-    // response.status(200);
-    response.render("otro_secreto");
-});
-app.get("/publico",identificador, function (request, response) {
-    // response.status(200);
-    response.render("publico");
-});
 
 
 // funciones de las vistas
 
-app.get("/login1", function (request, response) {
+app.get("/logearse", function (request, response) {
     daoUser.isUserCorrect(request.query.nombre,request.query.password,cb_isUserCorrect);
     response.redirect("/secreto");
 });
 
 
+//errores y listen
 
+app.use(middelware404Error);
+app.use(middelware500Error);
 app.listen(3000, function(err) {
     if (err) {
         console.error("No se pudo inicializar el servidor: " +
