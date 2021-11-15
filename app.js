@@ -20,6 +20,7 @@ const express = require("express");
 const { request } = require("http");
 const { response } = require("express");
 const app = express();
+var router_user=require("./routers/users")
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 let nombre = "usuario";
 let password = "1234";
 let usuario_identificado = false;
+let usuario_correcto= false;
 
 
 //MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
@@ -55,23 +57,21 @@ function identificador(request,response,next){
 
 
 // rutas
+app.get("/login", function(request, response) {
+    if(usuario_identificado){ response.redirect("/inicio");}
+    else{ response.sendFile(path.join(__dirname, "./Views/Templates","login.html"));}
+});
+app.get("/SingUp", function(request, response) {
+    if(usuario_identificado){ response.redirect("/inicio");}
+    else{ response.sendFile(path.join(__dirname, "./Views/Templates","CreateAccount.html"));}
+});
 app.get("/", function (request, response) {
     // response.status(200);
     response.redirect("/login");
 });
-app.get("/login", function (request, response) {
-    if(usuario_identificado){
-        response.render("secreto");
-    }
-    else{
-        response.sendFile(path.join(__dirname, "/Views/Templates","login.html"));
-    }
-    
-});
-
 app.get("/inicio",identificador, function (request, response) {
     // response.status(200);
-    response.render("inicio",{nombre1:nombre});
+    response.render("secreto");
 });
 app.get("/secreto",identificador, function (request, response) {
     // response.status(200);
@@ -85,6 +85,24 @@ app.get("/logearse", function (request, response) {
     daoUser.isUserCorrect(request.query.nombre,request.query.password,cb_isUserCorrect);
     response.redirect("/secreto");
 });
+app.get("/crearUsuario", function (request, response) {
+   //validar datos
+    var img=imagenPerfil(request.query.img);
+    var datosValidados=validarDatos(request.query.email,request.query.password,request.query.password_r);
+    daoUser.getUserName(request.query.email, buscarUsuario);
+    
+    if(datosValidados&&usuario_correcto){
+        //añadirlo en la BD
+        
+    }
+    else{
+        response.redirect("/secreto");
+    }
+    // poner el callback si ha ido bien ha identificado
+    //redireccionar a la pagina de inicio
+    
+});
+
 
 
 //errores y listen
@@ -114,5 +132,46 @@ function cb_isUserCorrect(err, result) {
     } else {
         usuario_identificado = false;
         console.log("Usuario y/o contraseña incorrectos");
+    }
+}
+function buscarUsuario(err, result) {
+    if (err) {
+        usuario_identificado = false;
+        console.log(err.message);
+    } else if (result) {
+        console.log("Usuario ya existe");
+    } else {
+        usuario_correcto=true;
+        console.log("Usuario correcto");
+    }
+}
+
+
+//funciones
+
+
+function validarDatos(email, contraseña,contraseña_r) {
+    var valido=false;
+    if(contraseña==contraseña_r && validarEmail(email)) valido=true;
+    return valido;
+}
+function validarEmail(email) {
+    var re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+    if (!re.exec(email)) return false;
+    else return true;
+    
+}
+function imagenPerfil(img){
+    if(img){
+        return img;
+    }
+    else{
+        var listaImagenes= ['/Imagenes_de_perfil/sfg.png', 
+        '/Imagenes_de_perfil/roberto.png', '/Imagenes_de_perfil/nico.png',
+        '/Imagenes_de_perfil/marta.png', '/Imagenes_de_perfil/kuroko.png',
+        '/Imagenes_de_perfil/defecto3.png', '/Imagenes_de_perfil/defecto2.png',
+        '/Imagenes_de_perfil/defecto1.png', '/Imagenes_de_perfil/amy.png'];
+        var numero= Math.floor(Math.random() * (listaImagenes.length - 0));
+        return listaImagenes[numero];
     }
 }

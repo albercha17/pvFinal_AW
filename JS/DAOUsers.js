@@ -53,13 +53,13 @@ class DAOUsers {
             }
         });
       }
-      getUserName(email, callback) { 
+      getUserName(email,callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT nombre FROM user WHERE email = ?",
+                    "SELECT * FROM user WHERE email = ?",
                     [email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
@@ -67,15 +67,15 @@ class DAOUsers {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, false); 
                             } else {
-                                callback(null, rows[0].nombre);
+                                callback(null, true);
                             }
                         }
                     }
                 );
             }
         });
-      }
+    }
 }
 module.exports = DAOUsers
