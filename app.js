@@ -45,7 +45,13 @@ app.get("/", function (request, response) {
     response.redirect("/login");
 });
 app.get("/login", function (request, response) {
-    response.sendFile(path.join(__dirname, "/Views/Templates","login.html"));
+    if(usuario_identificado){
+        response.render("secreto");
+    }
+    else{
+        response.sendFile(path.join(__dirname, "/Views/Templates","login.html"));
+    }
+    
 });
 
 app.get("/inicio",identificador, function (request, response) {
@@ -70,13 +76,7 @@ app.get("/publico",identificador, function (request, response) {
 
 app.get("/login1", function (request, response) {
     daoUser.isUserCorrect(request.query.nombre,request.query.password,cb_isUserCorrect);
-    daoUser.getUserName(request.query.nombre,coseguir_nomnbre);
-    if(usuario_identificado){
-        response.redirect("/inicio");
-    }
-    else{
-        response.redirect("/login");
-    }
+    response.redirect("/secreto");
 });
 
 
@@ -104,22 +104,5 @@ function cb_isUserCorrect(err, result) {
     } else {
         usuario_identificado = false;
         console.log("Usuario y/o contraseña incorrectos");
-    }
-}
-function coseguir_nomnbre(err, result) {
-    if (err) {
-        console.log(err.message);
-    } else if (result) {
-        usuario_identificado = true;
-        nombre=result;
-    }
-}
-
-function identificador(request,response,next){
-    if(usuario_identificado){
-        next();
-    }
-    else{
-        response.redirect("/login");
     }
 }
