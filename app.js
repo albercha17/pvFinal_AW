@@ -45,15 +45,9 @@ app.get("/", function (request, response) {
     response.redirect("/login");
 });
 app.get("/login", function (request, response) {
-    // response.status(200);
-    if(usuario_identificado){
-        response.redirect("/inicio");
-    }
-    else{
-        response.render("login");
-    }
-    
+    response.sendFile(path.join(__dirname, "/Views/Templates","login.html"));
 });
+
 app.get("/inicio",identificador, function (request, response) {
     // response.status(200);
     response.render("inicio",{nombre1:nombre});

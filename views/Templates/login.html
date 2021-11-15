@@ -16,14 +16,14 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
      
-          <form th:action="@{/login}" th:object="${usuario}" method="post">
+            <form method="get" action="/login1">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">E-mail</label>
-              <input type="email" th:field="*{email}" class="form-control" aria-describedby="emailHelp">
+              <input type="email" name="user" class="form-control" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" th:field="*{contrasenia}" class="form-control" >
+              <input type="password" name="password" class="form-control" >
             </div>
             <br>
             <br>
