@@ -29,6 +29,15 @@ let usuario_identificado = false;
 
 
 
+function identificador(request,response,next){
+    if(usuario_identificado){
+        next();
+    }
+    else{
+        response.redirect("/login");
+    }
+}
+
 
 // rutas
 app.get("/", function (request, response) {
@@ -47,7 +56,7 @@ app.get("/login", function (request, response) {
 });
 app.get("/inicio",identificador, function (request, response) {
     // response.status(200);
-    response.render("inicio",{nombre:nombre});
+    response.render("inicio",{nombre1:nombre});
 });
 app.get("/secreto",identificador, function (request, response) {
     // response.status(200);
