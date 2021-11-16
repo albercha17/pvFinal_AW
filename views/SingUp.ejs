@@ -16,27 +16,26 @@
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <form method="get" action="/crearUsuario">
-      
+        <p style="color: red;"><%= errorCrearUsuario %></p>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">E-mail</label>
-            <input type="email" name="email" class="form-control" aria-describedby="emailHelp">
+            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" required>
           </div>
-          <ul th:if="${errmessg != null}">
-            <p style="color: red;" th:text = "${errmessg}"></p>
-          </ul>
+
+          
         </ul>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" >
+            <input type="password" name="password" class="form-control" required>
             
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword2" class="form-label">Repeat Password</label>
-            <input type="password" name="password_r" class="form-control" >
+            <input type="password" name="password_r" class="form-control"required >
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword2" class="form-label">User Name</label>
-            <input type="text" name="nombre" class="form-control" aria-describedby="emailHelp">
+            <input type="text" name="nombre" class="form-control" aria-describedby="emailHelp" required>
           </div>
 
           <input type="file" name="img">:
@@ -44,7 +43,7 @@
             <button class="btn btn-primary" type="submit">Create Account</button>
           </div>
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="submit">Sign-Up</button>
+            <button class="btn btn-primary"onclick="location.href='http://localhost:3000/login'" type="button">Sign-Up</button>
           </div>
          
           
