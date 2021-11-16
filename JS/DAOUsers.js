@@ -1,10 +1,10 @@
 "use strict";
 
 class DAOUsers {
-     constructor(pool) {
-        this.pool=pool
+    constructor(pool) {
+        this.pool = pool
     }
-     isUserCorrect(email, password, callback) {
+    isUserCorrect(email, password, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -28,8 +28,8 @@ class DAOUsers {
             }
         });
     }
-    
-    getUserImageName(email, callback) { 
+
+    getUserImageName(email, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -52,8 +52,8 @@ class DAOUsers {
                 );
             }
         });
-      }
-      getUserName(email,callback) {
+    }
+    getUserName(email, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -67,7 +67,7 @@ class DAOUsers {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, false); 
+                                callback(null, false);
                             } else {
                                 callback(null, true);
                             }
@@ -75,6 +75,46 @@ class DAOUsers {
                     }
                 );
             }
+        });
+    }
+    insertUser(email, password, nombre, img, callback) { // si falla el insert del tag se hace rollback?????
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                error = new Error("Error de acceso a la base de datos");
+            } else {
+                connection.query(
+                    "SELECT * FROM user WHERE email = ?",
+                    [email],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                connection.query(
+                                    "INSERT INTO user (email,password,nombre,img,reputacion) VALUES (?, ?, ?, ?, ?)",
+                                    [email, password, nombre, img, 1],
+                                    function (err, rows) {
+                                        connection.release(); // devolver al pool la conexión
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else {
+                                            callback(null, true);
+                                        }
+                                    }
+                                );
+                            } else {
+                                callback(new Error("Ya existe un usuario con este correo."));
+                            }
+                        }
+                    }
+                );
+
+
+
+
+
+            }
+
         });
     }
 }

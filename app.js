@@ -25,10 +25,7 @@ var router_user=require("./routers/users")
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-let nombre = "usuario";
-let password = "1234";
 let usuario_identificado = false;
-let usuario_correcto= false;
 
 
 //MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +53,8 @@ function identificador(request,response,next){
 
 
 
-// rutas
+// rutas-------------------------------------------------------------------------------------------------------------------------------------
+
 app.get("/login", function(request, response) {
     if(usuario_identificado){ response.redirect("/inicio");}
     else{ response.sendFile(path.join(__dirname, "./Views/Templates","login.html"));}
@@ -79,33 +77,51 @@ app.get("/secreto",identificador, function (request, response) {
 });
 
 
-// funciones de las vistas
+// funciones de las vistas --------------------------------------------------------------------------------------------------------------
 
+// funcion logearse
 app.get("/logearse", function (request, response) {
     daoUser.isUserCorrect(request.query.nombre,request.query.password,cb_isUserCorrect);
     response.redirect("/secreto");
 });
+function cb_isUserCorrect(err, result) {
+    if (err) {
+        usuario_identificado = false;
+        console.log(err.message);
+    } else if (result) {
+        usuario_identificado = true;
+        console.log("Usuario y contraseña correctos");
+    } else {
+        usuario_identificado = false;
+        console.log("Usuario y/o contraseña incorrectos");
+    }
+}
+
+
+//funcion crear usuario
 app.get("/crearUsuario", function (request, response) {
    //validar datos
     var img=imagenPerfil(request.query.img);
     var datosValidados=validarDatos(request.query.email,request.query.password,request.query.password_r);
-    daoUser.getUserName(request.query.email, buscarUsuario);
     
-    if(datosValidados&&usuario_correcto){
-        //añadirlo en la BD
-        
+    if(datosValidados){
+        daoUser.insertUser(request.query.email,request.query.password,request.query.nombre,img, crearusuario);
+        // aqui creariamos un objeto user
     }
-    else{
         response.redirect("/secreto");
-    }
-    // poner el callback si ha ido bien ha identificado
-    //redireccionar a la pagina de inicio
-    
 });
+function crearusuario(err, result) {
+    if (err) {
+        usuario_identificado = false;
+        console.log(err.message);
+    } else if (result) {
+        usuario_identificado=true;
+        console.log("Usuario creado");
+    }
+}
 
 
-
-//errores y listen
+//errores y listen--------------------------------------------------------------------------------------------------------------------------
 
 app.use(middelware404Error);
 app.use(middelware500Error);
@@ -121,33 +137,13 @@ app.listen(3000, function(err) {
 
 
 
-//callbacks
-function cb_isUserCorrect(err, result) {
-    if (err) {
-        usuario_identificado = false;
-        console.log(err.message);
-    } else if (result) {
-        usuario_identificado = true;
-        console.log("Usuario y contraseña correctos");
-    } else {
-        usuario_identificado = false;
-        console.log("Usuario y/o contraseña incorrectos");
-    }
-}
-function buscarUsuario(err, result) {
-    if (err) {
-        usuario_identificado = false;
-        console.log(err.message);
-    } else if (result) {
-        console.log("Usuario ya existe");
-    } else {
-        usuario_correcto=true;
-        console.log("Usuario correcto");
-    }
-}
 
 
-//funciones
+
+
+
+
+//funciones -----------------------------------------------------------------------------------------------------------------------------
 
 
 function validarDatos(email, contraseña,contraseña_r) {
