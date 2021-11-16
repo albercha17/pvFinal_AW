@@ -69,7 +69,7 @@ class DAOUsers {
                             if (rows.length === 0) {
                                 callback(null, false);
                             } else {
-                                callback(null, true);
+                                callback(null, rows[0]);
                             }
                         }
                     }
@@ -98,7 +98,7 @@ class DAOUsers {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else {
-                                            callback(null, true);
+                                            callback(null, email);
                                         }
                                     }
                                 );

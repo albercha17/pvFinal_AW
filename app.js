@@ -26,7 +26,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 let usuario_identificado = false;
-
+let nombre="desconocido";
+let e
 
 //MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
 //error404
@@ -57,32 +58,29 @@ function identificador(request,response,next){
 
 app.get("/login", function(request, response) {
     if(usuario_identificado){ response.redirect("/inicio");}
-    else{ response.sendFile(path.join(__dirname, "./Views/Templates","login.html"));}
+    else{ response.render("login");}
 });
 app.get("/SingUp", function(request, response) {
     if(usuario_identificado){ response.redirect("/inicio");}
-    else{ response.sendFile(path.join(__dirname, "./Views/Templates","CreateAccount.html"));}
+    else{ response.render("SingUp");}
 });
-app.get("/", function (request, response) {
+app.get("/", identificador,function (request, response) {
     // response.status(200);
-    response.redirect("/login");
+    response.redirect("/inicio");
 });
 app.get("/inicio",identificador, function (request, response) {
     // response.status(200);
-    response.render("secreto");
-});
-app.get("/secreto",identificador, function (request, response) {
-    // response.status(200);
-    response.render("secreto");
+    response.render("inicio");
 });
 
 
 // funciones de las vistas --------------------------------------------------------------------------------------------------------------
 
-// funcion logearse
+// funcion logearse------------------------------------------------------------------------------------
 app.get("/logearse", function (request, response) {
-    daoUser.isUserCorrect(request.query.nombre,request.query.password,cb_isUserCorrect);
-    response.redirect("/secreto");
+    daoUser.isUserCorrect(request.query.email,request.query.password,cb_isUserCorrect);
+    daoUser.getUserName(request.query.email,buscarNombre);
+    response.redirect("/inicio");
 });
 function cb_isUserCorrect(err, result) {
     if (err) {
@@ -98,7 +96,7 @@ function cb_isUserCorrect(err, result) {
 }
 
 
-//funcion crear usuario
+//funcion crear usuario------------------------------------------------------------------------------------------------
 app.get("/crearUsuario", function (request, response) {
    //validar datos
     var img=imagenPerfil(request.query.img);
@@ -106,9 +104,9 @@ app.get("/crearUsuario", function (request, response) {
     
     if(datosValidados){
         daoUser.insertUser(request.query.email,request.query.password,request.query.nombre,img, crearusuario);
-        // aqui creariamos un objeto user
+
     }
-        response.redirect("/secreto");
+        response.redirect("/SingUp");
 });
 function crearusuario(err, result) {
     if (err) {
@@ -116,10 +114,20 @@ function crearusuario(err, result) {
         console.log(err.message);
     } else if (result) {
         usuario_identificado=true;
+        daoUser.getUserName(result,buscarNombre);
         console.log("Usuario creado");
     }
 }
-
+function buscarNombre(err, result) {
+    if (err) {
+        console.log(err.message);
+    } else if (result) {
+        nombre=result.nombre;
+        console.log("Usuario:"+result.email);
+    } else {
+        console.log("Usuario incorrecto");
+    }
+}
 
 //errores y listen--------------------------------------------------------------------------------------------------------------------------
 
@@ -148,14 +156,17 @@ app.listen(3000, function(err) {
 
 function validarDatos(email, contraseña,contraseña_r) {
     var valido=false;
-    if(contraseña==contraseña_r && validarEmail(email)) valido=true;
+    if(contraseña!=contraseña_r) console.log("Las contraseñas no coinciden");
+    else if(validarEmail(email)&&contraseña==contraseña_r) valido=true;
     return valido;
 }
 function validarEmail(email) {
     var re = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-    if (!re.exec(email)) return false;
+    if (!re.exec(email)){
+        console.log("Correo no valido");
+        return false;
+    } 
     else return true;
-    
 }
 function imagenPerfil(img){
     if(img){
