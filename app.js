@@ -41,8 +41,8 @@ function middelware500Error(error, request, response, next) {
 
  app.use(cookieParser());
 
-// rutas-------------------------------------------------------------------------------------------------------------------------------------
-
+//------------------------------------------  R U T A S  -------------------------------------------------------------------------------------------
+//router_user
 app.get("/",router_user);
 app.get("/inicio",router_user);
 app.get("/login",router_user);
@@ -50,6 +50,7 @@ app.get("/loguearse",router_user);
 app.get("/SingUp",router_user);
 app.get("/crearUsuario",router_user);
 
+//
 
 app.use(middelware404Error);
 app.use(middelware500Error);
