@@ -28,7 +28,8 @@ var errorLogin = null;
 var errorCrearUsuario=null;
 var nombre="";
 
-// middleware that is specific to this router
+//--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
+
 function identificador(request, response, next) {
     if (identificado) {
         next();
@@ -36,13 +37,12 @@ function identificador(request, response, next) {
             response.redirect("/login");
     }
 }
-// define the home page route
+//--------------------------------------  R U T A S ---------------------------------------------------------
+
 router.get("/",identificador, function (request, response) {
-    // response.status(200);
     response.redirect("/inicio");
 });
 router.get("/inicio",identificador, function (request, response) {
-    // response.status(200);
     response.render("inicio", {
         nombre: nombre
     });
@@ -72,7 +72,9 @@ router.get("/SingUp", function (request, response) {
 });
 
 
-// funciones
+//--------------------------------------  F U N C I O N E S ---------------------------------------------------------
+
+//--------------------------------------  loguear usuario ---------------------------------------------------------
 router.get("/loguearse", function (request, response) {
     daoUser.isUserCorrect(request.query.email, request.query.password, cb_isUserCorrect);
     response.redirect("/inicio");
@@ -102,6 +104,9 @@ function buscarNombre(err, result) {
         console.log("Usuario incorrecto");
     }
 }
+
+//--------------------------------------  crear usuario ---------------------------------------------------------
+
 router.get("/crearUsuario", function (request, response) {
     //validar datos
     var img = imagenPerfil(request.query.img);
@@ -126,7 +131,8 @@ function crearusuario(err, result) {
 }
 
 
-//funciones -----------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------  F U N C I O N E S     S E C U N D A R I A S ---------------------------------------------------------
+
 
 
 function validarDatos(email, contraseña, contraseña_r) {
