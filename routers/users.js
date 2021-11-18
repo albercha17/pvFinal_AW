@@ -81,10 +81,11 @@ router.get("/loguearse", function (request, response) {
         });
       } 
       else {
-        response.redirect("/login");
+        
         identificado = false;
         response.cookie("identificado",false);
         errorLogin = "Usuario y/o contraseña incorrectos";
+        response.redirect("/login");
       }
     }
   );
@@ -134,7 +135,8 @@ router.get("/crearUsuario", function (request, response) {
         }
       }
     );
-  } else response.redirect("/SingUp");
+  }
+   else response.redirect("/SingUp");
 });
 
 //--------------------------------------  F U N C I O N E S     S E C U N D A R I A S ---------------------------------------------------------
