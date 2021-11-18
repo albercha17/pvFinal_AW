@@ -23,8 +23,16 @@ const middelwareSession=session({
     resave:false,
     
 });
+
+
+var identificado=false;
+var creado=false;
 //MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
 //error404
+
+
+
+
 function middelware404Error(request, response, next) {
     response.status(404);
     response.render("error404", {
@@ -39,19 +47,46 @@ function middelware500Error(error, request, response, next) {
         pila: error.stack
     });
 };
+function identificador(request, response, next) {
+    if(!creado){
+        response.cookie("identificado",false);
+        creado=true;
+    }
+    identificado=request.cookies.identificado;
+    if (identificado!='false') {
+      next();
+    } else {
+      response.redirect("/login");
+    }
+  }
 
- app.use(cookieParser());
+  
+  app.use(cookieParser());
 
 //------------------------------------------  R U T A S  -------------------------------------------------------------------------------------------
 //router_user
-app.get("/",router_user);
-app.get("/inicio",router_user);
+
 app.get("/login",router_user);
 app.get("/loguearse",router_user);
 app.get("/SingUp",router_user);
 app.get("/crearUsuario",router_user);
 
-//
+
+
+app.get("/", identificador, function (request, response) {
+    response.redirect("/inicio");
+  });
+app.get("/inicio", identificador, function (request, response) {
+    response.render("inicio", {
+      nombre: request.cookies.nombre,
+    });
+  });
+
+
+
+
+
+//Errores
 
 app.use(middelware404Error);
 app.use(middelware500Error);
