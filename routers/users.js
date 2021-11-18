@@ -4,21 +4,13 @@ const path = require("path");
 const { request } = require("http");
 const { response } = require("express");
 //DAOS   -----------------------------------------------------
-const config = require("../JS/config");
-const mysql = require("mysql");
-const DAOUsers = require("../JS/DAOUsers");
-// Crear el pool de conexiones
-const pool = mysql.createPool({
-  host: config.host,
-  user: config.user,
-  password: config.password,
-  database: config.database,
-});
-let daoUser = new DAOUsers(pool);
 
+const FactoryDao = require("../JS/FactoriaDao");
+let Factorydao = new FactoryDao()
+var daoUser= Factorydao.DaoUser();
 const cookieParser=require("cookie-parser")
 //--------------------------------------------------
-
+const DAOUsers = require("../JS/DAOUsers");
 //const session= require("express-session")
 //const cookieParser=require("cookie-parser") vbvg
 

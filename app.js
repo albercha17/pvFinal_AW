@@ -12,6 +12,8 @@ const app = express();
 const session= require("express-session")
 const cookieParser=require("cookie-parser")
 var router_user = require("./routers/users")
+var router_inicio = require("./routers/inicio")
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -29,10 +31,6 @@ var identificado=false;
 var creado=false;
 //MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
 //error404
-
-
-
-
 function middelware404Error(request, response, next) {
     response.status(404);
     response.render("error404", {
@@ -47,6 +45,8 @@ function middelware500Error(error, request, response, next) {
         pila: error.stack
     });
 };
+
+// Para saber si esta identificado
 function identificador(request, response, next) {
     if(!creado){
         response.cookie("identificado",false);
@@ -60,7 +60,7 @@ function identificador(request, response, next) {
     }
   }
 
-  
+  // cookieParser
   app.use(cookieParser());
 
 //------------------------------------------  R U T A S  -------------------------------------------------------------------------------------------
@@ -72,17 +72,10 @@ app.get("/SingUp",router_user);
 app.get("/crearUsuario",router_user);
 
 
-
-app.get("/", identificador, function (request, response) {
-    response.redirect("/inicio");
-  });
-app.get("/inicio", identificador, function (request, response) {
-    response.render("inicio", {
-      nombre: request.cookies.nombre,
-    });
-  });
-
-
+//router_inicio
+app.get("/",identificador,router_inicio);
+app.get("/inicio",identificador,router_inicio);
+app.get("/desconectarse",identificador,router_inicio);
 
 
 
