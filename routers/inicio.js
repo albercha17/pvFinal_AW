@@ -23,6 +23,5 @@ router.get("/inicio", function (request, response) {
   router.get("/desconectarse", function (request, response) {
     response.cookie("identificado",false);
     response.redirect("/login");
-    var x =request.cookies.nombre;
   });
 module.exports = router;

@@ -6,13 +6,11 @@ const { response } = require("express");
 //DAOS   -----------------------------------------------------
 
 const FactoryDao = require("../JS/FactoriaDao");
-let Factorydao = new FactoryDao()
+let Factorydao = new FactoryDao();
 var daoUser= Factorydao.DaoUser();
 const cookieParser=require("cookie-parser")
 //--------------------------------------------------
-const DAOUsers = require("../JS/DAOUsers");
 //const session= require("express-session")
-//const cookieParser=require("cookie-parser") vbvg
 
 var identificado = false;
 var errorLogin = null;
@@ -32,8 +30,10 @@ function identificador(request, response, next) {
 
 
 router.get("/login", function (request, response) {
-  if (identificado) {
+  identificado=request.cookies.identificado;
+  if (identificado!='false') {
     response.redirect("/inicio");
+
   } else {
     response.render("login", {
       errorLogin: errorLogin,
@@ -43,13 +43,9 @@ router.get("/login", function (request, response) {
 });
 
 router.get("/SingUp", function (request, response) {
-  if (identificado) {
-    response.redirect("/login");
-  } else {
     response.render("SingUp", {
       errorCrearUsuario: errorCrearUsuario,
-    });
-  }
+  });
 
   errorCrearUsuario = null;
 });
