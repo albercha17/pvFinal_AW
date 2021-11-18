@@ -20,7 +20,8 @@ app.set("views", path.join(__dirname, "views"));
 const middelwareSession=session({
     saveUninitialized:false,
     secret:"foobar34",
-    resave:false
+    resave:false,
+    
 });
 //MIDDELWARE  ------------------------------------------------------------------------------------------------------------------------------------
 //error404
