@@ -8,30 +8,21 @@ const { response } = require("express");
 const FactoryDao = require("../JS/FactoriaDao");
 let Factorydao = new FactoryDao();
 var daoUser= Factorydao.DaoUser();
-const cookieParser=require("cookie-parser")
-//--------------------------------------------------
-//const session= require("express-session")
 
+//--------------------------------------------------
 var identificado = false;
 var errorLogin = null;
 var errorCrearUsuario = null;
 
 //--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
-router.use(cookieParser());
-function identificador(request, response, next) {
-  if (identificado) {
-    next();
-  } else {
-    response.redirect("/login");
-  }
-}
+
 //--------------------------------------  R U T A S ---------------------------------------------------------
 
 
 
 router.get("/login", function (request, response) {
-  identificado=request.cookies.identificado;
-  if (identificado!='false') {
+  identificado=request.session.identificado;
+  if (identificado!=false) {
     response.redirect("/inicio");
 
   } else {
@@ -60,21 +51,21 @@ router.get("/loguearse", function (request, response) {
     function cb_isUserCorrect(err, result) {
       if (err) {
         identificado = false;
-        response.cookie("identificado",false);
+        request.session.identificado=false;
         console.log(err.message);
         response.redirect("/login");
       } 
       else if (result) {
         identificado = true;
-        response.cookie("identificado",true);
+        request.session.identificado=true;
         daoUser.getUserName(result.email, function buscarNombre(err, result) {
           if (err) {
             console.log(err.message);
             response.redirect("/login");
           } else if (result){
-            response.cookie("nombre",result.nombre);
-            response.cookie("email",result.email);
-            response.cookie("img",result.img);
+            request.session.nombre=result.nombre;
+            request.session.email=result.email;
+            request.session.img=result.img;
             console.log("Usuario:" + result.email);
             response.redirect("/inicio");
           }
@@ -83,7 +74,7 @@ router.get("/loguearse", function (request, response) {
       else {
         
         identificado = false;
-        response.cookie("identificado",false);
+        request.session.identificado=false;
         errorLogin = "Usuario y/o contraseña incorrectos";
         response.redirect("/login");
       }
@@ -115,15 +106,15 @@ router.get("/crearUsuario", function (request, response) {
           response.redirect("/SingUp");
         } else if (result) {
           identificado = true;
-          response.cookie("identificado",true);
+          request.session.identificado=true;
           daoUser.getUserName(result, function buscarNombre(err, result) {
             if (err) {
               console.log(err.message);
               response.redirect("/SingUp");
             } else if (result) {
-              response.cookie("nombre",result.nombre);
-              response.cookie("email",result.email);
-              response.cookie("img",result.img);
+              request.session.nombre=result.nombre;
+              request.session.email=result.email;
+              request.session.img=result.img;
               console.log("Usuario:" + result.email);
               response.redirect("/inicio");
             } else {

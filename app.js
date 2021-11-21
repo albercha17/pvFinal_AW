@@ -1,5 +1,5 @@
 "use strict";
-
+const config = require("./JS/config");
 const path = require("path");
 const express = require("express");
 const {
@@ -9,21 +9,40 @@ const {
     response
 } = require("express");
 const app = express();
-const session= require("express-session")
-const cookieParser=require("cookie-parser")
-var router_user = require("./routers/users")
-var router_inicio = require("./routers/inicio")
 
-
+//-------------------------------------------------------PLANTILLAS------------------------------------
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(__dirname + '/public'));
+
+
+//---------------------------------------------------- SESION-----------------------------
+const session= require("express-session")
+const MySQLSession = require("express-mysql-session");
+const MySQLStore=MySQLSession(session);
+const sessionStrore= new MySQLStore({
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+});
 const middelwareSession=session({
     saveUninitialized:false,
     secret:"foobar34",
     resave:false,
-    
+    store:sessionStrore
 });
+app.use(middelwareSession);
+
+//cookies
+const cookieParser=require("cookie-parser")
+app.use(cookieParser());
+
+
+//-----------------------------------------------------------------------------------------------------
+//-------------------------- ROUTERS---------------------
+var router_user = require("./routers/users")
+var router_inicio = require("./routers/inicio");
 
 
 var identificado=false;
@@ -48,20 +67,17 @@ function middelware500Error(error, request, response, next) {
 // Para saber si esta identificado
 function identificador(request, response, next) {
     if(!creado){
-        response.cookie("identificado",false);
+        request.session.identificado=false;
         creado=true;
     }
-    identificado=request.cookies.identificado;
-    if (identificado!='false') {
+    identificado=request.session.identificado;
+    if (identificado!=false) {
       next();
     } else {
       response.redirect("/login");
     }
   }
-
-  // cookieParser
-  app.use(cookieParser());
-
+  
 //------------------------------------------  R U T A S  -------------------------------------------------------------------------------------------
 //router_user
 

@@ -8,6 +8,17 @@
 </head>
 <body>
     <h1>BIENVENIDO <%= nombre%></h1>
+    <% x.forEach(function(pregunta) { %>
+        <li>
+            <strong><%= pregunta.pregunta.titulo%></strong>
+            <% pregunta.respuestas.forEach(function(respuesta) { %>
+                <li>
+                    <strong><%= respuesta.texto%></strong>
+                    
+                </li>
+            <% }); %>
+        </li>
+    <% }); %>
     <form method="get" action="/desconectarse">
     <button class="btn btn-primary" type="submit">Desconectarse</button>
     </form>
