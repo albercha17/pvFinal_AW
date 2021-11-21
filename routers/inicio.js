@@ -10,6 +10,7 @@ const cookieParser=require("cookie-parser")
 
 //--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
 router.use(cookieParser());
+router.use(express.static(__dirname + '/public'));
 
 //--------------------------------------  R U T A S ---------------------------------------------------------
 router.get("/", function (request, response) {

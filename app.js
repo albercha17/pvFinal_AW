@@ -17,8 +17,7 @@ var router_inicio = require("./routers/inicio")
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
-
+app.use(express.static(__dirname + '/public'));
 const middelwareSession=session({
     saveUninitialized:false,
     secret:"foobar34",
