@@ -43,6 +43,7 @@ app.use(cookieParser());
 //-------------------------- ROUTERS---------------------
 var router_user = require("./routers/users")
 var router_inicio = require("./routers/inicio");
+var router_usuarios = require("./routers/usuariosRegistrados");
 
 
 var identificado=false;
@@ -93,6 +94,8 @@ app.get("/inicio",identificador,router_inicio);
 app.get("/SinResponder",identificador,router_inicio);
 app.get("/desconectarse",identificador,router_inicio);
 
+//router usuarios
+app.get("/usuarios",identificador,router_usuarios);
 
 
 //Errores
