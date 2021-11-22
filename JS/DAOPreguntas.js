@@ -63,14 +63,13 @@ class DAOPreguntas {
 
 
 
-        getRespuesta(id, callback) {
+        getRespuesta(callback) {
             this.pool.getConnection(function (err, connection) {
                 if (err) {
                     callback(new Error("Error de conexión a la base de datos"));
                 } else {
                     connection.query(
-                        "SELECT * FROM respuesta WHERE idPregunta = ?",
-                        [id],
+                        "SELECT * FROM respuesta",
                         function (err, rows) {
                             connection.release(); // devolver al pool la conexión
                             if (err) {

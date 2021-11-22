@@ -3,7 +3,7 @@
 
 <head>
     <title>inicio</title>
-    <link href="/css/estilo.css" rel="stylesheet" type="text/css" media="print">
+    <link href="../public/css/estilo.css" rel="stylesheet" type="text/css" media="print">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
@@ -15,31 +15,18 @@
 <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->   
 
     <div id="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+            <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#" >Sin responder</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Usuarios</a>
+                  </li>
               </ul>
+
               <form class="form-inline my-4 my-lg-3">
                 <input class="form-control mr-sm-4" type="search" placeholder="Buscar por titulo o cuerpo" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
@@ -48,36 +35,43 @@
               <li class="nav-item">
                 <a class="nav-link" href="#"><%= nombre%></a>
               </li>
-
+              <form method="get" action="/desconectarse">
+                <button class="btn btn-primary" type="submit">Desconectarse</button>
+                </form>
             </div>
           </nav>
     </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->   
 <br>    
-<h1  class="text-center">Preguntas sin responder</h1>
-
+<h1  class="text-center">Preguntas Sin responder</h1>
+<br>
+<br>
     <% preguntas.forEach(function(pregunta) { %>
-        <div class="card" style="width: 18rem;">
+        <div class="card"  style="width: 60rem;">
             <div class="card-body">
                 <div class="pregunta">
-                    
                     <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><%= pregunta.autor%></h6>
                     <p class="card-text"><%= pregunta.cuerpo%></p>
+                    <% pregunta.tag.forEach(function(tag) { %>
+                        <p class="card-text"><%= tag.tag%></p>
+                    <% }); %>
+                    </div>
+                        <br>
+                            <a class="bi bi-hand-thumbs-up " ></a>
+                            <a class="bi bi-hand-thumbs-down" ><a>
+                        </div>
+                    
                 </div>
-                <br>
-                <div class="botones">
-                    <a class="bi bi-hand-thumbs-up" ></a>
-                    <a class="bi bi-hand-thumbs-down" ><a>
-                    <a href="#" class="card-link">Ver</a>
-                </div>
+                
+               
                 
             </div>
           </div>
+        </div>
     <% }); %>
-    <form method="get" action="/desconectarse">
-    <button class="btn btn-primary" type="submit">Desconectarse</button>
-    </form>
+
+    
 </body>
 
 </html>

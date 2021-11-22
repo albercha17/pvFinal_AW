@@ -33,14 +33,37 @@ router.get("/", function (request, response) {
     })
   });
 
+  router.get("/SinResponder", function (request, response) {
+    DAOP.getPreguntas(function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        DAOP.getRespuesta(function buscarNombre(err, result) {
+          if (err) {
+            console.log(err.message);
+          } else if (result) {
+            var respuestas = result;
+            var Lista=Sinresponder(preguntas,respuestas);
+            response.render("preguntasSinResponder", {
+              nombre: request.session.nombre,
+              preguntas: Lista, 
+            });
+          }
+        })
+      }
+    })
+  });
+
   router.get("/desconectarse", function (request, response) {
     request.session.identificado=false;
     response.redirect("/login");
 
   });
 
-  /* esta para luego buscar por no respondidas es la clave
-  function combinar(preguntas,respuestas) {
+
+  function Sinresponder(preguntas,respuestas) {
+    var ListaFinal= new Array();
     var combinado= new Array();
     preguntas.forEach(pregunta => {
       var Pregunta= new Object();
@@ -54,7 +77,11 @@ router.get("/", function (request, response) {
       Pregunta.respuestas=listaP;
       combinado.push(Pregunta);
     });
-    
-    return combinado;
-  }*/
+    combinado.forEach(combinado => {
+      if(combinado.respuestas.length===0){
+        ListaFinal.push(combinado.pregunta);
+      }
+    });
+    return ListaFinal;
+  }
 module.exports = router;

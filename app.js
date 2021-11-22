@@ -90,6 +90,7 @@ app.get("/crearUsuario",router_user);
 //router_inicio
 app.get("/",identificador,router_inicio);
 app.get("/inicio",identificador,router_inicio);
+app.get("/SinResponder",identificador,router_inicio);
 app.get("/desconectarse",identificador,router_inicio);
 
 
