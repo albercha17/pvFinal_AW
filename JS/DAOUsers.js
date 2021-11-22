@@ -122,7 +122,31 @@ class DAOUsers {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM user",
+                    "SELECT * FROM user ORDER BY reputacion DESC",
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                callback(null, null);
+                            } else {
+                                callback(null, rows);
+                            }
+                        }
+                    }
+                );
+            }
+        });
+    }
+
+    getUsuarios_filtro(filtro,callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * FROM user WHeRE email LIKE '%"+filtro+"%' OR nombre like '%" +filtro+"%' ORDER BY reputacion DESC",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

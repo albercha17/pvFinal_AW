@@ -57,7 +57,16 @@
   <br>
   <div class="container">
     <div class="row">
-      <h2 ><%= usuarios.length%> usuarios registrados</h2>
+      <div class="col col-6">
+        <h2 ><%= usuarios.length%> usuarios registrados</h2>
+      </div>
+      <div class="col col-6">
+        <form class="d-flex" method="get" action="/BuscarUsuario">
+          <input class="form-control me-2" type="search" placeholder="Buscar por nombre o correo"
+              aria-label="Search" name="filtro">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+      </div>
       <% usuarios.forEach(function(usuario) { %>
       <div class="col col-3">
         <div class="card" >

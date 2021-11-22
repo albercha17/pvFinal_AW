@@ -28,5 +28,18 @@ router.use(express.static(__dirname + '/public'));
       }
     })
   });
+  router.get("/BuscarUsuario", function (request, response) {
+    DAOUser.getUsuarios_filtro(request.query.filtro,function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var usuarios = result;
+        response.render("usuariosRegistrados", {
+        nombre: request.session.nombre,
+         usuarios: usuarios, 
+        });
+      }
+    })
+  });
 
 module.exports = router;

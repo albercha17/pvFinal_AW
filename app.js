@@ -100,8 +100,7 @@ app.get("/BuscarTextoSR",identificador,router_inicio);
 
 //router usuarios
 app.get("/usuarios",identificador,router_usuarios);
-
-
+app.get("/BuscarUsuario",identificador,router_usuarios);
 //Errores
 
 app.use(middelware404Error);
