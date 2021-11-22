@@ -28,18 +28,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder">Sin
+                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"> Preguntas sin
                             responder</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://localhost:3000/usuarios">Usuarios</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
                 <ul class="navbar-nav  mb-4 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
@@ -59,16 +54,37 @@
     <h1 class="text-center">Todas las preguntas</h1>
     <br>
     <br>
+    
     <div class="container">
-        
-            <h2 ><%= preguntas.length%> preguntas</h2>
-            <% preguntas.forEach(function(pregunta) { %>
-            <div class="row">
+         <!---------------------------------- BARRAS DE BUSQUEDA--------------------------------------->
+        <div class="row">
+            <div class="col col-md-4">
+                <h2><%= preguntas.length%> preguntas</h2>
+            </div>
+            <div class="col col-md-4">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            <div class="col col-md-3">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+         <!---------------------------------- PREGUNTAS  --------------------------------------->
+        <% preguntas.forEach(function(pregunta) { %>
+        <div class="row">
             <div class="card" style="width: 80rem;">
                 <div class="card-body">
                     <div class="pregunta">
                         <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
-                        <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder" style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
+                        <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
+                            style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                         <p class="card-text"><%= pregunta.cuerpo%></p>
                         <% pregunta.tag.forEach(function(tag) { %>
                         <p class="card-text"><%= tag.tag%></p>
@@ -78,8 +94,8 @@
             </div>
         </div>
         <br>
-            <% }); %>
-        
+        <% }); %>
+
     </div>
 
 </body>
