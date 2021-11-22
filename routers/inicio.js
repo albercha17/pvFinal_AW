@@ -36,7 +36,7 @@ router.get("/", function (request, response) {
   router.get("/desconectarse", function (request, response) {
     request.session.identificado=false;
     response.redirect("/login");
-    response.end();
+
   });
 
   /* esta para luego buscar por no respondidas es la clave

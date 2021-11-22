@@ -48,40 +48,36 @@
               <li class="nav-item">
                 <a class="nav-link" href="#"><%= nombre%></a>
               </li>
-              <form method="get" action="/desconectarse">
-                <button class="btn btn-primary" type="submit">Desconectarse</button>
-                </form>
+
             </div>
           </nav>
     </div>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->   
 <br>    
-<h1  class="text-center">Todas las preguntas</h1>
-<br>
-<br>
+<h1  class="text-center">Preguntas sin responder</h1>
+
     <% preguntas.forEach(function(pregunta) { %>
-        <div class="card"  style="width: 60rem;">
+        <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <div class="pregunta">
+                    
                     <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><%= pregunta.autor%></h6>
                     <p class="card-text"><%= pregunta.cuerpo%></p>
-                    </div>
-                        <br>
-                            <a class="bi bi-hand-thumbs-up " ></a>
-                            <a class="bi bi-hand-thumbs-down" ><a>
-                        </div>
-                    
                 </div>
-                
-               
+                <br>
+                <div class="botones">
+                    <a class="bi bi-hand-thumbs-up" ></a>
+                    <a class="bi bi-hand-thumbs-down" ><a>
+                    <a href="#" class="card-link">Ver</a>
+                </div>
                 
             </div>
           </div>
-        </div>
     <% }); %>
-
-    
+    <form method="get" action="/desconectarse">
+    <button class="btn btn-primary" type="submit">Desconectarse</button>
+    </form>
 </body>
 
 </html>
