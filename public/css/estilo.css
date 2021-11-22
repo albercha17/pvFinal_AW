@@ -15,3 +15,56 @@ h1 {font-weight: bold;text-align: center;}
     opacity: 100%;
     max-width: 100%;
 }
+.usuarios{
+    margin-left: 50px;
+}
+
+.tarea{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10px;
+    padding: 20px 40px;
+    display: block;
+    background-color:rgb(123, 203, 206);
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    text-align: right;
+    max-width: 100%;
+}
+
+.tarea nombreTarea{
+    float: left;
+    color:white;
+    margin-right: 50px;
+    font-size: 22px;
+}
+
+.tarea etiqueta{
+    float: left;
+    margin-right: 10px;
+    padding: 5px 5px;
+    font-size:15px;
+    color:#FFFFFF;
+    /*borde*/
+    background-color:rgb(118, 188, 190);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.botonTerminarTarea {
+    
+    color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    background-color:rgb(112, 33, 9);
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+  }
