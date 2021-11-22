@@ -60,27 +60,26 @@
     <br>
     <br>
     <div class="container">
-        <div class="row">
+        
             <h2 ><%= preguntas.length%> preguntas</h2>
             <% preguntas.forEach(function(pregunta) { %>
+            <div class="row">
             <div class="card" style="width: 80rem;">
                 <div class="card-body">
                     <div class="pregunta">
                         <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><%= pregunta.autor%></h6>
+                        <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder" style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                         <p class="card-text"><%= pregunta.cuerpo%></p>
                         <% pregunta.tag.forEach(function(tag) { %>
                         <p class="card-text"><%= tag.tag%></p>
                         <% }); %>
-                        <a class="bi bi-hand-thumbs-up "></a>
-                        <a class="bi bi-hand-thumbs-down"><a>
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
-            <% }); %>
         </div>
+        <br>
+            <% }); %>
+        
     </div>
 
 </body>
