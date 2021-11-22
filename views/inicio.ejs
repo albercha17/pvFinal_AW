@@ -8,15 +8,9 @@
 </head>
 <body>
     <h1>BIENVENIDO <%= nombre%></h1>
-    <% x.forEach(function(pregunta) { %>
+    <% preguntas.forEach(function(pregunta) { %>
         <li>
-            <strong><%= pregunta.pregunta.titulo%></strong>
-            <% pregunta.respuestas.forEach(function(respuesta) { %>
-                <li>
-                    <strong><%= respuesta.texto%></strong>
-                    
-                </li>
-            <% }); %>
+            <strong><%= pregunta.titulo%></strong>
         </li>
     <% }); %>
     <form method="get" action="/desconectarse">

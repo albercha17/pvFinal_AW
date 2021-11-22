@@ -30,17 +30,9 @@ router.get("/inicio", function (request, response) {
       console.log(err.message);
     } else if (result) {
       var preguntas = result;
-      DAOP.getRespuesta(function buscarNombre(err, result) {
-        if (err) {
-          console.log(err.message);
-        } else if (result) {
-          var respuestas = result;
-          ListaP = combinar(preguntas, respuestas);
-          response.render("inicio", {
-            nombre: request.session.nombre,
-            x: ListaP, // tengo .preguntas y .respuestas
-          });
-        }
+      response.render("inicio", {
+        nombre: request.session.nombre,
+        preguntas: preguntas, // tengo .preguntas y .respuestas
       });
     }
   })
@@ -56,22 +48,4 @@ router.get("/desconectarse", function (request, response) {
 
 
 //------------funciones secundarias
-
-function combinar(preguntas, respuestas) {
-  var combinado = new Array();
-  preguntas.forEach(pregunta => {
-    var Pregunta = new Object();
-    var listaP = new Array();
-    respuestas.forEach(respuesta => {
-      if (pregunta.id == respuesta.idPregunta) {
-        listaP.push(respuesta);
-      }
-    });
-    Pregunta.pregunta = pregunta;
-    Pregunta.respuestas = listaP;
-    combinado.push(Pregunta);
-  });
-
-  return combinado;
-}
 module.exports = router;
