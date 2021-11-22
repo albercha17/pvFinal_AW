@@ -14,41 +14,42 @@
 
 <body>
 
-    <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
+   <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
 
-    <div id="header"></div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"> Preguntas sin
-                            responder</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:3000/usuarios">Usuarios</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav  mb-4 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page"
-                            href="http://localhost:3000/SinResponder"><%= nombre%></a>
-                    </li>
-                    <form method="get" action="/desconectarse">
-                        <button class="btn btn-primary" type="submit">Desconectarse</button>
-                    </form>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    </div>
+   <div id="header"></div>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <div class="container-fluid">
+           <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+               aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                   <li class="nav-item">
+                       <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"> Preguntas sin
+                           responder</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="http://localhost:3000/usuarios">Usuarios</a>
+                   </li>
+               </ul>
+               <ul class="navbar-nav  mb-4 mb-lg-0">
+                   <li class="nav-item">
+                       <a class="nav-link active" aria-current="page"
+                           href="http://localhost:3000/SinResponder"><%= nombre%></a>
+                   </li>
+                   <form method="get" action="/desconectarse">
+                       <button class="btn btn-primary" type="submit">Desconectarse</button>
+                   </form>
+               </ul>
+           </div>
+       </div>
+   </nav>
+   </div>
 
+   <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
     <br>
     <h1 class="text-center">Todas las preguntas</h1>
@@ -57,46 +58,51 @@
     
     <div class="container">
          <!---------------------------------- BARRAS DE BUSQUEDA--------------------------------------->
-        <div class="row">
-            <div class="col col-md-4">
+         <div class="row">
+            <div class="col col-md-8">
                 <h2><%= preguntas.length%> preguntas</h2>
+                <% preguntas.forEach(function(pregunta) { %>
+                    <div class="row">
+                        <div class="card" style="width: 80rem;">
+                            <div class="card-body">
+                                <div class="pregunta">
+                                    <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
+                                    <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
+                                        style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
+                                    <p class="card-text"><%= pregunta.cuerpo%></p>
+                                    <% pregunta.tag.forEach(function(tag) { %>
+                                    <p class="card-text"><%= tag.tag%></p>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <% }); %>
             </div>
             <div class="col col-md-4">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
+                <br><br>
+                    <form class="d-flex"method="get" action="/BuscarTexto">
+                        <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
+                            aria-label="Search" name="tag">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                    <br>
+                    <form class="d-flex" method="get" action="/BuscarEtiqueta">
+                        <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
+                            aria-label="Search" name="tag">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                    <br>
+                    <form method="get" action="/desconectarse">
+                        <button class="btn btn-primary" type="submit">Crear pregunta</button>
+                    </form>
             </div>
-            <div class="col col-md-3">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
-            </div>
-        </div>
+         </div>
+                
          <!---------------------------------- PREGUNTAS  --------------------------------------->
-        <% preguntas.forEach(function(pregunta) { %>
-        <div class="row">
-            <div class="card" style="width: 80rem;">
-                <div class="card-body">
-                    <div class="pregunta">
-                        <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
-                        <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
-                            style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
-                        <p class="card-text"><%= pregunta.cuerpo%></p>
-                        <% pregunta.tag.forEach(function(tag) { %>
-                        <p class="card-text"><%= tag.tag%></p>
-                        <% }); %>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <% }); %>
+        
 
-    </div>
 
 </body>
 

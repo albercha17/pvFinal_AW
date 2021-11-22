@@ -61,6 +61,81 @@ router.get("/", function (request, response) {
 
   });
 
+  router.get("/BuscarEtiqueta", function (request, response) {
+    var tag= request.query.tag;
+    DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          preguntas: preguntas, 
+        });
+      }
+    })
+  });
+  router.get("/BuscarTexto", function (request, response) {
+    var tag= request.query.tag;
+    DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          preguntas: preguntas, 
+        });
+      }
+    })
+  });
+
+  router.get("/BuscarEtiquetaSR", function (request, response) {
+    var tag=request.query.tag;
+    DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        DAOP.getRespuesta(function buscarNombre(err, result) {
+          if (err) {
+            console.log(err.message);
+          } else if (result) {
+            var respuestas = result;
+            var Lista=Sinresponder(preguntas,respuestas);
+            response.render("preguntasSinResponder", {
+              nombre: request.session.nombre,
+              preguntas: Lista, 
+            });
+          }
+        })
+      }
+    })
+  });
+
+  router.get("/BuscarTextoSR", function (request, response) {
+    var tag=request.query.tag;
+    DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        DAOP.getRespuesta(function buscarNombre(err, result) {
+          if (err) {
+            console.log(err.message);
+          } else if (result) {
+            var respuestas = result;
+            var Lista=Sinresponder(preguntas,respuestas);
+            response.render("preguntasSinResponder", {
+              nombre: request.session.nombre,
+              preguntas: Lista, 
+            });
+          }
+        })
+      }
+    })
+  });
+  
 
   function Sinresponder(preguntas,respuestas) {
     var ListaFinal= new Array();
