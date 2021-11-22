@@ -38,8 +38,8 @@ class DAOPreguntas {
                                         while (i < rows.length - 1 && fila.id === rows[i + 1].id) {
                                             i++;
                                             var tag2 = new Object();
-                                            tag.idPregunta = fila.idPregunta;
-                                        tag.tag = fila.tag;
+                                            tag2.idPregunta = rows[i].idPregunta;
+                                            tag2.tag = rows[i].tag;
                                             listaTags.push(tag2);
                                         }
                                      pregunta.tag = listaTags;

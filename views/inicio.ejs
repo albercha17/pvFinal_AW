@@ -66,6 +66,9 @@
                     <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><%= pregunta.autor%></h6>
                     <p class="card-text"><%= pregunta.cuerpo%></p>
+                    <% pregunta.tag.forEach(function(tag) { %>
+                        <p class="card-text"><%= tag.tag%></p>
+                    <% }); %>
                     </div>
                         <br>
                             <a class="bi bi-hand-thumbs-up " ></a>
