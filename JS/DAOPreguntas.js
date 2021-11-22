@@ -22,20 +22,20 @@ class DAOPreguntas {
                                 } else {
                                     var listaP = new Array();
                                     var i=0;
-                                    rows.forEach(function(fila) {
+                                    while(i<rows.length) {
                                         var listaTags = new Array();
                                         var pregunta = new Object();
                                         var tag = new Object();
-                                        pregunta.id = fila.id;
-                                        pregunta.titulo = fila.titulo;
-                                        pregunta.cuerpo = fila.cuerpo;
-                                        pregunta.autor = fila.autor;
-                                        pregunta.visitas = fila.visitas;
-                                        pregunta.puntos = fila.puntos;
-                                        tag.idPregunta = fila.idPregunta;
-                                        tag.tag = fila.tag;
+                                        pregunta.id = rows[i].id;
+                                        pregunta.titulo = rows[i].titulo;
+                                        pregunta.cuerpo = rows[i].cuerpo;
+                                        pregunta.autor = rows[i].autor;
+                                        pregunta.visitas = rows[i].visitas;
+                                        pregunta.puntos = rows[i].puntos;
+                                        tag.idPregunta = rows[i].idPregunta;
+                                        tag.tag = rows[i].tag;
                                         listaTags.push(tag);
-                                        while (i < rows.length - 1 && fila.id === rows[i + 1].id) {
+                                        while (i < rows.length - 1 && rows[i].id === rows[i + 1].id) {
                                             i++;
                                             var tag2 = new Object();
                                             tag2.idPregunta = rows[i].idPregunta;
@@ -45,7 +45,7 @@ class DAOPreguntas {
                                      pregunta.tag = listaTags;
                                      listaP.push (pregunta)
                                         i++;
-                                    });
+                                    };
                                     // fin del bucle
                                     callback(null, listaP);
                                 }
