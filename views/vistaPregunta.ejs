@@ -71,29 +71,32 @@
         </div>
         <div class="row" style="margin-top: 40px;">
             <h3 style="font-size: larger; margin-left: 15px;">Descripción</h3>
-                <p style="font-size: larger; margin-left: 20px;"><%= pregunta.cuerpo%></p>
+                <p style="font-size: larger;margin-inline-start: 4px;"><%= pregunta.cuerpo%></p>
+                <h3 style="font-size: larger; margin-left: 15px;">Etiquetas</h3>
+                <div>
+                    <% pregunta.tag.forEach(function(tag) { %>
+                        <a class="card-text" style="font-size: 25px; color: rgb(190, 117, 20);text-decoration:none; margin-left: 20px;"><%= tag.tag%></a>
+                        <% }); %>
+                </div>
+                
         </div>
-        <br><br><br><br><br>
-        <div class="row">
-            <p style="font-size: larger; margin-left: 15px;"><i class="bi bi-eye"></i>  Visitas: <%= pregunta.visitas%></p>
-        </div>
-
+        <br><br>
 
         <div class="row">
-            <div class="col col-1">
-                <form method="get" >
-                    <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
-                        <i class="bi bi-hand-thumbs-up-fill" style="color: rgb(8, 122, 18);"></i></button>
-                </form>
+            <div class="col col-10">
+                <p style="font-size: larger; margin-left: 15px;"><i class="bi bi-eye"></i>  Visitas: <%= pregunta.visitas%></p>
             </div>
-            <div class="col col-1">
-                <form method="get">
+            <div class="col col-2">
+                
+                <form method="get" action="/desconectarse" style="float: right;">
                     <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
                         <i class="bi bi-hand-thumbs-down-fill" style="color: rgb(131, 12, 12);"></i></button>
                 </form>
-            </div>
-            <div class="col col-5">
-                <p style="font-size: larger; margin-left: 15px;">  Votos: <%= pregunta.puntos%></p>
+                <form method="get" action="/desconectarse" style="float: right;">
+                    <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                        <i class="bi bi-hand-thumbs-up-fill" style="color: rgb(19, 122, 10);"></i></button>
+                </form>
+                <p style="float: right;font-size: larger;" >  Votos: <%= pregunta.puntos%></p>
             </div>
         </div>
             

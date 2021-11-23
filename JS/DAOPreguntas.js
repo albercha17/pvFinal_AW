@@ -11,7 +11,7 @@ class DAOPreguntas {
                     callback(new Error("Error de conexión a la base de datos"));
                 } else {
                     connection.query(
-                        "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta",
+                        "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta ORDER BY puntos DESC",
                         function (err, rows) {
                             connection.release(); // devolver al pool la conexión
                             if (err) {
@@ -207,7 +207,7 @@ class DAOPreguntas {
                         callback(new Error("Error de conexión a la base de datos"));
                     } else {
                         connection.query(
-                            "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta AND a.tag = ?",
+                            "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta AND a.tag = ? ORDER BY puntos DESC",
                             [task],
                             function (err, rows) {
                                 connection.release(); // devolver al pool la conexión
@@ -259,7 +259,7 @@ class DAOPreguntas {
                         callback(new Error("Error de conexión a la base de datos"));
                     } else {
                         connection.query(
-                            "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta AND (T.titulo LIKE '%"+task+"%' OR T.cuerpo like '%" +task+"%')",
+                            "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta AND (T.titulo LIKE '%"+task+"%' OR T.cuerpo like '%" +task+"%') ORDER BY puntos DESC",
                             function (err, rows) {
                                 connection.release(); // devolver al pool la conexión
                                 if (err) {
