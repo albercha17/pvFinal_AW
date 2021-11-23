@@ -58,7 +58,43 @@ class DAOPreguntas {
 
 
 
-
+        visitaPregunta(id,callback) { // preguntar si puede ser un pregunta sin tag
+            this.pool.getConnection(function (err, connection) {
+                if (err) {
+                    callback(new Error("Error de conexión a la base de datos"));
+                } else {
+                    connection.query(
+                        "SELECT * FROM pregunta WHERE id= ?",
+                        [id],
+                        function (err, rows) {
+                            if (err) {
+                                callback(new Error("Error de acceso a la base de datos"));
+                            } else {
+                                if (rows.length === 0) {
+                                    callback(null, null); //no está el usuario con el password proporcionado
+                                } else {
+                                    var visitas=rows[0].visitas;
+                                    visitas++;
+                                    connection.query(
+                                        "UPDATE pregunta SET visitas= ? WHERE id= ?",
+                                        [visitas,id],
+                                        function (err, rows) {
+                                            connection.release(); // devolver al pool la conexión
+                                            if (err) {
+                                                callback(new Error("Error de acceso a la base de datos"));
+                                            } else {
+                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                 
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        }
+                    );
+                }
+            });
+        }
 
 
 

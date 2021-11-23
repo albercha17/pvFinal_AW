@@ -17,17 +17,24 @@ router.use(express.static(__dirname + '/public'));
 
 //--------------------------------------  R U T A S ---------------------------------------------------------
   router.get("/pregunta/:id", function (request, response) {
-    DAOPregunta.getPreguntasId(request.params.id,function buscarNombre(err, result) {
-        if (err) {
-          console.log(err.message);
-        } else if (result){
-          var preguntas = result;
-          var pregunta=preguntas[0];
-          response.render("vistaPregunta", {
-            nombre: request.session.nombre,
-            email: request.session.email,
+          DAOPregunta.visitaPregunta(request.params.id,function buscarNombre(err, result) {
+            if (err) {
+              console.log(err.message);
+            } else if (result){
+              DAOPregunta.getPreguntasId(request.params.id,function buscarNombre(err, result) {
+                if (err) {
+                  console.log(err.message);
+                } else if (result){
+                  var preguntas = result;
+                  var pregunta=preguntas[0];
 
-            pregunta:pregunta,
+                response.render("vistaPregunta", {
+                nombre: request.session.nombre,
+                email: request.session.email,
+    
+                pregunta:pregunta,
+              });
+            }
           });
         }
       })    
