@@ -61,13 +61,44 @@
 
 <body class="cuerpo1">
     <br>
-    <h1 class="text-center"><%= pregunta.titulo%></h1>
+    
     <br>
     <br>
     <div class="container">
+        <div class="card" style="border-color: rgb(3, 3, 27);">
         <div class="row">
-            
+                <h2 class="text-center"><%= pregunta.titulo%></h2>
         </div>
+        <div class="row" style="margin-top: 40px;">
+            <h3 style="font-size: larger; margin-left: 15px;">Descripción</h3>
+                <p style="font-size: larger; margin-left: 20px;"><%= pregunta.cuerpo%></p>
+        </div>
+        <br><br><br><br><br>
+        <div class="row">
+            <p style="font-size: larger; margin-left: 15px;"><i class="bi bi-eye"></i>  Visitas: <%= pregunta.visitas%></p>
+        </div>
+
+
+        <div class="row">
+            <div class="col col-1">
+                <form method="get" >
+                    <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                        <i class="bi bi-hand-thumbs-up-fill" style="color: rgb(8, 122, 18);"></i></button>
+                </form>
+            </div>
+            <div class="col col-1">
+                <form method="get">
+                    <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                        <i class="bi bi-hand-thumbs-down-fill" style="color: rgb(131, 12, 12);"></i></button>
+                </form>
+            </div>
+            <div class="col col-5">
+                <p style="font-size: larger; margin-left: 15px;">  Votos: <%= pregunta.puntos%></p>
+            </div>
+        </div>
+            
+        
+    </div>
 
     </div>
 
