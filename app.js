@@ -44,6 +44,7 @@ app.use(cookieParser());
 var router_user = require("./routers/users")
 var router_inicio = require("./routers/inicio");
 var router_usuarios = require("./routers/usuariosRegistrados");
+var router_pSR = require("./routers/preguntasSR");
 
 
 var identificado=false;
@@ -91,16 +92,20 @@ app.get("/crearUsuario",router_user);
 //router_inicio
 app.get("/",identificador,router_inicio);
 app.get("/inicio",identificador,router_inicio);
-app.get("/SinResponder",identificador,router_inicio);
 app.get("/desconectarse",identificador,router_inicio);
-app.get("/BuscarEtiquetaSR",identificador,router_inicio);
 app.get("/BuscarEtiqueta",identificador,router_inicio);
 app.get("/BuscarTexto",identificador,router_inicio);
-app.get("/BuscarTextoSR",identificador,router_inicio);
 
 //router usuarios
 app.get("/usuarios",identificador,router_usuarios);
 app.get("/BuscarUsuario",identificador,router_usuarios);
+
+
+//router router_pSR
+app.get("/SinResponder",identificador,router_pSR);
+app.get("/BuscarEtiquetaSR",identificador,router_pSR);
+app.get("/BuscarTextoSR",identificador,router_pSR);
+
 //Errores
 
 app.use(middelware404Error);

@@ -20,11 +20,18 @@ router.get("/", function (request, response) {
   });
 
   router.get("/inicio", function (request, response) {
+    var preguntas= new Array();
     DAOP.getPreguntas(function buscarNombre(err, result) {
       if (err) {
         console.log(err.message);
       } else if (result) {
-        var preguntas = result;
+        preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          preguntas: preguntas, 
+        });
+      }
+      else{
         response.render("inicio", {
           nombre: request.session.nombre,
           preguntas: preguntas, 
@@ -32,29 +39,6 @@ router.get("/", function (request, response) {
       }
     })
   });
-
-  router.get("/SinResponder", function (request, response) {
-    DAOP.getPreguntas(function buscarNombre(err, result) {
-      if (err) {
-        console.log(err.message);
-      } else if (result) {
-        var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
-          if (err) {
-            console.log(err.message);
-          } else if (result) {
-            var respuestas = result;
-            var Lista=Sinresponder(preguntas,respuestas);
-            response.render("preguntasSinResponder", {
-              nombre: request.session.nombre,
-              preguntas: Lista, 
-            });
-          }
-        })
-      }
-    })
-  });
-
   router.get("/desconectarse", function (request, response) {
     request.session.identificado=false;
     response.redirect("/login");
@@ -62,12 +46,19 @@ router.get("/", function (request, response) {
   });
 
   router.get("/BuscarEtiqueta", function (request, response) {
+    var preguntas= new Array();
     var tag= request.query.tag;
     DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
       if (err) {
         console.log(err.message);
       } else if (result) {
-        var preguntas = result;
+        preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          preguntas: preguntas, 
+        });
+      }
+      else{
         response.render("inicio", {
           nombre: request.session.nombre,
           preguntas: preguntas, 
@@ -76,12 +67,19 @@ router.get("/", function (request, response) {
     })
   });
   router.get("/BuscarTexto", function (request, response) {
+    var preguntas= new Array();
     var tag= request.query.tag;
     DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
       if (err) {
         console.log(err.message);
       } else if (result) {
-        var preguntas = result;
+        preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          preguntas: preguntas, 
+        });
+      }
+      else{
         response.render("inicio", {
           nombre: request.session.nombre,
           preguntas: preguntas, 
@@ -89,74 +87,4 @@ router.get("/", function (request, response) {
       }
     })
   });
-
-  router.get("/BuscarEtiquetaSR", function (request, response) {
-    var tag=request.query.tag;
-    DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
-      if (err) {
-        console.log(err.message);
-      } else if (result) {
-        var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
-          if (err) {
-            console.log(err.message);
-          } else if (result) {
-            var respuestas = result;
-            var Lista=Sinresponder(preguntas,respuestas);
-            response.render("preguntasSinResponder", {
-              nombre: request.session.nombre,
-              preguntas: Lista, 
-            });
-          }
-        })
-      }
-    })
-  });
-
-  router.get("/BuscarTextoSR", function (request, response) {
-    var tag=request.query.tag;
-    DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
-      if (err) {
-        console.log(err.message);
-      } else if (result) {
-        var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
-          if (err) {
-            console.log(err.message);
-          } else if (result) {
-            var respuestas = result;
-            var Lista=Sinresponder(preguntas,respuestas);
-            response.render("preguntasSinResponder", {
-              nombre: request.session.nombre,
-              preguntas: Lista, 
-            });
-          }
-        })
-      }
-    })
-  });
-  
-
-  function Sinresponder(preguntas,respuestas) {
-    var ListaFinal= new Array();
-    var combinado= new Array();
-    preguntas.forEach(pregunta => {
-      var Pregunta= new Object();
-      var listaP= new Array();
-      respuestas.forEach(respuesta => {
-        if(pregunta.id==respuesta.idPregunta){
-          listaP.push(respuesta);
-        }
-      });
-      Pregunta.pregunta=pregunta;
-      Pregunta.respuestas=listaP;
-      combinado.push(Pregunta);
-    });
-    combinado.forEach(combinado => {
-      if(combinado.respuestas.length===0){
-        ListaFinal.push(combinado.pregunta);
-      }
-    });
-    return ListaFinal;
-  }
 module.exports = router;
