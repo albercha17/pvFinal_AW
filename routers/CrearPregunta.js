@@ -67,7 +67,11 @@ router.use(express.static(__dirname + '/public'));
         Etiquetas = etiqueta.split("@");
         var i = Etiquetas.indexOf("");
         Etiquetas.splice( i, 1 );
-        return true;
+        if(Etiquetas.length<=5)return true;
+        else{
+            error= "Solo puedes añadir un máximo de 5 etiquetas por pregunta.";
+            return false;
+        } 
     }
     else{
         error= "El formato del tag es invalido. Empieza y separa cada tag con un @";
