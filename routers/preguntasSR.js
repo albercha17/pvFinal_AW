@@ -30,12 +30,14 @@ router.use(express.static(__dirname + '/public'));
             Lista=Sinresponder(preguntas,respuestas);
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
+              email:request.session.email,
               preguntas: Lista, 
             });
           }
           else{
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
+                email:request.session.email,
                 preguntas: Lista, 
               });
           }
@@ -44,6 +46,7 @@ router.use(express.static(__dirname + '/public'));
       else{
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
+            email:request.session.email,
             preguntas: Lista, 
           });
       }
@@ -65,12 +68,14 @@ router.use(express.static(__dirname + '/public'));
             Lista=Sinresponder(preguntas,respuestas);
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
+              email:request.session.email,
               preguntas: Lista, 
             });
           }
           else{
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
+                email:request.session.email,
                 preguntas: Lista, 
               });
           }
@@ -79,6 +84,7 @@ router.use(express.static(__dirname + '/public'));
       else{
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
+            email:request.session.email,
             preguntas: Lista, 
           });
       }
@@ -101,12 +107,14 @@ router.use(express.static(__dirname + '/public'));
              Lista=Sinresponder(preguntas,respuestas);
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
+              email:request.session.email,
               preguntas: Lista, 
             });
           }
           else{
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
+                email:request.session.email,
                 preguntas: Lista, 
               });
           }
@@ -115,6 +123,7 @@ router.use(express.static(__dirname + '/public'));
       else{
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
+            email:request.session.email,
             preguntas: Lista, 
           });
       }

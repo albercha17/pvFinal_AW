@@ -39,7 +39,7 @@
                 <img src="/Images/amy.png" id="iconoHeader"  width="50" height="46" style="border-radius: 50%;">
                    <li class="nav-item">
                        <a class="nav-link active" aria-current="page"
-                           href="http://localhost:3000/SinResponder"><%= nombre%></a>
+                           href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
                    </li>
                    <form method="get" action="/desconectarse">
                        <button class="btn btn-danger" type="submit">Cerrar Sesion</button>
@@ -68,9 +68,9 @@
                             <div class="card-body">
                                 <div class="pregunta">
                                     <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
-                                     href="#"><strong><%= pregunta.titulo%></strong></a>
+                                     href="http://localhost:3000/pregunta/<%= pregunta.id%>"><strong><%= pregunta.titulo%></strong></a>
                                      <p></p>
-                                    <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
+                                    <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= pregunta.autor%>"
                                         style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                                     <p class="card-text"><%= pregunta.cuerpo%></p>
                                     <% pregunta.tag.forEach(function(tag) { %>

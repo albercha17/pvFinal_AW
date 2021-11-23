@@ -46,6 +46,8 @@ var router_inicio = require("./routers/inicio");
 var router_usuarios = require("./routers/usuariosRegistrados");
 var router_pSR = require("./routers/preguntasSR");
 var router_crearPregunta = require("./routers/CrearPregunta");
+var router_verUsuario = require("./routers/vistaUsuaio");
+var router_verPregunta = require("./routers/vistaPregunta");
 
 
 var identificado=false;
@@ -112,6 +114,16 @@ app.get("/BuscarTextoSR",identificador,router_pSR);
 
 app.get("/FormularPregunta",identificador,router_crearPregunta);
 app.get("/CrearPregunta",identificador,router_crearPregunta);
+
+
+// router_verUsuario
+
+app.get("/usuario/:email",identificador,router_verUsuario);
+
+
+// router_verPregunta
+app.get("/pregunta/:id",identificador,router_verPregunta);
+
 
 //Errores
 

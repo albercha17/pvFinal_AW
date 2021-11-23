@@ -13,6 +13,7 @@
 </head>
 <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
 
+
 <div id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -36,7 +37,7 @@
                  <img src="/Images/amy.png" id="iconoHeader"  width="50" height="46" style="border-radius: 50%;">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
-                            href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
+                            href="http://localhost:3000/usuario/<%= email%>" ><%= nombre%></a>
                     </li>
                     <form method="get" action="/desconectarse">
                         <button class="btn btn-danger" type="submit">Cerrar Sesion</button>
@@ -48,52 +49,16 @@
     </div>
  
    
-
 <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <body class="cuerpo1">
     <br>
-    <h1 class="text-center">Formular pregunta</h1>
+    <h1 class="text-center"><%= pregunta.titulo%></h1>
     <br>
     <br>
     <div class="container">
         <div class="row">
-            <div class="col col-8" style="margin: auto;">
-                <div class="card" style="width: 50rem;border-color: blue;">
-                    <div class="card-body" " >
-                        <form method=" get" action="/CrearPregunta">
-                        <div class="mb-3">
-                            <br>
-                            <p style="color: red;"><%= error %></p>
-                            <br>
-                            <h5 for="exampleInputEmail1" class="form-label">Texto</h5>
-                            <p class="card-text" style="color: rgb(58, 56, 56);">Formula tu pregunta como si estuvieras
-                                hablando a otra persona</p>
-                            <input type="text" name="titulo" class="form-control" aria-describedby="emailHelp"
-                                placeholder="10 caracteres min." required>
-                        </div>
-                        <div class="mb-3">
-                            <h5 for="exampleInputEmail1" class="form-label">Cuerpo</h5>
-                            <p class="card-text" style="color: rgb(58, 56, 56);">Describa su pregunta para que el resto
-                                de usuarios tengan más información</p>
-                            <textarea class="form-control" name="cuerpo" id="cuerpo" rows="4"
-                                placeholder="20 caracteres min." required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <h5 for="exampleInputEmail1" class="form-label">Etiquetas</h5>
-                            <p class="card-text" style="color: rgb(58, 56, 56);">Añade hasta 5 etiquetas para su
-                                pregunta</p>
-                            <input type="text" name="etiquetas" class="form-control" aria-describedby="emailHelp"
-                                placeholder="Separa cada etiqueta con un @: @css @grupo" required>
-                        </div>
-                        <div class="mb-3" style="text-align: center;">
-                            <br>
-                            <button class="btn btn-outline-success" type="submit">Crear pregunta</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
     </div>

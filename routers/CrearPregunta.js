@@ -20,6 +20,7 @@ router.use(express.static(__dirname + '/public'));
   router.get("/FormularPregunta", function (request, response) {
     response.render("crearPregunta", {
         nombre: request.session.nombre,
+        email:request.session.email,
         error: error,
       });
   });
@@ -29,14 +30,13 @@ router.use(express.static(__dirname + '/public'));
       if(!validarD || !validarEiquetas){
         response.render("crearPregunta", {
             nombre: request.session.nombre,
+            email:request.session.email,
             error:error,
           });
           error=null;
           Etiquetas= new Array();
       }
       else{
-        var etiquetas= new Array();
-        etiquetas.push(request.query.etiquetas);
         DAOP.insertPregunta(request.session.email,request.query.titulo,request.query.cuerpo,Etiquetas,function buscarNombre(err, result) {
           if (err) {
             console.log(err.message);

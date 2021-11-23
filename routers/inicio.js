@@ -28,12 +28,14 @@ router.get("/", function (request, response) {
         preguntas = result;
         response.render("inicio", {
           nombre: request.session.nombre,
+          email:request.session.email,
           preguntas: preguntas, 
         });
       }
       else{
         response.render("inicio", {
           nombre: request.session.nombre,
+          email:request.session.email,
           preguntas: preguntas, 
         });
       }
@@ -55,12 +57,14 @@ router.get("/", function (request, response) {
         preguntas = result;
         response.render("inicio", {
           nombre: request.session.nombre,
+          email:request.session.email,
           preguntas: preguntas, 
         });
       }
       else{
         response.render("inicio", {
           nombre: request.session.nombre,
+          email:request.session.email,
           preguntas: preguntas, 
         });
       }
@@ -76,12 +80,14 @@ router.get("/", function (request, response) {
         preguntas = result;
         response.render("inicio", {
           nombre: request.session.nombre,
+          email:request.session.email,
           preguntas: preguntas, 
         });
       }
       else{
         response.render("inicio", {
           nombre: request.session.nombre,
+          email:request.session.email,
           preguntas: preguntas, 
         });
       }

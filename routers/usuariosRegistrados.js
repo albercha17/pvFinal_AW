@@ -23,6 +23,7 @@ router.use(express.static(__dirname + '/public'));
         var usuarios = result;
         response.render("usuariosRegistrados", {
         nombre: request.session.nombre,
+        email:request.session.email,
          usuarios: usuarios, 
         });
       }
@@ -36,6 +37,7 @@ router.use(express.static(__dirname + '/public'));
         var usuarios = result;
         response.render("usuariosRegistrados", {
         nombre: request.session.nombre,
+        email:request.session.email,
          usuarios: usuarios, 
         });
       }
