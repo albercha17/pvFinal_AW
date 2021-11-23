@@ -45,6 +45,7 @@ var router_user = require("./routers/users")
 var router_inicio = require("./routers/inicio");
 var router_usuarios = require("./routers/usuariosRegistrados");
 var router_pSR = require("./routers/preguntasSR");
+var router_crearPregunta = require("./routers/CrearPregunta");
 
 
 var identificado=false;
@@ -105,6 +106,12 @@ app.get("/BuscarUsuario",identificador,router_usuarios);
 app.get("/SinResponder",identificador,router_pSR);
 app.get("/BuscarEtiquetaSR",identificador,router_pSR);
 app.get("/BuscarTextoSR",identificador,router_pSR);
+
+
+// router router_crearPregunta
+
+app.get("/FormularPregunta",identificador,router_crearPregunta);
+
 
 //Errores
 
