@@ -41,6 +41,55 @@ router.get("/", function (request, response) {
       }
     })
   });
+
+  router.get("/filtrarVisitas", function (request, response) {
+    var preguntas= new Array();
+    DAOP.filtrarVisitas(function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          email:request.session.email,
+          preguntas: preguntas, 
+        });
+      }
+      else{
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          email:request.session.email,
+          preguntas: preguntas, 
+        });
+      }
+    })
+  });
+
+  
+  router.get("/filtrarFecha", function (request, response) {
+    var preguntas= new Array();
+    DAOP.filtrarFecha(function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        preguntas = result;
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          email:request.session.email,
+          preguntas: preguntas, 
+        });
+      }
+      else{
+        response.render("inicio", {
+          nombre: request.session.nombre,
+          email:request.session.email,
+          preguntas: preguntas, 
+        });
+      }
+    })
+  });
+  
+  
   router.get("/desconectarse", function (request, response) {
     request.session.identificado=false;
     response.redirect("/login");

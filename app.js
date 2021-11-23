@@ -95,6 +95,8 @@ app.get("/crearUsuario",router_user);
 //router_inicio
 app.get("/",identificador,router_inicio);
 app.get("/inicio",identificador,router_inicio);
+app.get("/filtrarFecha",identificador,router_inicio);
+app.get("/filtrarVisitas",identificador,router_inicio);
 app.get("/desconectarse",identificador,router_inicio);
 app.get("/BuscarEtiqueta",identificador,router_inicio);
 app.get("/BuscarTexto",identificador,router_inicio);
@@ -108,7 +110,8 @@ app.get("/BuscarUsuario",identificador,router_usuarios);
 app.get("/SinResponder",identificador,router_pSR);
 app.get("/BuscarEtiquetaSR",identificador,router_pSR);
 app.get("/BuscarTextoSR",identificador,router_pSR);
-
+app.get("/filtrarFechaSR",identificador,router_pSR);
+app.get("/filtrarVisitasSR",identificador,router_pSR);
 
 // router router_crearPregunta
 

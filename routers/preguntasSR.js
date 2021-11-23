@@ -52,6 +52,83 @@ router.use(express.static(__dirname + '/public'));
       }
     })
   });
+
+  router.get("/filtrarVisitasSR", function (request, response) {
+    var Lista= new Array();
+    DAOP.filtrarVisitas(function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        DAOP.getRespuesta(function buscarNombre(err, result) {
+          if (err) {
+            console.log(err.message);
+          } else if (result) {
+            var respuestas = result;
+            Lista=Sinresponder(preguntas,respuestas);
+            response.render("preguntasSinResponder", {
+              nombre: request.session.nombre,
+              email:request.session.email,
+              preguntas: Lista, 
+            });
+          }
+          else{
+            response.render("preguntasSinResponder", {
+                nombre: request.session.nombre,
+                email:request.session.email,
+                preguntas: Lista, 
+              });
+          }
+        })
+      }
+      else{
+        response.render("preguntasSinResponder", {
+            nombre: request.session.nombre,
+            email:request.session.email,
+            preguntas: Lista, 
+          });
+      }
+    })
+  });
+
+  router.get("/filtrarFechaSR", function (request, response) {
+    var Lista= new Array();
+    DAOP.filtrarFecha(function buscarNombre(err, result) {
+      if (err) {
+        console.log(err.message);
+      } else if (result) {
+        var preguntas = result;
+        DAOP.getRespuesta(function buscarNombre(err, result) {
+          if (err) {
+            console.log(err.message);
+          } else if (result) {
+            var respuestas = result;
+            Lista=Sinresponder(preguntas,respuestas);
+            response.render("preguntasSinResponder", {
+              nombre: request.session.nombre,
+              email:request.session.email,
+              preguntas: Lista, 
+            });
+          }
+          else{
+            response.render("preguntasSinResponder", {
+                nombre: request.session.nombre,
+                email:request.session.email,
+                preguntas: Lista, 
+              });
+          }
+        })
+      }
+      else{
+        response.render("preguntasSinResponder", {
+            nombre: request.session.nombre,
+            email:request.session.email,
+            preguntas: Lista, 
+          });
+      }
+    })
+  });
+
   router.get("/BuscarEtiquetaSR", function (request, response) {
     var Lista= new Array();
     var tag=request.query.tag;
