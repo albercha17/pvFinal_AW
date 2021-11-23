@@ -36,7 +36,7 @@
                    </li>
                </ul>
                <ul class="navbar-nav  mb-4 mb-lg-0">
-                <img src="/Images/amy.png" id="iconoHeader" width="50" height="50">
+                <img src="/Images/amy.png" id="iconoHeader" width="50" height="46">
                    <li class="nav-item">
                        <a class="nav-link active" aria-current="page"
                            href="http://localhost:3000/SinResponder"><%= nombre%></a>
@@ -72,7 +72,7 @@
                                         style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                                     <p class="card-text"><%= pregunta.cuerpo%></p>
                                     <% pregunta.tag.forEach(function(tag) { %>
-                                    <p class="card-text"><%= tag.tag%></p>
+                                    <a class="card-text" style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 30px;"><%= tag.tag%></a>
                                     <% }); %>
                                 </div>
                             </div>

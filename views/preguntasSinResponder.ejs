@@ -71,8 +71,8 @@
                                         style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                                     <p class="card-text"><%= pregunta.cuerpo%></p>
                                     <% pregunta.tag.forEach(function(tag) { %>
-                                    <p class="card-text"><%= tag.tag%></p>
-                                    <% }); %>
+                                      <a class="card-text" style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 30px;"><%= tag.tag%></a>
+                                      <% }); %>
                                 </div>
                             </div>
                         </div>
