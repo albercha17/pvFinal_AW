@@ -67,7 +67,9 @@
                         <div class="card" style="width: 80rem;">
                             <div class="card-body">
                                 <div class="pregunta">
-                                    <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
+                                    <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
+                                     href="#"><strong><%= pregunta.titulo%></strong></a>
+                                     <p></p>
                                     <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
                                         style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                                     <p class="card-text"><%= pregunta.cuerpo%></p>
@@ -86,13 +88,13 @@
                     <form class="d-flex"method="get" action="/BuscarTexto">
                         <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
                             aria-label="Search" name="tag">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
                     </form>
                     <br>
                     <form class="d-flex" method="get" action="/BuscarEtiqueta">
                         <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
                             aria-label="Search" name="tag">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
                     </form>
                     <br>
                     <form method="get" action="/desconectarse">

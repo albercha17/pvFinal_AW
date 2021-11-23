@@ -58,47 +58,49 @@
     
     <div class="container">
          <!---------------------------------- BARRAS DE BUSQUEDA--------------------------------------->
-         <div class="row">
-            <div class="col col-md-8">
-                <h2><%= preguntas.length%> preguntas</h2>
-                <% preguntas.forEach(function(pregunta) { %>
-                    <div class="row">
-                        <div class="card" style="width: 80rem;">
-                            <div class="card-body">
-                                <div class="pregunta">
-                                    <h5 class="card-title" href="#"><%= pregunta.titulo%></h5>
-                                    <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
-                                        style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
-                                    <p class="card-text"><%= pregunta.cuerpo%></p>
-                                    <% pregunta.tag.forEach(function(tag) { %>
-                                      <a class="card-text" style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px;"><%= tag.tag%></a>
-                                      <% }); %>
+              <div class="row">
+                <div class="col col-md-8">
+                    <h2><%= preguntas.length%> preguntas</h2>
+                    <% preguntas.forEach(function(pregunta) { %>
+                        <div class="row">
+                            <div class="card" style="width: 80rem;">
+                                <div class="card-body">
+                                    <div class="pregunta">
+                                        <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
+                                         href="#"><strong><%= pregunta.titulo%></strong></a>
+                                         <p></p>
+                                        <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/SinResponder"
+                                            style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
+                                        <p class="card-text"><%= pregunta.cuerpo%></p>
+                                        <% pregunta.tag.forEach(function(tag) { %>
+                                        <a class="card-text" style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px;"><%= tag.tag%></a>
+                                        <% }); %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <% }); %>
-            </div>
-            <div class="col col-md-4">
-                <br><br>
-                    <form class="d-flex" method="get" action="/BuscarTextoSR">
-                        <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
-                            aria-label="Search"name="tag">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                    <br>
-                    <form class="d-flex" method="get" action="/BuscarEtiquetaSR">
-                        <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
-                            aria-label="Search"name="tag" >
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                    <br>
-                    <form method="get" action="/desconectarse">
-                        <button class="btn btn-primary" type="submit">Crear pregunta</button>
-                    </form>
-            </div>
-         </div>
+                        <br>
+                        <% }); %>
+                </div>
+                <div class="col col-md-4">
+                    <br><br>
+                        <form class="d-flex"method="get" action="/BuscarTexto">
+                            <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
+                                aria-label="Search" name="tag">
+                            <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
+                        </form>
+                        <br>
+                        <form class="d-flex" method="get" action="/BuscarEtiqueta">
+                            <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
+                                aria-label="Search" name="tag">
+                            <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
+                        </form>
+                        <br>
+                        <form method="get" action="/desconectarse">
+                            <button class="btn btn-primary" type="submit">Crear pregunta</button>
+                        </form>
+                </div>
+             </div>
                 
          <!---------------------------------- PREGUNTAS  --------------------------------------->
         
