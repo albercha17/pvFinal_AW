@@ -111,7 +111,7 @@ app.get("/BuscarTextoSR",identificador,router_pSR);
 // router router_crearPregunta
 
 app.get("/FormularPregunta",identificador,router_crearPregunta);
-
+app.get("/CrearPregunta",identificador,router_crearPregunta);
 
 //Errores
 

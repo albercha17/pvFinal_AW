@@ -2,83 +2,93 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" type="text/css" href="../public/css/estilo.css" media="print" />
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear pregunta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/estilo.css" media="print" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear pregunta</title>
 </head>
- <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
 
- <div id="header">
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-     <div class="container-fluid">
-         <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-             aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                 <li class="nav-item">
-                     <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"> Preguntas sin
-                         responder</a>
-                 </li>
-                 <li class="nav-item">
-                     <a class="nav-link active" href="http://localhost:3000/usuarios">Usuarios</a>
-                 </li>
-             </ul>
-             <ul class="navbar-nav  mb-4 mb-lg-0">
-              <img src="/Images/amy.png" id="iconoHeader"  width="50" height="46" style="border-radius: 50%;">
-                 <li class="nav-item">
-                     <a class="nav-link active" aria-current="page"
-                         href="http://localhost:3000/SinResponder"><%= nombre%></a>
-                 </li>
-                 <form method="get" action="/desconectarse">
-                     <button class="btn btn-danger" type="submit">Cerrar Sesion</button>
-                 </form>
-             </ul>
-         </div>
-     </div>
- </nav>
- </div>
+<div id="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder">
+                            Preguntas sin
+                            responder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://localhost:3000/usuarios">Usuarios</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav  mb-4 mb-lg-0">
+                    <img src="/Images/amy.png" id="iconoHeader" width="50" height="46" style="border-radius: 50%;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page"
+                            href="http://localhost:3000/SinResponder"><%= nombre%></a>
+                    </li>
+                    <form method="get" action="/desconectarse">
+                        <button class="btn btn-danger" type="submit">Cerrar Sesion</button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
 
- <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
- 
+<!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <body class="cuerpo1">
     <br>
     <h1 class="text-center">Formular pregunta</h1>
     <br>
-    <br> 
+    <br>
     <div class="container">
         <div class="row">
             <div class="col col-8" style="margin: auto;">
                 <div class="card" style="width: 50rem;border-color: blue;">
                     <div class="card-body" " >
-                        <form method="get" action="/CrearPregunta">
-                            <div class="mb-3">
-                              <h5 for="exampleInputEmail1" class="form-label">Texto</h5>
-                              <p class="card-text" style="color: rgb(58, 56, 56);">Formula tu pregunta como si estuvieras hablando a otra persona</p>
-                              <input type="text" name="texto" class="form-control" aria-describedby="emailHelp" placeholder="10 caracteres min.">
-                            </div>
-                            <div class="mb-3">
-                                <h5 for="exampleInputEmail1" class="form-label">Cuerpo</h5>
-                                <p class="card-text" style="color: rgb(58, 56, 56);">Describa su pregunta para que el resto de usuarios tengan más información</p>
-                                <textarea class="form-control" name ="cuerpo" id="cuerpo" rows="4" placeholder="20 caracteres min."></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <h5 for="exampleInputEmail1" class="form-label">Etiquetas</h5>
-                                <p class="card-text" style="color: rgb(58, 56, 56);">Añade hasta 5 etiquetas para su pregunta</p>
-                                <input type="text" name="etiquetas" class="form-control" aria-describedby="emailHelp"  placeholder="Separa cada etiqueta con un @: @css @grupo">
-                            </div>
-                            <div class="mb-3" style="text-align: center;">
-                                <br>
-                                <button class="btn btn-outline-success" type="submit">Crear pregunta</button>
-                            </div>   
+                        <form method=" get" action="/CrearPregunta">
+                        <div class="mb-3">
+                            <br>
+                            <p style="color: red;"><%= error %></p>
+                            <br>
+                            <h5 for="exampleInputEmail1" class="form-label">Texto</h5>
+                            <p class="card-text" style="color: rgb(58, 56, 56);">Formula tu pregunta como si estuvieras
+                                hablando a otra persona</p>
+                            <input type="text" name="titulo" class="form-control" aria-describedby="emailHelp"
+                                placeholder="10 caracteres min." required>
+                        </div>
+                        <div class="mb-3">
+                            <h5 for="exampleInputEmail1" class="form-label">Cuerpo</h5>
+                            <p class="card-text" style="color: rgb(58, 56, 56);">Describa su pregunta para que el resto
+                                de usuarios tengan más información</p>
+                            <textarea class="form-control" name="cuerpo" id="cuerpo" rows="4"
+                                placeholder="20 caracteres min." required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <h5 for="exampleInputEmail1" class="form-label">Etiquetas</h5>
+                            <p class="card-text" style="color: rgb(58, 56, 56);">Añade hasta 5 etiquetas para su
+                                pregunta</p>
+                            <input type="text" name="etiquetas" class="form-control" aria-describedby="emailHelp"
+                                placeholder="Separa cada etiqueta con un @: @css @grupo" required>
+                        </div>
+                        <div class="mb-3" style="text-align: center;">
+                            <br>
+                            <button class="btn btn-outline-success" type="submit">Crear pregunta</button>
+                        </div>
                         </form>
                     </div>
                 </div>
@@ -86,7 +96,7 @@
         </div>
 
     </div>
-  
+
 </body>
 
 </html>

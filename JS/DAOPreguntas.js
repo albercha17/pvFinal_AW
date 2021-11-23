@@ -190,6 +190,54 @@ class DAOPreguntas {
                     }
                 });
             }
+
+
+            insertPregunta(email,titulo,cuerpo,etiquetas, callback) {
+                this.pool.getConnection(function (err, connection) {
+                    if (err) {
+                        callback(new Error("Error de conexión a la base de datos"));
+                    } else {
+                        connection.query(
+                            "SELECT * FROM pregunta WHERE id = (SELECT MAX(id) FROM pregunta);",
+                            function (err, rows) {
+                                if (err) {
+                                    callback(new Error("Error de acceso a la base de datos"));
+                                } else {
+                                    if (rows.length === 0) {
+                                        callback(null, false); //no está el usuario con el password proporcionado
+                                    } else {
+                                        var id=rows[0].id;
+                                        id++;
+                                        connection.query(
+                                            "INSERT INTO pregunta (id,titulo,cuerpo,autor,visitas,puntos) VALUES (?, ?, ?, ?, ?, ?)",
+                                            [id, titulo, cuerpo, email, 0, 0],
+                                            function (err, rows) {
+                                                if (err) {
+                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                } else {
+                                                    etiquetas.forEach(etiqueta => {
+                                                        connection.query(
+                                                            "INSERT INTO etiqueta (idPregunta ,tag) VALUES (?, ?)",
+                                                            [id, etiqueta],
+                                                            function (err, rows) {
+                                                                if (err) {
+                                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                                }
+                                                            }
+                                                        );
+                                                    });
+                                                    connection.release(); // devolver al pool la conexión
+                                                    callback(null, true);
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            }
+                        );
+                    }
+                });
+            }
     }
 
     
