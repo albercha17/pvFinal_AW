@@ -119,7 +119,7 @@ class DAOPreguntas {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta ORDER BY fecha DESC",
+                    "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta ORDER BY fecha DESC, id DESC",
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {

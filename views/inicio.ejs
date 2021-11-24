@@ -14,134 +14,148 @@
 
 <body>
 
-   <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
 
-   <div id="header">
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <div class="container-fluid">
-           <a class="navbar-brand" href="http://localhost:3000/" style="font-size:x-large;">Inicio</a>
-           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-               aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-           </button>
-           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                   <li class="nav-item">
-                       <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder" style="font-size:x-large;"> Preguntas sin
-                           responder</a>
-                   </li>
-                   <li class="nav-item">
-                       <a class="nav-link active" href="http://localhost:3000/usuarios" style="font-size:x-large;">Usuarios</a>
-                   </li>
-               </ul>
-               <ul class="navbar-nav  mb-4 mb-lg-0">
-                   <div class="container">
-                       <div class="row">
-                           <div class="col col-3">
-                            <img src="/Images/nico.png" id="iconoHeader"  width="70" height="66" style="border-radius: 60%; margin-top: 10px;">
-                           </div>
-                           <div class="col col-3">
-                            <a class="nav-link active" aria-current="page" style="font-size:x-large; margin-top: 10px;"
-                            href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
-                           </div>
-                           <div class="col col-6">
-                            <form method="get" action="/desconectarse">
-                                <button class="btn btn-danger" type="submit" style="margin-top: 20px; float: right;">Cerrar Sesion</button>
-                            </form>
+    <div id="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="http://localhost:3000/" style="font-size:x-large;">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"
+                                style="font-size:x-large;"> Preguntas sin
+                                responder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="http://localhost:3000/usuarios"
+                                style="font-size:x-large;">Usuarios</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav  mb-4 mb-lg-0">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col col-3">
+                                    <img src="/Images/nico.png" id="iconoHeader" width="70" height="66"
+                                        style="border-radius: 60%; margin-top: 10px;">
+                                </div>
+                                <div class="col col-3">
+                                    <a class="nav-link active" aria-current="page"
+                                        style="font-size:x-large; margin-top: 10px;"
+                                        href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
+                                </div>
+                                <div class="col col-6">
+                                    <form method="get" action="/desconectarse">
+                                        <button class="btn btn-danger" type="submit"
+                                            style="margin-top: 20px; float: right;">Cerrar Sesion</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                       </div>
-                   </div>
-               </ul>
-           </div>
-       </div>
-   </nav>
-   </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-   <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
     <br>
     <h1 class="text-center">Todas las preguntas</h1>
     <br>
     <br>
-    
+
     <div class="container">
-         <!---------------------------------- BARRAS DE BUSQUEDA--------------------------------------->
-         <div class="row" >
+        <!---------------------------------- BARRAS DE BUSQUEDA--------------------------------------->
+        <div class="row">
             <div class="col col-md-8">
-                <h2><%= preguntas.length%> preguntas</h2>
-                <% preguntas.forEach(function(pregunta) { %>
+                <div class="container">
                     <div class="row">
-                        <div class="card" style="width: 80rem;">
-                            <div class="card-body">
-                                <div class="pregunta">
-                                    <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
-                                     href="http://localhost:3000/pregunta/<%= pregunta.id%>"><strong><%= pregunta.titulo%></strong></a>
-                                     <p></p>
+                        <div class="col col-md-3">
+                            <h2><%= preguntas.length%> preguntas</h2>
+                        </div>
+                        <div class="col col-md-3">
+                            <form method="get" action="/inicio">
+                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i
+                                        class="bi bi-hand-thumbs-up-fill"></i> Más votados</button>
+                            </form>
+                        </div>
+                        <div class="col col-md-3">
+                            <form method="get" action="/filtrarVisitas">
+                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i
+                                        class="bi bi-eye-fill"></i> Más visitados</button>
+                            </form>
+                        </div>
+                        <div class="col col-md-3">
+                            <form method="get" action="/filtrarFecha">
+                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i
+                                        class="bi bi-receipt-cutoff"></i> Más recientes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% preguntas.forEach(function(pregunta) { %>
+                <div class="row">
+                    <div class="card" style="width: 80rem;">
+                        <div class="card-body">
+                            <div class="pregunta">
+                                <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
+                                    href="http://localhost:3000/pregunta/<%= pregunta.id%>"><strong><%= pregunta.titulo%></strong></a>
+                                <p></p>
 
-                                     <img src="/Images/amy.png" id="iconoHeader" width="30" height="30" style="border-radius: 50%;">
+                                <img src="/Images/amy.png" id="iconoHeader" width="30" height="30"
+                                    style="border-radius: 50%;">
 
-                                     <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= pregunta.autor%>"
-                                        style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
-                                        <p></p>
-                                    <p class="card-text"><%= pregunta.cuerpo%></p>
-                                    <% pregunta.tag.forEach(function(tag) { %>
-                                    <a class="card-text" style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px;"><%= tag.tag%></a>
-                                    <% }); %>
-                                    <p style="float: right; color: rgb(5, 102, 5);">Votos: <%= pregunta.puntos%></p>
-                                    <p style="float: right;margin-right: 40px; color: rgb(111, 0, 255);">Visitas: <%= pregunta.visitas%></p>
-                                    <br><br><br>
-                                    
-                                    <p style="margin-right: 40px; color: rgb(158, 158, 158);"><%= pregunta.fecha%></p>
-
-                                        
-                                        
-                                   
-                                </div>
+                                <a class="card-subtitle mb-2 text-muted"
+                                    href="http://localhost:3000/usuario/<%= pregunta.autor%>"
+                                    style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
+                                <p></p>
+                                <p class="card-text"><%= pregunta.cuerpo%></p>
+                                <% pregunta.tag.forEach(function(tag) { %>
+                                <a class="card-text"
+                                    style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px;"><%= tag.tag%></a>
+                                <% }); %>
+                                <p style="float: right; color: rgb(5, 102, 5);">Votos: <%= pregunta.puntos%></p>
+                                <p style="float: right;margin-right: 40px; color: rgb(111, 0, 255);">Visitas:
+                                    <%= pregunta.visitas%></p>
+                                <br><br><br>
+                                <p style="margin-right: 40px; color: rgb(158, 158, 158);"><%= pregunta.fecha%></p>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <% }); %>
+                </div>
+                <br>
+                <% }); %>
             </div>
             <div class="col col-md-4 " style="text-align: left;"">
                 <br><br>
-                    <form class="d-flex"method="get" action="/BuscarTexto">
-                        <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
-                            aria-label="Search" name="tag">
-                        <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
-                    </form>
-                    <br>
-                    <form class="d-flex" method="get" action="/BuscarEtiqueta">
-                        <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta"
-                            aria-label="Search" name="tag">
-                        <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
-                    </form>
-                    <br>
-                    <form method="get" action="/FormularPregunta" >
-                        <button class="btn btn-primary" type="submit">Crear pregunta</button>
-                    </form>
-                    <br><br>
-                    <i class="bi bi-filter" style="font-size: 30px;"> Filtros</i>
-                    <br><br>
-                    <form method="get" action="/inicio">
-                        <button  class="btn btn-warning" type="submit" style="margin-left: 30px;" ><i class="bi bi-hand-thumbs-up-fill"></i>  Más votados</button>
-                    </form>
-                    <br>
-                    <form method="get" action="/filtrarVisitas">
-                        <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i class="bi bi-eye-fill"></i>   Más visitados</button>
-                    </form>
-                    <br>
-                    <form method="get" action="/filtrarFecha">
-                        <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i class="bi bi-receipt-cutoff"></i>  Más recientes</button>
-                    </form>
+                    <form class=" d-flex"method="get" action="/BuscarTexto">
+                <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
+                    aria-label="Search" name="tag">
+                <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
+                </form>
+                <br>
+                <form class="d-flex" method="get" action="/BuscarEtiqueta">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta" aria-label="Search"
+                        name="tag">
+                    <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
+                </form>
+                <br>
+                <form method="get" action="/FormularPregunta">
+                    <button class="btn btn-primary" type="submit">Crear pregunta</button>
+                </form>
             </div>
-         </div>
-                
-         <!---------------------------------- PREGUNTAS  --------------------------------------->
-        
+        </div>
 
-         <br><br><br>
+        <!---------------------------------- PREGUNTAS  --------------------------------------->
+
+
+        <br><br><br>
 
 </body>
 
