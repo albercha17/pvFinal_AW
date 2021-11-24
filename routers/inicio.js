@@ -26,6 +26,7 @@ router.get("/", function (request, response) {
         response.status(500);
       } else if (result) {
         preguntas = result;
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -33,6 +34,7 @@ router.get("/", function (request, response) {
         });
       }
       else{
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -49,6 +51,7 @@ router.get("/", function (request, response) {
         response.status(500);
       } else if (result) {
         preguntas = result;
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -56,6 +59,7 @@ router.get("/", function (request, response) {
         });
       }
       else{
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -73,6 +77,7 @@ router.get("/", function (request, response) {
         response.status(500);
       } else if (result) {
         preguntas = result;
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -80,6 +85,7 @@ router.get("/", function (request, response) {
         });
       }
       else{
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -104,6 +110,7 @@ router.get("/", function (request, response) {
         response.status(500);
       } else if (result) {
         preguntas = result;
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -111,6 +118,7 @@ router.get("/", function (request, response) {
         });
       }
       else{
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -127,6 +135,7 @@ router.get("/", function (request, response) {
         response.status(500);
       } else if (result) {
         preguntas = result;
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
@@ -134,6 +143,7 @@ router.get("/", function (request, response) {
         });
       }
       else{
+        response.status(200);
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,

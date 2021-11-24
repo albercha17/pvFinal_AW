@@ -18,6 +18,7 @@ router.use(express.static(__dirname + '/public'));
 
 //--------------------------------------  R U T A S ---------------------------------------------------------
   router.get("/FormularPregunta", function (request, response) {
+    response.status(200);
     response.render("crearPregunta", {
         nombre: request.session.nombre,
         email:request.session.email,
@@ -28,6 +29,7 @@ router.use(express.static(__dirname + '/public'));
       var validarD= validarDatos(request.query.titulo,request.query.cuerpo);
       var validarEiquetas=validarEiqueta(request.query.etiquetas);
       if(!validarD || !validarEiquetas){
+        response.status(200);
         response.render("crearPregunta", {
             nombre: request.session.nombre,
             email:request.session.email,
@@ -52,17 +54,21 @@ router.use(express.static(__dirname + '/public'));
 
   function validarDatos(titulo, cuerpo) {
     var valido = false;
-    if (titulo.length<10) {
-      error= "El título tiene que tener por lo menos 10 caracteres";
+    if (titulo.length<10 ||titulo.length>100) {
+      error= "El título tiene que tener por lo menos 10 caracteres y un maximo de 100";
     } 
-    else if (cuerpo.length<20){
-        error= "El cuerpo tiene que tener por lo menos 20 caracteres";
+    else if (cuerpo.length<20 || cuerpo.length>200){
+        error= "El cuerpo tiene que tener por lo menos 20 caracteres y un maximo de 200";
     }
     else valido=true;
     return valido;
   }
   
   function validarEiqueta(etiqueta){
+      if(etiqueta.length>10){
+        error= "Pon un maximo de 10 palabras en las etiquetas.";
+        return false;
+      }
     if(etiqueta.startsWith('@')){
         Etiquetas = etiqueta.split("@");
         var i = Etiquetas.indexOf("");

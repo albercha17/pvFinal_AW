@@ -27,7 +27,7 @@ router.use(express.static(__dirname + '/public'));
                 } else if (result){
                   var preguntas = result;
                   var pregunta=preguntas[0];
-
+                  response.status(200);
                 response.render("vistaPregunta", {
                 nombre: request.session.nombre,
                 email: request.session.email,

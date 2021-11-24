@@ -22,6 +22,7 @@ router.use(express.static(__dirname + '/public'));
             response.status(500);
         } else if (result){
           var usuario = result;
+          response.status(200);
           response.render("vistaUsuario", {
             nombre: request.session.nombre,
             email: request.session.email,

@@ -21,6 +21,7 @@ router.use(express.static(__dirname + '/public'));
         response.status(500);
       } else if (result) {
         var usuarios = result;
+        response.status(200);
         response.render("usuariosRegistrados", {
         nombre: request.session.nombre,
         email:request.session.email,
@@ -35,6 +36,7 @@ router.use(express.static(__dirname + '/public'));
         response.status(500);
       } else if (result) {
         var usuarios = result;
+        response.status(200);
         response.render("usuariosRegistrados", {
         nombre: request.session.nombre,
         email:request.session.email,

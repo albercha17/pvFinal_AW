@@ -26,6 +26,7 @@ router.get("/login", function (request, response) {
     response.redirect("/inicio");
 
   } else {
+    response.status(200);
     response.render("login", {
       errorLogin: errorLogin,
     });
@@ -34,6 +35,7 @@ router.get("/login", function (request, response) {
 });
 
 router.get("/SingUp", function (request, response) {
+  response.status(200);
     response.render("SingUp", {
       errorCrearUsuario: errorCrearUsuario,
   });
