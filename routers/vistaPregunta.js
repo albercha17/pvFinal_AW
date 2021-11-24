@@ -19,11 +19,11 @@ router.use(express.static(__dirname + '/public'));
   router.get("/pregunta/:id", function (request, response) {
           DAOPregunta.visitaPregunta(request.params.id,function buscarNombre(err, result) {
             if (err) {
-              console.log(err.message);
+              response.status(500);
             } else if (result){
               DAOPregunta.getPreguntasId(request.params.id,function buscarNombre(err, result) {
                 if (err) {
-                  console.log(err.message);
+                  response.status(500);
                 } else if (result){
                   var preguntas = result;
                   var pregunta=preguntas[0];

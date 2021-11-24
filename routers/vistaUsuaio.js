@@ -19,7 +19,7 @@ router.use(express.static(__dirname + '/public'));
   router.get("/usuario/:email", function (request, response) {
     DAOUser.getUserName(request.params.email,function buscarNombre(err, result) {
         if (err) {
-          console.log(err.message);
+            response.status(500);
         } else if (result){
           var usuario = result;
           response.render("vistaUsuario", {

@@ -39,7 +39,7 @@ router.use(express.static(__dirname + '/public'));
       else{
         DAOP.insertPregunta(request.session.email,request.query.titulo,request.query.cuerpo,Etiquetas,function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
+            response.status(500);
           } else if (result) {
               response.redirect("/");
               error=null;

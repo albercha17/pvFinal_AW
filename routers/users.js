@@ -52,16 +52,14 @@ router.get("/loguearse", function (request, response) {
       if (err) {
         identificado = false;
         request.session.identificado=false;
-        console.log(err.message);
-        response.redirect("/login");
+        response.status(500);
       } 
       else if (result) {
         identificado = true;
         request.session.identificado=true;
         daoUser.getUserName(result.email, function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
-            response.redirect("/login");
+            response.status(500);
           } else if (result){
             request.session.nombre=result.nombre;
             request.session.email=result.email;
@@ -102,15 +100,14 @@ router.get("/crearUsuario", function (request, response) {
       function crearusuario(err, result) {
         if (err) {
           errorCrearUsuario = err;
-          console.log(err.message);
+          response.status(500);
           response.redirect("/SingUp");
         } else if (result) {
           identificado = true;
           request.session.identificado=true;
           daoUser.getUserName(result, function buscarNombre(err, result) {
             if (err) {
-              console.log(err.message);
-              response.redirect("/SingUp");
+              response.status(500);
             } else if (result) {
               request.session.nombre=result.nombre;
               request.session.email=result.email;

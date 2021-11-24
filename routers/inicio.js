@@ -23,7 +23,7 @@ router.get("/", function (request, response) {
     var preguntas= new Array();
     DAOP.getPreguntas(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         preguntas = result;
         response.render("inicio", {
@@ -46,7 +46,7 @@ router.get("/", function (request, response) {
     var preguntas= new Array();
     DAOP.filtrarVisitas(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         preguntas = result;
         response.render("inicio", {
@@ -70,7 +70,7 @@ router.get("/", function (request, response) {
     var preguntas= new Array();
     DAOP.filtrarFecha(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         preguntas = result;
         response.render("inicio", {
@@ -101,7 +101,7 @@ router.get("/", function (request, response) {
     var tag= request.query.tag;
     DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         preguntas = result;
         response.render("inicio", {
@@ -124,7 +124,7 @@ router.get("/", function (request, response) {
     var tag= request.query.tag;
     DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         preguntas = result;
         response.render("inicio", {

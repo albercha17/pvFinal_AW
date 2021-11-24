@@ -19,12 +19,12 @@ router.use(express.static(__dirname + '/public'));
     var Lista= new Array();
     DAOP.getPreguntas(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var preguntas = result;
         DAOP.getRespuesta(function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
+            response.status(500);
           } else if (result) {
             var respuestas = result;
             Lista=Sinresponder(preguntas,respuestas);
@@ -57,12 +57,12 @@ router.use(express.static(__dirname + '/public'));
     var Lista= new Array();
     DAOP.filtrarVisitas(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var preguntas = result;
         DAOP.getRespuesta(function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
+            response.status(500);
           } else if (result) {
             var respuestas = result;
             Lista=Sinresponder(preguntas,respuestas);
@@ -95,12 +95,12 @@ router.use(express.static(__dirname + '/public'));
     var Lista= new Array();
     DAOP.filtrarFecha(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var preguntas = result;
         DAOP.getRespuesta(function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
+            response.status(500);
           } else if (result) {
             var respuestas = result;
             Lista=Sinresponder(preguntas,respuestas);
@@ -134,12 +134,12 @@ router.use(express.static(__dirname + '/public'));
     var tag=request.query.tag;
     DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var preguntas = result;
         DAOP.getRespuesta(function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
+            response.status(500);
           } else if (result) {
             var respuestas = result;
             Lista=Sinresponder(preguntas,respuestas);
@@ -173,12 +173,12 @@ router.use(express.static(__dirname + '/public'));
     var tag=request.query.tag;
     DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var preguntas = result;
         DAOP.getRespuesta(function buscarNombre(err, result) {
           if (err) {
-            console.log(err.message);
+            response.status(500);
           } else if (result) {
             var respuestas = result;
              Lista=Sinresponder(preguntas,respuestas);

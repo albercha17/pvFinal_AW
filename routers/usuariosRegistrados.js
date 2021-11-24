@@ -18,7 +18,7 @@ router.use(express.static(__dirname + '/public'));
   router.get("/usuarios", function (request, response) {
     DAOUser.getUsuarios(function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var usuarios = result;
         response.render("usuariosRegistrados", {
@@ -32,7 +32,7 @@ router.use(express.static(__dirname + '/public'));
   router.get("/BuscarUsuario", function (request, response) {
     DAOUser.getUsuarios_filtro(request.query.filtro,function buscarNombre(err, result) {
       if (err) {
-        console.log(err.message);
+        response.status(500);
       } else if (result) {
         var usuarios = result;
         response.render("usuariosRegistrados", {
