@@ -78,8 +78,12 @@
                                     <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
                                      href="http://localhost:3000/pregunta/<%= pregunta.id%>"><strong><%= pregunta.titulo%></strong></a>
                                      <p></p>
-                                    <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= pregunta.autor%>"
+
+                                     <img src="/Images/amy.png" id="iconoHeader" width="30" height="30" style="border-radius: 50%;">
+
+                                     <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= pregunta.autor%>"
                                         style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
+                                        <p></p>
                                     <p class="card-text"><%= pregunta.cuerpo%></p>
                                     <% pregunta.tag.forEach(function(tag) { %>
                                     <a class="card-text" style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px;"><%= tag.tag%></a>
