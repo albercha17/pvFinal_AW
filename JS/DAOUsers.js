@@ -70,6 +70,8 @@ class DAOUsers {
                             if (rows.length === 0) {
                                 callback(null, null);
                             } else {
+                                var fecha = rows[0].fechaAlta.toDateString();
+                                rows[0].fechaAlta = fecha;
                                 callback(null, rows[0]);
                             }
                         }
