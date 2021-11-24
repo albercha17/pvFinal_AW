@@ -1,5 +1,7 @@
 "use strict";
 
+var moment = require('moment');
+
 class DAOPreguntas {
     constructor(pool) {
         this.pool = pool
@@ -113,7 +115,7 @@ class DAOPreguntas {
                     callback(new Error("Error de conexión a la base de datos"));
                 } else {
                     connection.query(
-                        "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta ORDER BY id DESC",
+                        "SELECT * FROM pregunta T, etiqueta a WHERE T.id=a.idPregunta ORDER BY fecha DESC",
                         function (err, rows) {
                             connection.release(); // devolver al pool la conexión
                             if (err) {
@@ -420,9 +422,10 @@ class DAOPreguntas {
                                     } else {
                                         var id=rows[0].id;
                                         id++;
+                                        var hoy = moment().format("YYYY-MM-DD");
                                         connection.query(
-                                            "INSERT INTO pregunta (id,titulo,cuerpo,autor,visitas,puntos) VALUES (?, ?, ?, ?, ?, ?)",
-                                            [id, titulo, cuerpo, email, 0, 0],
+                                            "INSERT INTO pregunta (id,titulo,cuerpo,autor,visitas,puntos, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                                            [id, titulo, cuerpo, email, 0, 0, hoy],
                                             function (err, rows) {
                                                 if (err) {
                                                     callback(new Error("Error de acceso a la base de datos"));

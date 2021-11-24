@@ -1,4 +1,5 @@
 "use strict";
+var moment = require('moment');
 
 class DAOUsers {
     constructor(pool) {
@@ -90,9 +91,10 @@ class DAOUsers {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
+                                var hoy = moment().format("YYYY-MM-DD");
                                 connection.query(
-                                    "INSERT INTO user (email,password,nombre,img,reputacion) VALUES (?, ?, ?, ?, ?)",
-                                    [email, password, nombre, img, 1],
+                                    "INSERT INTO user (email,password,nombre,img,reputacion,fechaAlta) VALUES (?, ?, ?, ?, ? , ?)",
+                                    [email, password, nombre, img, 1,hoy],
                                     function (err, rows) {
                                         connection.release(); // devolver al pool la conexión
                                         if (err) {
