@@ -86,7 +86,8 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
-              
+              filtroE : filtroE,
+          filtroC : filtroC,
             });
           }
           else{
