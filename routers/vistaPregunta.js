@@ -27,16 +27,36 @@ router.use(express.static(__dirname + '/public'));
                 } else if (result){
                   var preguntas = result;
                   var pregunta=preguntas[0];
-                  response.status(200);
-                response.render("vistaPregunta", {
-                nombre: request.session.nombre,
-                email: request.session.email,
-    
-                pregunta:pregunta,
-              });
+                  DAOPregunta.getRespuestaId(pregunta.id,function buscarNombre(err, result) {
+                    if (err) {
+                      response.status(500);
+                    }
+                    else if (result){
+                      var respuestas= result;
+                      response.status(200);
+                      response.render("vistaPregunta", {
+                      nombre: request.session.nombre,
+                      email: request.session.email,
+                      pregunta:pregunta,
+                      respuestas : respuestas,
+                    });
+                    }
+                  });
+                 
             }
           });
         }
       })    
   });
+
+  router.get("/CrearRespuesta/:id",function (request, response) {
+    DAOPregunta.insertRespuesta(request.params.id,request.query.texto,request.session.email,function buscarNombre(err, result) {
+      if (err) {
+        response.status(500);
+      } else if (result){
+        response.status(200);
+        response.redirect("/")
+      }
+    })  
+});
 module.exports = router;

@@ -126,7 +126,7 @@ app.get("/usuario/:email",identificador,router_verUsuario);
 
 // router_verPregunta
 app.get("/pregunta/:id",identificador,router_verPregunta);
-
+app.get("/CrearRespuesta/:id",identificador,router_verPregunta);
 
 //Errores
 

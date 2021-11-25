@@ -235,7 +235,7 @@ class DAOPreguntas {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM respuesta WHERE idPregunta= ?",
+                    "SELECT * FROM respuesta WHERE idPregunta= ? ORDER BY puntos DESC",
                     [id],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
@@ -243,8 +243,13 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, false);
+                                var lista = new Array();
+                                callback(null, lista);
                             } else {
+                                rows.forEach(function (row) {
+                                    var fecha = row.fecha.toDateString();
+                                    row.fecha = fecha;
+                                });
                                 callback(null, rows);
                             }
                         }
@@ -462,6 +467,53 @@ class DAOPreguntas {
                         }
                     }
                 );
+            }
+        });
+    }
+
+
+    insertRespuesta(idPregunta, texto, autor, callback) {
+        var id = 1;
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * FROM respuesta WHERE idPregunta= ?;",
+                    [idPregunta],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            connection.query(
+                                "SELECT * FROM respuesta WHERE id = (SELECT MAX(id) FROM respuesta);",
+                                [idPregunta],
+                                function (err, rows) {
+                                    if (err) {
+                                        callback(new Error("Error de acceso a la base de datos"));
+                                    } else {
+                                        if (rows.length != 0) {
+                                            var id = rows[0].id;
+                                            id++;
+                                        }
+                                        var hoy = moment().format("YYYY-MM-DD");
+                                        connection.query(
+                                            "INSERT INTO respuesta (idpregunta,id,texto,autor,puntos,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                            [idPregunta, id, texto, autor, 0, hoy],
+                                            function (err, rows) {
+                                                connection.release(); // devolver al pool la conexión
+                                                if (err) {
+                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                } else {
+                                                    callback(null, true);
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            );
+                        }
+                    });
             }
         });
     }

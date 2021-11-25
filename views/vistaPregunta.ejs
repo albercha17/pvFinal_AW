@@ -69,6 +69,7 @@
             <div class="col col-9"> <!-- Cuerpo de la pregunta-->
                 <div class="card" style="border-color: rgb(3, 3, 27);">
                     <div class="card-body">
+                        
                         <h2 class="text-center"><%= pregunta.titulo%></h2>
                     <div class="row" style="margin-top: 40px;">
                         <h3 style="font-size: larger;">Descripción</h3>
@@ -82,38 +83,44 @@
                             
                     </div>
                     <br><br>
-                    <div class="container" style="text-align: right;">
+                    <div class="row"><a href="http://localhost:3000/usuario/<%= pregunta.autor%>"
+                        style="text-decoration:none;color:rgb(67, 68, 70);">De: <%= pregunta.autor%></a></div>
+                        <br>
                         <div class="row">
-                            <div class="col col-10">
-                                <p style="font-size: larger; margin-left: 15px;"><i class="bi bi-eye"></i>  Visitas: <%= pregunta.visitas%></p>
-                            </div>
-                            <div class="col col-2">
-                                <form method="get" action="/desconectarse" style="float: right;">
-                                    <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
-                                        <i class="bi bi-hand-thumbs-down-fill" style="color: rgb(131, 12, 12);"></i></button>
-                                </form>
-                                <form method="get" action="/desconectarse" style="float: right;">
-                                    <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
-                                        <i class="bi bi-hand-thumbs-up-fill" style="color: rgb(19, 122, 10);"></i></button>
-                                </form>
-                                <p style="float: right;font-size: larger;" >  Votos: <%= pregunta.puntos%></p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <p style="margin-right: 40px; color: rgb(158, 158, 158); text-align: right;"><%= pregunta.fecha%></p>
+                            <div class="container">
+                               <div class="row">
+                                   <div class="col col-8" style="text-align: left;">
+                                       <p style="margin-right: 40px; color: rgb(158, 158, 158);"><%= pregunta.fecha%></p>
+                                   </div>
+                                   <div class="col col-4">
+                                    <a style="font-size: larger; margin-left: 15px;"><i class="bi bi-eye"></i>  Visitas: <%= pregunta.visitas%></a>
+
+                                       <form method="get" action="/desconectarse" style="float: right;text-align: right;">
+                                           <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                                               <i class="bi bi-hand-thumbs-down-fill" style="color: rgb(131, 12, 12);"></i></button>
+                                       </form>
+                                       <form method="get" action="/desconectarse" style="float: right;">
+                                           <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                                               <i class="bi bi-hand-thumbs-up-fill" style="color: rgb(19, 122, 10);"></i></button>
+                                       </form>
+                                       <p style="float: right;font-size: larger;" >  Votos: <%= pregunta.puntos%></p>
+                                   </div>
+                               </div>
+                           </div>
+                           </div>                    
+                   
                     </div>
                 </div>
             </div>
             <div class="col col-3"><!-- Cuerpo de tu respuesta-->
                 <div class="card" style="border-color: blue;">
                     <div class="card-body">
-                        <form method=" get" action="/CrearRespuesta">
+                        <form method=" get" action="/CrearRespuesta/<%= pregunta.id%>">
                         <div class="mb-3">
                             <h5 for="exampleInputEmail1" class="form-label">Formular respuesta</h5>
                             <p class="card-text" style="color: rgb(58, 56, 56);">Contesta a la pregunta de la forma mas clara posible</p>
-                            <textarea class="form-control" name="cuerpo" id="cuerpo" rows="5"
-                                placeholder="20 caracteres min." required></textarea>
+                            <textarea class="form-control" name="texto" id="texto" rows="5"
+                                placeholder="Escriba aqui su respuesta..." required></textarea>
                         </div>
                         <div class="mb-3" style="text-align: center;">
                             <br>
@@ -123,6 +130,49 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <h2><%= respuestas.length%> respuestas</h2>
+            <% respuestas.forEach(function(respuesta) { %>
+                <div class="col col-9"> <!-- Cuerpo de la pregunta-->
+                    <div class="card" style="border-color: rgb(3, 3, 27);">
+                        <div class="card-body">
+                        <div class="row">
+                            <h3 style="font-size: larger;">Descripción</h3>
+                                <p style="font-size: larger;"><%= respuesta.texto%></p>
+                                
+                        </div>
+                        <br><br>
+                        <div class="row" ><a href="http://localhost:3000/usuario/<%= respuesta.autor%>"
+                            style="text-decoration:none;color:rgb(67, 68, 70);">De: <%= respuesta.autor%></a></div>
+                            <br>
+                            
+                        <div class="row">
+                             <div class="container">
+                                <div class="row">
+                                    <div class="col col-8" style="text-align: left;">
+                                        <p style="margin-right: 40px; color: rgb(158, 158, 158);"><%= respuesta.fecha%></p>
+                                    </div>
+                                    <div class="col col-4">
+                                        <form method="get" action="/desconectarse" style="float: right;text-align: right;">
+                                            <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                                                <i class="bi bi-hand-thumbs-down-fill" style="color: rgb(131, 12, 12);"></i></button>
+                                        </form>
+                                        <form method="get" action="/desconectarse" style="float: right;">
+                                            <button type="submit" style="border: 0ch;background-color:rgb(252, 252, 252);"> 
+                                                <i class="bi bi-hand-thumbs-up-fill" style="color: rgb(19, 122, 10);"></i></button>
+                                        </form>
+                                        <p style="float: right;font-size: larger;" >  Votos: <%= respuesta.puntos%></p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <% }); %>
         </div>
         
 
