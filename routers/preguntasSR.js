@@ -11,12 +11,16 @@ let Factorydao = new FactoryDao();
 var DAOP= Factorydao.DAOPreguntas();
 
 //--------------------------------------------------
+var filtroE =null;
+var filtroC =null;
 //--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
 router.use(express.static(__dirname + '/public'));
 
 //--------------------------------------  R U T A S ---------------------------------------------------------
   router.get("/SinResponder", function (request, response) {
     var Lista= new Array();
+    filtroE =null;
+    filtroC =null;
     DAOP.getPreguntas(function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -33,6 +37,8 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
+              filtroE : filtroE,
+          filtroC : filtroC,
             });
           }
           else{
@@ -41,6 +47,8 @@ router.use(express.static(__dirname + '/public'));
                 nombre: request.session.nombre,
                 email:request.session.email,
                 preguntas: Lista, 
+                filtroE : filtroE,
+          filtroC : filtroC,
               });
           }
         })
@@ -51,6 +59,8 @@ router.use(express.static(__dirname + '/public'));
             nombre: request.session.nombre,
             email:request.session.email,
             preguntas: Lista, 
+            filtroE : filtroE,
+          filtroC : filtroC,
           });
       }
     })
@@ -58,6 +68,8 @@ router.use(express.static(__dirname + '/public'));
 
   router.get("/filtrarVisitasSR", function (request, response) {
     var Lista= new Array();
+    filtroE =null;
+    filtroC =null;
     DAOP.filtrarVisitas(function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -74,6 +86,7 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
+              
             });
           }
           else{
@@ -81,7 +94,9 @@ router.use(express.static(__dirname + '/public'));
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
                 email:request.session.email,
-                preguntas: Lista, 
+                preguntas: Lista,
+                filtroE : filtroE,
+          filtroC : filtroC, 
               });
           }
         })
@@ -92,6 +107,8 @@ router.use(express.static(__dirname + '/public'));
             nombre: request.session.nombre,
             email:request.session.email,
             preguntas: Lista, 
+            filtroE : filtroE,
+          filtroC : filtroC,
           });
       }
     })
@@ -99,6 +116,8 @@ router.use(express.static(__dirname + '/public'));
 
   router.get("/filtrarFechaSR", function (request, response) {
     var Lista= new Array();
+    filtroE =null;
+    filtroC =null;
     DAOP.filtrarFecha(function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -115,6 +134,8 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
+              filtroE : filtroE,
+          filtroC : filtroC,
             });
           }
           else{
@@ -122,7 +143,9 @@ router.use(express.static(__dirname + '/public'));
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
                 email:request.session.email,
-                preguntas: Lista, 
+                preguntas: Lista,
+                filtroE : filtroE,
+          filtroC : filtroC,
               });
           }
         })
@@ -133,6 +156,8 @@ router.use(express.static(__dirname + '/public'));
             nombre: request.session.nombre,
             email:request.session.email,
             preguntas: Lista, 
+            filtroE : filtroE,
+          filtroC : filtroC,
           });
       }
     })
@@ -140,6 +165,8 @@ router.use(express.static(__dirname + '/public'));
 
   router.get("/BuscarEtiquetaSR", function (request, response) {
     var Lista= new Array();
+    filtroE =request.query.tag;
+    filtroC =null;
     var tag=request.query.tag;
     DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
       if (err) {
@@ -157,6 +184,8 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
+              filtroE : filtroE,
+          filtroC : filtroC,
             });
           }
           else{
@@ -165,6 +194,8 @@ router.use(express.static(__dirname + '/public'));
                 nombre: request.session.nombre,
                 email:request.session.email,
                 preguntas: Lista, 
+                filtroE : filtroE,
+          filtroC : filtroC,
               });
           }
         })
@@ -175,6 +206,8 @@ router.use(express.static(__dirname + '/public'));
             nombre: request.session.nombre,
             email:request.session.email,
             preguntas: Lista, 
+            filtroE : filtroE,
+          filtroC : filtroC,
           });
       }
     })
@@ -182,6 +215,8 @@ router.use(express.static(__dirname + '/public'));
 
   router.get("/BuscarTextoSR", function (request, response) {
     var Lista= new Array();
+    filtroE =null;
+    filtroC =request.query.tag;
     var tag=request.query.tag;
     DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
       if (err) {
@@ -199,6 +234,8 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
+              filtroE : filtroE,
+          filtroC : filtroC,
             });
           }
           else{
@@ -207,6 +244,8 @@ router.use(express.static(__dirname + '/public'));
                 nombre: request.session.nombre,
                 email:request.session.email,
                 preguntas: Lista, 
+                filtroE : filtroE,
+          filtroC : filtroC,
               });
           }
         })
@@ -217,6 +256,8 @@ router.use(express.static(__dirname + '/public'));
             nombre: request.session.nombre,
             email:request.session.email,
             preguntas: Lista, 
+            filtroE : filtroE,
+          filtroC : filtroC,
           });
       }
     })

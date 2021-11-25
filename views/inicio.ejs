@@ -69,7 +69,14 @@
     <h1 class="text-center">Todas las preguntas</h1>
     <br>
     <br>
-
+    <% if(filtroE!=null){ %>
+        <h3 class="text-center">Filtrado por etiqueta: <%= filtroE%> </h3>
+        <br>
+    <% } ; %>
+    <% if(filtroC!=null){ %>
+        <h3 class="text-center">Filtrado por cuerpo o título: <%= filtroC%> </h3>
+        <br>
+    <% } ; %>
     <div class="container">
         <!---------------------------------- BARRAS DE BUSQUEDA--------------------------------------->
         <div class="row">

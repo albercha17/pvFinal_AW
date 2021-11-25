@@ -10,6 +10,9 @@ const FactoryDao = require("../JS/FactoriaDao");
 let Factorydao = new FactoryDao();
 var DAOP= Factorydao.DAOPreguntas();
 
+var filtroE =null;
+var filtroC =null;
+
 //--------------------------------------------------
 //--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
 router.use(express.static(__dirname + '/public'));
@@ -21,6 +24,8 @@ router.get("/", function (request, response) {
 
   router.get("/inicio", function (request, response) {
     var preguntas= new Array();
+    filtroE =null;
+    filtroC =null;
     DAOP.getPreguntas(function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -31,6 +36,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
       else{
@@ -39,6 +46,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
     })
@@ -46,6 +55,8 @@ router.get("/", function (request, response) {
 
   router.get("/filtrarVisitas", function (request, response) {
     var preguntas= new Array();
+    filtroE =null;
+    filtroC =null;
     DAOP.filtrarVisitas(function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -56,6 +67,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
       else{
@@ -64,6 +77,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
     })
@@ -72,6 +87,8 @@ router.get("/", function (request, response) {
   
   router.get("/filtrarFecha", function (request, response) {
     var preguntas= new Array();
+    filtroE =null;
+    filtroC =null;
     DAOP.filtrarFecha(function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -82,6 +99,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
       else{
@@ -90,6 +109,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
     })
@@ -105,6 +126,8 @@ router.get("/", function (request, response) {
   router.get("/BuscarEtiqueta", function (request, response) {
     var preguntas= new Array();
     var tag= request.query.tag;
+    filtroE =tag;
+    filtroC =null;
     DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -115,6 +138,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
       else{
@@ -123,6 +148,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
     })
@@ -130,6 +157,8 @@ router.get("/", function (request, response) {
   router.get("/BuscarTexto", function (request, response) {
     var preguntas= new Array();
     var tag= request.query.tag;
+    filtroE =null;
+    filtroC =tag;
     DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
       if (err) {
         response.status(500);
@@ -140,6 +169,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
       else{
@@ -148,6 +179,8 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          filtroE : filtroE,
+          filtroC : filtroC,
         });
       }
     })
