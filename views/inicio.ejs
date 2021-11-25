@@ -131,7 +131,7 @@ height: 100%;";>
                                 <p class="card-text"><%= pregunta.cuerpo%></p>
                                 <% pregunta.tag.forEach(function(tag) { %>
                                 <a class="card-text"
-                                    style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px;"><%= tag.tag%></a>
+                                    style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px; font-size: large;"><%= tag.tag%></a>
                                 <% }); %>
                                 <p style="float: right; color: rgb(5, 102, 5);">Votos: <%= pregunta.puntos%></p>
                                 <p style="float: right;margin-right: 40px; color: rgb(111, 0, 255);">Visitas:
@@ -150,13 +150,13 @@ height: 100%;";>
                     <form class=" d-flex"method="get" action="/BuscarTexto">
                 <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
                     aria-label="Search" name="tag">
-                <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
+                <button class="btn btn-outline-light" type="submit"> <i class="bi bi-search"></i></button>
                 </form>
                 <br>
                 <form class="d-flex" method="get" action="/BuscarEtiqueta">
                     <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta" aria-label="Search"
                         name="tag">
-                    <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
+                    <button class="btn btn-outline-light" type="submit"> <i class="bi bi-search"></i></button>
                 </form>
                 <br>
                 <form method="get" action="/FormularPregunta">
