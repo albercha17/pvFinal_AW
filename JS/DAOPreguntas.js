@@ -203,6 +203,38 @@ class DAOPreguntas {
         });
     }
 
+    puntuarPregunta(id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT puntos from pregunta WHERE id= ?",
+                    [id],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            var puntosAux = rows[0] + puntos;
+                            connection.query(
+                                "UPDATE pregunta SET puntos= ? WHERE id= ?",
+                                [puntosAux, id],
+                                function (err, rows) {
+                                    connection.release(); // devolver al pool la conexión
+                                    if (err) {
+                                        callback(new Error("Error de acceso a la base de datos"));
+                                    } else {
+                                        callback(null, true); //no está el usuario con el password proporcionado
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        });
+    }
+
 
 
 

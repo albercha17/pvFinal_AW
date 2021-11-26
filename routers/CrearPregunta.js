@@ -49,8 +49,9 @@ router.use(express.static(__dirname + '/public'));
           }
       });
       }
-      
   });
+
+
 
   function validarDatos(titulo, cuerpo) {
     var valido = false;
@@ -65,11 +66,7 @@ router.use(express.static(__dirname + '/public'));
   }
   
   function validarEiqueta(etiqueta){
-      if(etiqueta.length>10){
-        error= "Pon un maximo de 10 palabras en las etiquetas.";
-        return false;
-      }
-    if(etiqueta.startsWith('@')){
+        if(etiqueta.startsWith('@')){
         Etiquetas = etiqueta.split("@");
         var i = Etiquetas.indexOf("");
         Etiquetas.splice( i, 1 );
