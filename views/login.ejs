@@ -9,7 +9,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My index</title>
+  <title>404-Iniciar sesion</title>
+  <link rel="shortcut icon"  type="image/png" href="/Images/icono.png"/>
 </head>
 
 <body style="background-image: url(/Images/fondo1.jpg);background-position: center center;
@@ -17,8 +18,7 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 background-size: cover;
 height: 100%;";>
-  <br>
-  <br>
+<div style="text-align: center;"> <img src="/Images/logo.png" id="iconoHeader" width="360px" style="margin-top: 80px;"></div>
   <br>
   <br>
   <div class="container espacio"></div>
@@ -28,20 +28,19 @@ height: 100%;";>
 
       <form method="get" action="/loguearse">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">E-mail</label>
+          <label for="exampleInputEmail1" class="form-label">Correo</label>
           <input type="email" name="email" class="form-control" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
           <input type="password" name="password" class="form-control">
         </div>
         <br>
         <p style="color: red;"><%= errorLogin %></p>
         <br>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" type="submit">Log-In</button>
-          <button class="btn btn-primary" onclick="location.href='http://localhost:3000/SingUp'" type="button">Create
-            Account</button>
+          <button class="btn btn-primary" type="submit">Iniciar sesion</button>
+          <button class="btn btn-primary" onclick="location.href='http://localhost:3000/SingUp'" type="button">Crear cuenta</button>
         </div>
       </form>
     </div>

@@ -9,7 +9,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My index</title>
+    <title>404-Crear cuenta</title>
+    <link rel="shortcut icon"  type="image/png" href="/Images/icono.png"/>
 </head>
 
 <body style="background-image: url(/Images/fondo1.jpg);background-position: center center;
@@ -27,20 +28,20 @@ height: 100%;";>
         <div class="col-md-4">
             <form method="get" action="/crearUsuario">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                    <label for="exampleInputEmail1" class="form-label">Correo</label>
                     <input type="email" name="email" class="form-control" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                     <input type="password" name="password" class="form-control" required>
 
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword2" class="form-label">Repeat Password</label>
+                    <label for="exampleInputPassword2" class="form-label">Repetir contraseña</label>
                     <input type="password" name="password_r" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword2" class="form-label">User Name</label>
+                    <label for="exampleInputPassword2" class="form-label">Nombre de usuario</label>
                     <input type="text" name="nombre" class="form-control" aria-describedby="emailHelp" required>
                 </div>
 
@@ -50,9 +51,9 @@ height: 100%;";>
                 <p style="color: red;"><%= errorCrearUsuario %></p>
                 <br>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary" type="submit">Create Account</button>
+                    <button class="btn btn-primary" type="submit">Crear cuenta</button>
                     <button class="btn btn-primary" onclick="location.href='http://localhost:3000/login'"
-                        type="button">Sign-Up</button>
+                        type="button">Iniciar sesion</button>
                 </div>
 
             </form>
