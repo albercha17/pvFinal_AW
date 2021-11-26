@@ -209,13 +209,19 @@ class DAOPreguntas {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT puntos from pregunta WHERE id= ?",
+                    "SELECT * from pregunta WHERE id= ?",
                     [id],
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
-                            var puntosAux = rows[0] + puntos;
+                            var puntosAux = rows[0].puntos;
+                            if (puntos == -1) {
+                                puntosAux--;
+                            }
+                            if (puntos ==1) {
+                                puntosAux++;
+                            }
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
