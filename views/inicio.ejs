@@ -52,7 +52,7 @@
                                 <div class="col col-6">
                                     <form method="get" action="/desconectarse">
                                         <button class="btn btn-danger" type="submit"
-                                            style="margin-top: 20px; float: right;">Cerrar Sesion</button>
+                                            style="margin-top: 20px; float: right;border-width: 1px; border-color: black;">Cerrar Sesion</button>
                                     </form>
                                 </div>
                             </div>
@@ -94,19 +94,19 @@ height: 100%;";>
                         </div>
                         <div class="col col-md-3">
                             <form method="get" action="/inicio">
-                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i
+                                <button class="btn btn-warning" type="submit" style="margin-left: 30px; border-width: 1px; border-color: black;"><i
                                         class="bi bi-hand-thumbs-up-fill"></i> Más votados</button>
                             </form>
                         </div>
                         <div class="col col-md-3">
                             <form method="get" action="/filtrarVisitas">
-                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i
+                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;border-width: 1px; border-color: black;"><i
                                         class="bi bi-eye-fill"></i> Más visitados</button>
                             </form>
                         </div>
                         <div class="col col-md-3">
                             <form method="get" action="/filtrarFecha">
-                                <button class="btn btn-warning" type="submit" style="margin-left: 30px;"><i
+                                <button class="btn btn-warning" type="submit" style="margin-left: 30px; border-width: 1px; border-color: black;"><i
                                         class="bi bi-receipt-cutoff"></i> Más recientes</button>
                             </form>
                         </div>
@@ -114,7 +114,7 @@ height: 100%;";>
                 </div>
                 <% preguntas.forEach(function(pregunta) { %>
                 <div class="row">
-                    <div class="card" style="width: 80rem;">
+                    <div class="card" style="width: 80rem; border-width: 1px; border-color: black;">
                         <div class="card-body">
                             <div class="pregunta">
                                 <a class="card-title" style="text-decoration:none;color:rgb(0, 0, 0);font-size:x-large;"
@@ -149,18 +149,18 @@ height: 100%;";>
                 <br><br>
                     <form class=" d-flex"method="get" action="/BuscarTexto">
                 <input class="form-control me-2" type="search" placeholder="Buscar por titulo o cuerpo"
-                    aria-label="Search" name="tag">
+                    aria-label="Search" name="tag" style="border-width: 1px; border-color: black;">
                 <button class="btn btn-outline-light" type="submit"> <i class="bi bi-search"></i></button>
                 </form>
                 <br>
                 <form class="d-flex" method="get" action="/BuscarEtiqueta">
                     <input class="form-control me-2" type="search" placeholder="Buscar por etiqueta" aria-label="Search"
-                        name="tag">
+                        name="tag" style="border-width: 1px; border-color: black;">
                     <button class="btn btn-outline-light" type="submit"> <i class="bi bi-search"></i></button>
                 </form>
                 <br>
                 <form method="get" action="/FormularPregunta">
-                    <button class="btn btn-primary" type="submit">Crear pregunta</button>
+                    <button class="btn btn-primary" type="submit" style="border-width: 1px; border-color: black;">Crear pregunta</button>
                 </form>
             </div>
         </div>
