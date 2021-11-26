@@ -59,6 +59,16 @@ router.get("/preguntaInfo/:id", function (request, response) {
   }
 });    
 });
+ 
+router.get("/PuntuarRespuesta/:id", function (request, response) {
+  DAOPregunta.puntuarRespuesta(request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
+    if (err) {
+      response.status(500);
+    }  else if (result){
+      response.redirect("/preguntaInfo/"+request.params.id)
+}
+});    
+});
 
   router.get("/CrearRespuesta/:id",function (request, response) {
     DAOPregunta.insertRespuesta(request.params.id,request.query.texto,request.session.email,function buscarNombre(err, result) {

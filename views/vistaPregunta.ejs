@@ -65,8 +65,7 @@
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<body style="background-image: url(/Images/fondo4.jpg);
-background-position: center center;
+<body style="background-image: url(/Images/fondo1.jpg);background-position: center center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-size: cover;
@@ -116,14 +115,14 @@ height: 100%;" ;>
                                             <button type="submit"
                                                 style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                 <i class="bi bi-hand-thumbs-down-fill"
-                                                    style="color: rgb(131, 12, 12);"></i></button>
+                                                    style="color: rgb(131, 12, 12);font-size: large;"></i></button>
                                         </form>
                                         <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>" style="float: right;">
                                             <input type="hidden" name="puntos" value=1>
                                             <button type="submit"
                                                 style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                 <i class="bi bi-hand-thumbs-up-fill"
-                                                    style="color: rgb(19, 122, 10);"></i></button>
+                                                    style="color: rgb(19, 122, 10); font-size: large;"></i></button>
                                         </form>
                                         <p style="float: right;font-size: larger;"> Votos: <%= pregunta.puntos%></p>
                                     </div>
@@ -181,18 +180,21 @@ height: 100%;" ;>
                                         </p>
                                     </div>
                                     <div class="col col-4">
-                                        <form method="get" action="/desconectarse"
+                                        <form method="get" action="/PuntuarRespuesta/<%= pregunta.id%>"
                                             style="float: right;text-align: right;">
-                                            <button type="submit"
+                                            <input type="hidden" name="puntos" value=-1>
+                                            <input type="hidden" name="id" value=<%= respuesta.id%>>                                            <button type="submit"
                                                 style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                 <i class="bi bi-hand-thumbs-down-fill"
-                                                    style="color: rgb(131, 12, 12);"></i></button>
+                                                    style="color: rgb(131, 12, 12);font-size: large;"></i></button>
                                         </form>
-                                        <form method="get" action="/desconectarse" style="float: right;">
+                                        <form method="get" action="/PuntuarRespuesta/<%= pregunta.id%>" style="float: right;">
+                                            <input type="hidden" name="puntos" value=1>
+                                            <input type="hidden" name="id" value= <%= respuesta.id%>>
                                             <button type="submit"
                                                 style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                 <i class="bi bi-hand-thumbs-up-fill"
-                                                    style="color: rgb(19, 122, 10);"></i></button>
+                                                    style="color: rgb(19, 122, 10); font-size: large;"></i></button>
                                         </form>
                                         <p style="float: right;font-size: larger;"> Votos: <%= respuesta.puntos%></p>
                                     </div>
