@@ -126,14 +126,63 @@ class DAOUsers {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM user ORDER BY reputacion DESC",
+                    "SELECT * FROM USER",
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                callback(null, null);
+                            } else {
+                                var i =0;
+                                rows.forEach(function (row) {
+                                    
+                                    connection.query(
+                                        "SELECT tag, COUNT( tag ) AS total FROM user U, pregunta P, etiqueta E WHERE U.email=? AND U.email=P.autor AND P.id=E.idPregunta GROUP BY tag ORDER BY total DESC",
+                                        [row.email],
+                                        function (err, rows1) {
+                                            i++;
+                                            if (err) {
+                                                callback(new Error("Error de acceso a la base de datos"));
+                                            } else {
+                                                if (rows1.length === 0) {
+                                                    row.tag=null;
+                                                } else {
+                                                    row.tag=rows1[0].tag;
+                                                }
+                                                if(i==rows.length){
+                                                    connection.release(); // devolver al pool la conexión
+                                                    callback(null, rows);
+                                                }
+                                            }
+                                            
+                                        }
+                                    );
+                                });
+                            }
+                        }
+                    }
+                );
+            }
+        });
+    }
+
+    getPreguntasUsuario(email, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * FROM user U, pregunta P WHERE u.email= ? AND U.email=P.autor ",
+                    [email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null);
+                                var lista = new Array();
+                                callback(null, lista);
                             } else {
                                 callback(null, rows);
                             }
@@ -144,22 +193,98 @@ class DAOUsers {
         });
     }
 
-    getUsuarios_filtro(filtro,callback) {
+    getRespuestasUsuario(email, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM user WHeRE email LIKE '%"+filtro+"%' OR nombre like '%" +filtro+"%' ORDER BY reputacion DESC",
+                    "SELECT * FROM user U, respuesta P WHERE u.email= ? AND U.email=P.autor ",
+                    [email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null);
+                                var lista = new Array();
+                                callback(null, lista);
                             } else {
                                 callback(null, rows);
+                            }
+                        }
+                    }
+                );
+            }
+        });
+    }
+
+    getEtiquetaPrincipal(email, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT tag, COUNT( tag ) AS total FROM user U, pregunta P, etiqueta E WHERE U.email=? AND U.email=P.autor AND P.id=E.idPregunta GROUP BY tag ORDER BY total DESC",
+                    [email],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                var lista = new Array();
+                                callback(null, lista);
+                            } else {
+                                callback(null, rows[0].tag);
+                            }
+                        }
+                    }
+                );
+            }
+        });
+    }
+
+
+
+    getUsuarios_filtro(filtro,callback){
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * FROM user WHeRE email LIKE '%"+filtro+"%' OR nombre like '%" +filtro+"%' ORDER BY reputacion DESC",                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                callback(null, null);
+                            } else {
+                                var i =0;
+                                rows.forEach(function (row) {
+                                    
+                                    connection.query(
+                                        "SELECT tag, COUNT( tag ) AS total FROM user U, pregunta P, etiqueta E WHERE U.email=? AND U.email=P.autor AND P.id=E.idPregunta GROUP BY tag ORDER BY total DESC",
+                                        [row.email],
+                                        function (err, rows1) {
+                                            i++;
+                                            if (err) {
+                                                callback(new Error("Error de acceso a la base de datos"));
+                                            } else {
+                                                if (rows1.length === 0) {
+                                                    row.tag=null;
+                                                } else {
+                                                    row.tag=rows1[0].tag;
+                                                }
+                                                if(i==rows.length){
+                                                    connection.release(); // devolver al pool la conexión
+                                                    callback(null, rows);
+                                                }
+                                            }
+                                            
+                                        }
+                                    );
+                                });
                             }
                         }
                     }
