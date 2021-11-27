@@ -130,15 +130,24 @@ height: 100%;";>
                                     style="text-decoration:none;color:rgb(67, 68, 70)"><%= pregunta.autor%></a>
                                 <p></p>
                                 <p class="card-text"><%= pregunta.cuerpo%></p>
-                                <% pregunta.tag.forEach(function(tag) { %>
-                                <a class="card-text"
-                                    style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px; font-size: large;"><%= tag.tag%></a>
-                                <% }); %>
-                                <p style="float: right; color: rgb(5, 102, 5);">Votos: <%= pregunta.puntos%></p>
-                                <p style="float: right;margin-right: 40px; color: rgb(111, 0, 255);">Visitas:
-                                    <%= pregunta.visitas%></p>
-                                <br><br><br>
-                                <p style="margin-right: 40px; color: rgb(158, 158, 158);"><%= pregunta.fecha%></p>
+                                <div class="row" >
+                                  <div class="col col-8">
+                                      <h6>Etiquetas</h6>
+                              <% pregunta.tag.forEach(function(tag) { %>
+                              <a class="card-text"
+                                  style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px; font-size: x-large;"><%= tag.tag%></a>
+                              <% }); %>
+                                  </div>
+                                  <div class="col col-md-4" style="text-align: right;">
+                                      <div class="row" >
+                                          <p style="margin-right: 40px; color: rgb(111, 0, 255);">Visitas:
+                                              <%= pregunta.visitas%></p>
+                                          <p style="color: rgb(5, 102, 5);">Votos: <%= pregunta.puntos%></p>
+                                      <p style=" margin-right: 40px; color: rgb(158, 158, 158);"><%= pregunta.fecha%></p>
+                                      </div>
+                                      
+                                  </div>
+                              </div>
                             </div>
                         </div>
                     </div>
