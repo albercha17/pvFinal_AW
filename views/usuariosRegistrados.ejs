@@ -84,7 +84,7 @@ height: 100%;";>
       </div>
       <% usuarios.forEach(function(usuario) { %>
       <div class="col col-4">
-        <div class="card" style="border-width: 1px; border-color: black;">
+        <div class="card" style="border-width: 1px; border-color: black; font-size:large;">
           <div class="card-body">
             <div class="container">
               <div class="row">
@@ -93,15 +93,23 @@ height: 100%;";>
                 </div>
                 <div class="col col-1"></div>
                 <div class="col col-8">
-                  <h5 class="card-title" href="#"><%= usuario.nombre%></h5>
+                  <h5 class="card-title" href="#" ><%= usuario.nombre%></h5>
                   <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= usuario.email%>"
                     style="text-decoration:none;"><%= usuario.email%></a>
                   <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 10px;">Reputacion: <%= usuario.reputacion%></h6>
                 </div>
               </div>
-              <div class="row" style=" margin-top: 20px;">
-                  <a class="card-text"
-                  style="color: rgb(190, 117, 20);text-decoration:none; margin-right: 20px; font-size:medium;"> Etiqueta mas utilizada:<%= usuario.tag%></a>
+              <br>
+              <div class="row" style=" text-align: center; color: rgb(133, 31, 18);;
+              margin-left: 50px; margin-right: 50px;">
+              <div class="card" style="border-width: 1px; border-color: black; background-color: rgb(242, 248, 250) ;font-size:large;">
+                <p class="card-text" style="font-size:medium;"
+                  >Etiqueta más utilizada: </p>
+                  <h6 class="card-text"
+                  style="margin-bottom: 10px; font-size:large;"><%= usuario.tag%></h6>
+              </div>
+                  
+               
                 </div>
                 
                
