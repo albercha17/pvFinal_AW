@@ -217,12 +217,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if (puntos == -1) {
-                                puntosAux--;
-                            }
-                            if (puntos ==1) {
-                                puntosAux++;
-                            }
+                            puntosAux=puntosAux+puntos;
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
@@ -615,7 +610,7 @@ class DAOPreguntas {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else {
-                                            callback(null, "No puntuado");
+                                            callback(null, "Insertar");
                                         }
                                     }
                                 );
@@ -634,7 +629,7 @@ class DAOPreguntas {
                                                     if (err) {
                                                         callback(new Error("Error de acceso a la base de datos"));
                                                     } else {
-                                                        callback(null, "Cambiar Puntos");
+                                                        callback(null, "Update");
                                                     }
                                                 }
                                             );
@@ -643,7 +638,6 @@ class DAOPreguntas {
                                         }
                                     }
                                 );
-                                callback(null, rows);
                             }
                            
                         }

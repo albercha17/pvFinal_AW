@@ -55,8 +55,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
       DAOPregunta.getPuntuado(request.session.email, request.params.id, 0, request.query.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
-        } else if (result) {
-          if (result == "No puntuado") {
+        } else if (result=="Insertar") {
             DAOPregunta.puntuarPregunta(request.params.id, request.query.puntos, function buscarNombre(err, result) {
               if (err) {
                 response.status(500);
@@ -64,21 +63,22 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
                 response.redirect("/preguntaInfo/" + request.params.id)
               }
             });
-          } else if (result == "Cambiar Puntos") {
-            DAOPregunta.puntuarPregunta(request.params.id, request.query.puntos, function buscarNombre(err, result) {
-              if (err) {
-                response.status(500);
-              } else if (result) {
-                response.redirect("/preguntaInfo/" + request.params.id)
-              }
-            });
-          } else if (result == "Nada") {
+        }
+        else if (result=="Update") {
+          var puntos=request.query.puntos*2;
+          DAOPregunta.puntuarPregunta(request.params.id, puntos, function buscarNombre(err, result) {
+            if (err) {
+              response.status(500);
+            } else if (result) {
+              response.redirect("/preguntaInfo/" + request.params.id)
+            }
+          });
+      }
+        else{
             response.redirect("/preguntaInfo/" + request.params.id)
           }
-        }
+        });
       });
-       
-});
  
 router.get("/PuntuarRespuesta/:id", function (request, response) {
   DAOPregunta.puntuarRespuesta(request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
