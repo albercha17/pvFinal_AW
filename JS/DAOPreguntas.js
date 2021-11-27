@@ -1,5 +1,6 @@
 "use strict";
 
+const { randomFillSync } = require('crypto');
 var moment = require('moment');
 
 class DAOPreguntas {
@@ -591,7 +592,70 @@ class DAOPreguntas {
             }
         });
     }
+
+
+
+    getPuntuado(email, idPregunta, idRespuesta, puntos, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT  * FROM puntos WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",
+                    [idPregunta, idRespuesta, email],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {//si no ha habido voto
+                            if (rows.length === 0) {
+                                connection.query(
+                                    "INSERT INTO puntos (idPregunta,idRespuesta,user,punto) VALUES (?, ?, ?, ?)",
+                                    [idPregunta, idRespuesta, email, puntos],
+                                    function (err, rows) {
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else {
+                                            callback(null, "No puntuado");
+                                        }
+                                    }
+                                );
+                            } else {
+                                connection.query(
+                                    "SELECT  * FROM puntos WHERE idPregunta = ? AND idRespuesta = ? AND user = ? AND punto = ?",
+                                    [idPregunta, idRespuesta, email, puntos],
+                                    function (err, rows) {
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else if (rows.length === 0) {
+                                            connection.query(
+                                                "UPDATE puntos SET punto = ? WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",                                                
+                                                [puntos, idPregunta, idRespuesta, email],
+                                                function (err, rows) {
+                                                    if (err) {
+                                                        callback(new Error("Error de acceso a la base de datos"));
+                                                    } else {
+                                                        callback(null, "Cambiar Puntos");
+                                                    }
+                                                }
+                                            );
+                                        } else{//si ya ha puntuado like
+                                            callback(null, "Nada");
+                                        }
+                                    }
+                                );
+                                callback(null, rows);
+                            }
+                           
+                        }
+                    }
+                );
+                connection.release(); // devolver al pool la conexión
+            }
+        });
+    }
 }
+
+
 
 
 module.exports = DAOPreguntas
