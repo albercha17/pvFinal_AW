@@ -202,50 +202,29 @@ height: 100%;" ;>
                                         </p>
                                     </div>
                                     <div class="col col-6">
-                                        <% if(votadoRN==null){ %>
                                             <form method="get" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>"
                                                 style="float: right;text-align: right;">
                                                 <input type="hidden" name="puntos" value=-1>
                                                 <input type="hidden" name="id" value= <%= respuesta.id%>>
                                                 <button type="submit"
                                                     style="border: 0ch;background-color:rgb(252, 252, 252);">
-                                                    <i class="bi bi-hand-thumbs-down"
+                                                    <i class="bi bi-hand-thumbs-down-fill"
                                                         style="color: rgb(131, 12, 12);font-size: large;"></i></button>
-                                            </form>                                               <% } ; %>
-
-                                            <% if(votadoRN!=null){ %>
-                                                    <button type="submit"
-                                                        style="border: 0ch;background-color:rgb(252, 252, 252);">
-                                                        <i class="bi bi-hand-thumbs-down-fill"
-                                                            style="color: rgb(131, 12, 12);font-size: large; float: right;"></i></button>
-                                                                                            <% } ; %>
-                                        <% if(votadoR==null){ %>
+                                            </form>
                                             <form method="get" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>"
                                                 style="float: right;">
                                                 <input type="hidden" name="puntos" value=1>
                                                 <input type="hidden" name="id" value= <%= respuesta.id%>>
                                                 <button type="submit"
                                                     style="border: 0ch;background-color:rgb(252, 252, 252);">
-                                                    <i class="bi bi-hand-thumbs-up"
-                                                        style="color: rgb(19, 122, 10); font-size: large;"></i></button>
-                                            </form>                                            <% } ; %>
-                                        
-                                        <% if(votadoR!=null){ %>
-                                                <button type="submit"
-                                                    style="border: 0ch;background-color:rgb(252, 252, 252); float: right;">
                                                     <i class="bi bi-hand-thumbs-up-fill"
-                                                        style="color: rgb(19, 122, 10); font-size: large;"></i></button>                                      <% } ; %>
+                                                        style="color: rgb(19, 122, 10); font-size: large;"></i></button>
+                                            </form>               
                                         <p style="float: right;font-size: larger;"> Votos: <%= respuesta.puntos%></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <% if(votadoRN!=null){ %>
-                            <p class="text-center" style="float: right; color: rgb(224, 28, 28);">Ya has votado negativamente esta respuesta.</p>
-                        <% } ; %>
-                        <% if(votadoR!=null){ %>
-                            <p class="text-center" style="float: right; color: rgb(13, 119, 18);">Ya has votado positivamente esta respuesta</p>
-                        <% } ; %>
                     </div>
                 </div>
                 <br>
