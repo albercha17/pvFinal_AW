@@ -32,16 +32,25 @@ router.get("/preguntaInfo/:id", function (request, response) {
         } else if (result) {
           var respuestas = result;
           response.status(200);
-          response.render("vistaPregunta", {
-            nombre: request.session.nombre,
-            email: request.session.email,
-            pregunta: pregunta,
-            respuestas: respuestas,
-            votadoN : votadoN,
-            votado : votado,
+          DAOPregunta.getEstaPuntuadaP(pregunta.id, request.session.email, function buscarNombre(err, result) {
+            if (err) {
+              response.status(500);
+            } else if (result) {
+              if(result=="-1") votadoN=1;
+              else if(result=="1") votado=-1;
+              response.status(200);
+              response.render("vistaPregunta", {
+                nombre: request.session.nombre,
+                email: request.session.email,
+                pregunta: pregunta,
+                respuestas: respuestas,
+                votadoN : votadoN,
+                votado : votado,
+              });
+              votadoN= null;
+              votado= null;
+            }
           });
-          votadoN= null;
-          votado= null;
         }
       });
     }
@@ -59,6 +68,8 @@ router.get("/preguntaInfo/:id", function (request, response) {
 
 
 router.get("/PuntuarPregunta/:id", function (request, response) {
+  votadoN= null;
+              votado= null;
       DAOPregunta.getPuntuado(request.session.email, request.params.id, 0, request.query.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);

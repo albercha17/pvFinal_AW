@@ -203,6 +203,31 @@ class DAOPreguntas {
             }
         });
     }
+    getEstaPuntuadaP(id, email, callback) { // preguntar si puede ser un pregunta sin tag
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * from puntos WHERE idPregunta= ? AND idRespuesta= ? AND user= ?",
+                    [id, 0, email],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                callback(null, "Nada");
+                            } else {
+                                if(rows[0].punto==1) callback(null,"1");
+                                if(rows[0].punto==-1) callback(null, "-1");
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
 
     puntuarPregunta(id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
