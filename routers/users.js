@@ -133,9 +133,11 @@ router.get("/crearUsuario", function (request, response) {
 
 function validarDatos(email, contraseña, contraseña_r) {
   var valido = false;
-  if (contraseña != contraseña_r) {
+  if (contraseña.search(/[a-z]/i) < 0 || contraseña.search(/[0-9]/) < 0 || contraseña.length<8 ) {
+    errorCrearUsuario = "Las contraseña tiene que tener 8 caracteres, con una letra y un numero por lo menos.";
+}
+   else if (contraseña != contraseña_r) {
     errorCrearUsuario = "Las contraseñas no coinciden";
-    console.log();
   } else if (validarEmail(email) && contraseña == contraseña_r) valido = true;
   return valido;
 }
