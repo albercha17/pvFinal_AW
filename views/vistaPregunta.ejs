@@ -120,14 +120,10 @@ height: 100%;" ;>
                                                 </form>                                               <% } ; %>
 
                                                 <% if(votadoN!=null){ %>
-                                                    <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>"
-                                                        style="float: right;text-align: right;">
-                                                        <input type="hidden" name="puntos" value=-1>
                                                         <button type="submit"
-                                                            style="border: 0ch;background-color:rgb(252, 252, 252);">
+                                                            style="border: 0ch;background-color:rgb(252, 252, 252); float: right;">
                                                             <i class="bi bi-hand-thumbs-down-fill"
-                                                                style="color: rgb(131, 12, 12);font-size: large;"></i></button>
-                                                    </form>                                            <% } ; %>
+                                                                style="color: rgb(131, 12, 12);font-size: large; "></i></button>                                        <% } ; %>
                                             <% if(votado==null){ %>
                                                 <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>" style="float: right;">
                                                     <input type="hidden" name="puntos" value=1>
@@ -138,13 +134,10 @@ height: 100%;" ;>
                                                 </form>                                            <% } ; %>
                                             
                                             <% if(votado!=null){ %>
-                                                <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>" style="float: right;">
-                                                    <input type="hidden" name="puntos" value=1>
                                                     <button type="submit"
-                                                        style="border: 0ch;background-color:rgb(252, 252, 252);">
+                                                        style="border: 0ch;background-color:rgb(252, 252, 252); float: right;">
                                                         <i class="bi bi-hand-thumbs-up-fill"
-                                                            style="color: rgb(19, 122, 10); font-size: large;"></i></button>
-                                                </form>                                            <% } ; %>
+                                                            style="color: rgb(19, 122, 10); font-size: large;"></i></button>                                        <% } ; %>
                                         
                                         
                                         <p style="float: right;font-size: larger;"> Votos: <%= pregunta.puntos%></p>
@@ -220,7 +213,7 @@ height: 100%;" ;>
                                             </form>                                               <% } ; %>
 
                                             <% if(votadoRN!=null){ %>
-                                                <form method="get" action="/PuntuarRespuesta/<%= respuesta.id%>"
+                                                <form method="get" action=""
                                                     style="float: right;text-align: right;">
                                                     <input type="hidden" name="puntos" value=-1>
                                                     <button type="submit"
@@ -239,7 +232,7 @@ height: 100%;" ;>
                                             </form>                                            <% } ; %>
                                         
                                         <% if(votadoR!=null){ %>
-                                            <form method="get" action="/PuntuarRespuesta/<%= respuesta.id%>"
+                                            <form method="get" action=""
                                                 style="float: right;">
                                                 <input type="hidden" name="puntos" value=1>
                                                 <button type="submit"

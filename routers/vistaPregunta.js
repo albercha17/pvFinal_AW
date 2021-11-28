@@ -34,7 +34,7 @@ router.get("/preguntaInfo/:id", function (request, response) {
         } else if (result) {
           var respuestas = result;
           response.status(200);
-          DAOPregunta.getEstaPuntuadaP(pregunta.id, request.session.email, function buscarNombre(err, result) {
+          DAOPregunta.getEstaPuntuada(pregunta.id, 0, request.session.email, function buscarNombre(err, result) {
             if (err) {
               response.status(500);
             } else if (result) {

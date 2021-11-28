@@ -203,14 +203,14 @@ class DAOPreguntas {
             }
         });
     }
-    getEstaPuntuadaP(id, email, callback) { // preguntar si puede ser un pregunta sin tag
+    getEstaPuntuada(id,idR, email, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
                     "SELECT * from puntos WHERE idPregunta= ? AND idRespuesta= ? AND user= ?",
-                    [id, 0, email],
+                    [id, idR, email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {
