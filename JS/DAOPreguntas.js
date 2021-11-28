@@ -270,6 +270,47 @@ class DAOPreguntas {
         });
     }
 
+    volverAPuntuarPregunta(id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * from pregunta WHERE id= ?",
+                    [id],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            var puntosAux = rows[0].puntos;
+                            if(puntos==1) puntosAux++;
+                            else if(puntos==-1) puntosAux--;
+                            else if(puntos==2){
+                                puntosAux++;
+                                puntosAux++;
+                            }else if(puntos==-2){
+                                puntosAux--;
+                                puntosAux--;
+                            } 
+                            connection.query(
+                                "UPDATE pregunta SET puntos= ? WHERE id= ?",
+                                [puntosAux, id],
+                                function (err, rows) {
+                                    connection.release(); // devolver al pool la conexión
+                                    if (err) {
+                                        callback(new Error("Error de acceso a la base de datos"));
+                                    } else {
+                                        callback(null, true); //no está el usuario con el password proporcionado
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        });
+    }
+
     puntuarRespuesta(idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
@@ -311,6 +352,46 @@ class DAOPreguntas {
         });
     }
 
+    volverAPuntuarRespuesta(idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * from respuesta WHERE idPregunta= ? AND id= ?",
+                    [idP,id],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            var puntosAux = rows[0].puntos;
+                            if(puntos==1) puntosAux++;
+                            else if(puntos==-1) puntosAux--;
+                            else if(puntos==2){
+                                puntosAux++;
+                                puntosAux++;
+                            }else if(puntos==-2){
+                                puntosAux--;
+                                puntosAux--;
+                            } 
+                            connection.query(
+                                "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
+                                [puntosAux, idP, id],
+                                function (err, rows) {
+                                    connection.release(); // devolver al pool la conexión
+                                    if (err) {
+                                        callback(new Error("Error de acceso a la base de datos"));
+                                    } else {
+                                        callback(null, true); //no está el usuario con el password proporcionado
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        });
+    }
 
     getRespuesta(callback) {
         this.pool.getConnection(function (err, connection) {

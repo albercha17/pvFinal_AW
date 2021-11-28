@@ -86,7 +86,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
       });
     } else if (result == "Update") {
       var puntos = request.query.puntos * 2;
-      DAOPregunta.puntuarPregunta(request.params.id, puntos, function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarPregunta(request.params.id, puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -119,7 +119,7 @@ router.get("/PuntuarRespuesta/:id", function (request, response) {
       });
     } else if (result == "Update") {
       var puntos = request.query.puntos * 2;
-      DAOPregunta.puntuarRespuesta(request.params.id, request.query.id, puntos, function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarRespuesta(request.params.id, request.query.id, puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
