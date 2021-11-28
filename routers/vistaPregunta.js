@@ -11,6 +11,9 @@ const FactoryDao = require("../JS/FactoriaDao");
 let Factorydao = new FactoryDao();
 var DAOPregunta= Factorydao.DAOPreguntas();
 
+
+var votadoN= null;
+var votado= null;
 //--------------------------------------------------
 //--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
 router.use(express.static(__dirname + '/public'));
@@ -34,7 +37,11 @@ router.get("/preguntaInfo/:id", function (request, response) {
             email: request.session.email,
             pregunta: pregunta,
             respuestas: respuestas,
+            votadoN : votadoN,
+            votado : votado,
           });
+          votadoN= null;
+          votado= null;
         }
       });
     }
@@ -75,6 +82,9 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
           });
       }
         else{
+          var puntos=request.query.puntos;
+          if(puntos>0){votado=1;}
+          else{votadoN=1;} 
             response.redirect("/preguntaInfo/" + request.params.id)
           }
         });

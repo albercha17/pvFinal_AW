@@ -130,6 +130,12 @@ height: 100%;" ;>
                                 </div>
                             </div>
                         </div>
+                        <% if(votadoN!=null){ %>
+                            <p class="text-center" style="float: right; color: rgb(224, 28, 28);">Ya has votado negativamente esta pregunta.</p>
+                        <% } ; %>
+                        <% if(votado!=null){ %>
+                            <p class="text-center" style="float: right; color: rgb(13, 119, 18);">Ya has votado positivamente esta pregunta</p>
+                        <% } ; %>
 
                     </div>
                 </div>
