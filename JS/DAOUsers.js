@@ -80,6 +80,89 @@ class DAOUsers {
             }
         });
     }
+
+    getReputacionPreguntas(email, callback) {
+        var reputacion=1;
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * FROM user U, pregunta P, puntos x WHERE U.email = ? AND U.email=P.autor AND P.id=x.idPregunta AND x.idRespuesta= ?",
+                    [email,0],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                callback(null, 0);
+                            } else {
+                                var i=0;
+                                rows.forEach(function (row) {
+                                    if(row.punto==1){
+                                        row.punto=row.punto*10;
+                                    }
+                                    else if(row.punto==-1){
+                                        row.punto=row.punto*2;
+                                    }
+                                    reputacion+= row.punto;
+                                    i++;
+                            });
+                            if(i==rows.length){
+                                callback(null, reputacion);
+                            }
+                        }
+                    }
+                }
+                );
+            }
+        });
+    }
+
+
+    getReputacionRespuestas(email, callback) {
+        var reputacion=1;
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT * FROM user U, respuesta R, puntos x WHERE U.email = ? AND U.email=R.autor AND R.idPregunta=x.idPregunta AND R.id= x.idRespuesta",
+                    [email],
+                    function (err, rows) {
+                        connection.release(); // devolver al pool la conexión
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else {
+                            if (rows.length === 0) {
+                                callback(null, 0);
+                            } else {
+                                var i=0;
+                                rows.forEach(function (row) {
+                                    if(row.punto==1){
+                                        row.punto=row.punto*10;
+                                    }
+                                    else if(row.punto==-1){
+                                        row.punto=row.punto*2;
+                                    }
+                                    reputacion+= row.punto;
+                                    i++;
+                            });
+                            if(i==rows.length){
+                                if(reputacion<1)reputacion=1;
+                                callback(null, reputacion);
+                            }
+                        }
+                    }
+                }
+                );
+            }
+        });
+    }
+
+    
+
     insertUser(email, password, nombre, img, callback) { // si falla el insert del tag se hace rollback?????
         this.pool.getConnection(function (err, connection) {
             if (err) {
