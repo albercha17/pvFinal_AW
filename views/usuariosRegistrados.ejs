@@ -84,7 +84,7 @@ height: 100%;";>
       </div>
       <% usuarios.forEach(function(usuario) { %>
       <div class="col col-4">
-        <div class="card" style="border-width: 1px; border-color: black; font-size:large;">
+        <div class="card" style="border-width: 1px; border-color: black; font-size:large; height: auto;">
           <div class="card-body">
             <div class="container">
               <div class="row">
@@ -111,9 +111,10 @@ height: 100%;";>
                                                           
                           <% } ; %>
                     <% if(usuario.tag==null){ %>
-                      <p class="card-text" style="font-size:medium; margin-top: 10px; margin-bottom: 10px;"
-                      >Este usuario no tiene ninguna pregunta </p>
-                                                                    
+                      <p class="card-text" style="font-size:medium;"
+                      >Etiqueta más utilizada: </p>
+                      <h6 class="card-text"
+                      style="margin-bottom: 10px; font-size:large; color: rgb(202, 202, 202);"> no tiene preguntas </h6>             
                                     <% } ; %>
                 
               </div>
