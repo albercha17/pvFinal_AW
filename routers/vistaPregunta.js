@@ -14,6 +14,8 @@ var DAOPregunta= Factorydao.DAOPreguntas();
 
 var votadoN= null;
 var votado= null;
+var votadoRN= null;
+var votadoR= null;
 //--------------------------------------------------
 //--------------------------------------  M I D D E L W A R E  ---------------------------------------------------------
 router.use(express.static(__dirname + '/public'));
@@ -46,6 +48,8 @@ router.get("/preguntaInfo/:id", function (request, response) {
                 respuestas: respuestas,
                 votadoN : votadoN,
                 votado : votado,
+                votadoRN : votadoRN,
+                votadoR : votadoR,
               });
               votadoN= null;
               votado= null;
