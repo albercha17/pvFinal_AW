@@ -9,7 +9,7 @@ insert into user values('emy@404.es','1234','Emy','/Imagenes_de_perfil/amy.png',
 create table pregunta(id int(11), titulo VARCHAR(100), cuerpo text, autor VARCHAR(100),visitas int(11),puntos int(11),fecha Date ,PRIMARY KEY(id));
 insert into pregunta values('1','¿Cual es la diferencia entre position: relative, position: absolute y position: fixed?'
 ,'Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página. Séque estas propiedades de CSS sirven para posicionar un elemento dentro de la página.',
-'nico@404.es','1','0','2021-11-23');
+'nico@404.es','0','0','2021-11-23');
 insert into pregunta values('2','¿Cómo funciona exactamente nth-child?','No acabo de comprender muy bien que hace exactamente y qué usos prácticos puede tener',
 'roberto@404.es','0','0','2021-11-23');
 insert into pregunta values('3',' Diferencias entre == y === (comparaciones en JavaScript)','Siempre he visto que en JavaScript hay:asignaciones =comparaciones == y ===Creo entender que == hace algo parecido a comparar el valor de la variable y el === tambiéncompara el tipo (como un equals de java).',
