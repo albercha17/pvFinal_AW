@@ -279,12 +279,12 @@ class DAOPreguntas {
                             var puntosAux = rows[0].puntos;
                             if (puntos == 1) puntosAux++;
                             else if (puntos == -1) puntosAux--;
+                            var user, tipo = null,
+                                nombre, idPregunta, idRespuesta, fecha;
+                            user = rows[0].autor;
+                            idPregunta = rows[0].id;
+                            idRespuesta = 0;
                             if (puntos == 1) {
-                                var user, tipo = null,
-                                    nombre, idPregunta, idRespuesta, fecha;
-                                user = rows[0].autor;
-                                idPregunta = rows[0].id;
-                                idRespuesta = 0;
                                 fecha = moment().format("YYYY-MM-DD");
                                 if (puntosAux == 1) {
                                     tipo = "bronce";
@@ -300,8 +300,6 @@ class DAOPreguntas {
                                     nombre = "Excelente pregunta ";
                                 }
                             }
-
-
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
@@ -329,8 +327,62 @@ class DAOPreguntas {
                                                             } else {
                                                                 /* Para las medallas */
                                                                 if (tipo == null) {
-                                                                    connection.release(); // devolver al pool la conexión
-                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                    if (puntosAux == 5) {
+                                                                        connection.query(
+                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                            [user, "oro", "Excelente pregunta", idPregunta, idRespuesta],
+                                                                            function (err, rows) {
+                                                                                connection.release(); // devolver al pool la conexión
+                                                                                if (err) {
+                                                                                    callback(null, true);
+                                                                                } else {
+                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                }
+                                                                            }
+                                                                        );
+                                                                    }
+                                                                    if (puntosAux == 3) {
+                                                                        connection.query(
+                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                            [user, "plata", "Buena pregunta", idPregunta, idRespuesta],
+                                                                            function (err, rows) {
+                                                                                connection.release(); // devolver al pool la conexión
+                                                                                if (err) {
+                                                                                    callback(null, true);
+                                                                                } else {
+                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                }
+                                                                            }
+                                                                        );
+                                                                    }
+                                                                    if (puntosAux == 1) {
+                                                                        connection.query(
+                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                            [user, "bronce", "Pregunta interesante", idPregunta, idRespuesta],
+                                                                            function (err, rows) {
+                                                                                connection.release(); // devolver al pool la conexión
+                                                                                if (err) {
+                                                                                    callback(null, true);
+                                                                                } else {
+                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                }
+                                                                            }
+                                                                        );
+                                                                    }
+                                                                    if (puntosAux == 0) {
+                                                                        connection.query(
+                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                            [user, "bronce", "Estudiante", idPregunta, idRespuesta],
+                                                                            function (err, rows) {
+                                                                                connection.release(); // devolver al pool la conexión
+                                                                                if (err) {
+                                                                                    callback(null, true);
+                                                                                } else {
+                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                }
+                                                                            }
+                                                                        );
+                                                                    }
                                                                 } else {
                                                                     connection.query(
                                                                         "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
@@ -429,9 +481,11 @@ class DAOPreguntas {
                                                                 callback(new Error("Error de acceso a la base de datos"));
                                                             } else {
                                                                 /* Para las medallas */
-                                                                if (tipo == null) {
+                                                                if (tipo == null) { // aqui meter el delete
+
+                                                                    connection.release(); // devolver al pool la conexión
                                                                     callback(null, true); //no está el usuario con el password proporcionado
-                                                                } else {
+                                                                } else { // aqui el insetar
                                                                     connection.query(
                                                                         "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
                                                                         [user, tipo, nombre, idPregunta, idRespuesta, fecha],
@@ -479,10 +533,10 @@ class DAOPreguntas {
 
                             var user, tipo = null,
                                 nombre, idPregunta, idRespuesta, fecha;
+                            user = rows[0].autor;
+                            idPregunta = rows[0].idPregunta;
+                            idRespuesta = rows[0].id;
                             if (puntos == 1) {
-                                user = rows[0].autor;
-                                idPregunta = rows[0].idPregunta;
-                                idRespuesta = rows[0].id;
                                 fecha = moment().format("YYYY-MM-DD");
                                 if (puntosAux == 2) {
                                     tipo = "bronce";
@@ -524,8 +578,50 @@ class DAOPreguntas {
                                                             } else {
                                                                 /* Para las medallas */
                                                                 if (tipo == null) {
-                                                                    connection.release(); // devolver al pool la conexión
-                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                    if (tipo == null) {
+                                                                        if (puntosAux == 5) {
+                                                                            connection.query(
+                                                                                "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                                [user, "oro", "Excelente respuesta", idPregunta, idRespuesta],
+                                                                                function (err, rows) {
+                                                                                    connection.release(); // devolver al pool la conexión
+                                                                                    if (err) {
+                                                                                        callback(null, true);
+                                                                                    } else {
+                                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    }
+                                                                                }
+                                                                            );
+                                                                        }
+                                                                        if (puntosAux == 3) {
+                                                                            connection.query(
+                                                                                "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                                [user, "plata", "Buena respuesta", idPregunta, idRespuesta],
+                                                                                function (err, rows) {
+                                                                                    connection.release(); // devolver al pool la conexión
+                                                                                    if (err) {
+                                                                                        callback(null, true);
+                                                                                    } else {
+                                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    }
+                                                                                }
+                                                                            );
+                                                                        }
+                                                                        if (puntosAux == 1) {
+                                                                            connection.query(
+                                                                                "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                                [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta],
+                                                                                function (err, rows) {
+                                                                                    connection.release(); // devolver al pool la conexión
+                                                                                    if (err) {
+                                                                                        callback(null, true);
+                                                                                    } else {
+                                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    }
+                                                                                }
+                                                                            );
+                                                                        }
+                                                                    }
                                                                 } else {
                                                                     connection.query(
                                                                         "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
@@ -584,13 +680,13 @@ class DAOPreguntas {
                                 idPregunta = rows[0].idPregunta;
                                 idRespuesta = rows[0].id;
                                 fecha = moment().format("YYYY-MM-DD");
-                                if (puntosAux == 2) {
+                                if (puntosAux == 2|| puntosAux == 3) {
                                     tipo = "bronce";
                                     nombre = "Respuesta interesante";
-                                } else if (puntosAux == 4) {
+                                } else if (puntosAux == 4||puntosAux == 5) {
                                     tipo = "plata";
                                     nombre = "Buena respuesta ";
-                                } else if (puntosAux == 6) {
+                                } else if (puntosAux >= 6) {
                                     tipo = "oro";
                                     nombre = "Excelente respuesta";
                                 }
