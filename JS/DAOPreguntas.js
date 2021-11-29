@@ -279,27 +279,28 @@ class DAOPreguntas {
                             var puntosAux = rows[0].puntos;
                             if (puntos == 1) puntosAux++;
                             else if (puntos == -1) puntosAux--;
+                            if (puntos == 1) {
+                                var user, tipo = null,
+                                    nombre, idPregunta, idRespuesta, fecha;
+                                user = rows[0].autor;
+                                idPregunta = rows[0].id;
+                                idRespuesta = 0;
+                                fecha = moment().format("YYYY-MM-DD");
+                                if (puntosAux == 1) {
+                                    tipo = "bronce";
+                                    nombre = "Estudiante";
+                                } else if (puntosAux == 2) {
+                                    tipo = "bronce";
+                                    nombre = "Pregunta interesante";
+                                } else if (puntosAux == 4) {
+                                    tipo = "plata";
+                                    nombre = "Buena pregunta";
+                                } else if (puntosAux == 6) {
+                                    tipo = "oro";
+                                    nombre = "Excelente pregunta ";
+                                }
+                            }
 
-                            var user, tipo, nombre, idPregunta, idRespuesta, fecha;
-                            user = rows[0].autor;
-                            idPregunta = rows[0].id;
-                            idRespuesta = 0;
-                            fecha = moment().format("YYYY-MM-DD");
-                            tipo = null;
-                            if (puntosAux == 1) {
-                                tipo = "bronce";
-                                nombre = "Estudiante";
-                            } else if (puntosAux == 2) {
-                                tipo = "bronce";
-                                nombre = "Pregunta interesante";
-                            } else if (puntosAux == 4) {
-                                tipo = "plata";
-                                nombre = "Buena pregunta";
-                            }
-                            else if (puntosAux == 6) {
-                                tipo = "oro";
-                                nombre = "Excelente pregunta ";
-                            }
 
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
@@ -318,6 +319,7 @@ class DAOPreguntas {
                                                     var nuevaReputacion = rows[0].reputacion;
                                                     if (puntos == 1) nuevaReputacion += 10;
                                                     else if (puntos == -1) nuevaReputacion -= 2;
+                                                    if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
@@ -336,7 +338,7 @@ class DAOPreguntas {
                                                                         function (err, rows) {
                                                                             connection.release(); // devolver al pool la conexión
                                                                             if (err) {
-                                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                                                callback(null, true);
                                                                             } else {
                                                                                 callback(null, true); //no está el usuario con el password proporcionado
                                                                             }
@@ -379,6 +381,27 @@ class DAOPreguntas {
                                 puntosAux--;
                                 puntosAux--;
                             }
+                            if (puntos == 1) {
+                                var user, tipo = null,
+                                    nombre, idPregunta, idRespuesta, fecha;
+                                user = rows[0].autor;
+                                idPregunta = rows[0].id;
+                                idRespuesta = 0;
+                                fecha = moment().format("YYYY-MM-DD");
+                                if (puntosAux == 1) {
+                                    tipo = "bronce";
+                                    nombre = "Estudiante";
+                                } else if (puntosAux == 2 || puntosAux == 3) {
+                                    tipo = "bronce";
+                                    nombre = "Pregunta interesante";
+                                } else if (puntosAux == 4 || puntosAux == 5) {
+                                    tipo = "plata";
+                                    nombre = "Buena pregunta";
+                                } else if (puntosAux >= 6) {
+                                    tipo = "oro";
+                                    nombre = "Excelente pregunta ";
+                                }
+                            }
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
@@ -402,11 +425,26 @@ class DAOPreguntas {
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
                                                         function (err, rows) {
-                                                            connection.release(); // devolver al pool la conexión
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos"));
                                                             } else {
-                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                /* Para las medallas */
+                                                                if (tipo == null) {
+                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                } else {
+                                                                    connection.query(
+                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                                        [user, tipo, nombre, idPregunta, idRespuesta, fecha],
+                                                                        function (err, rows) {
+                                                                            connection.release(); // devolver al pool la conexión
+                                                                            if (err) {
+                                                                                callback(null, true);
+                                                                            } else {
+                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                            }
+                                                                        }
+                                                                    );
+                                                                }
                                                             }
                                                         }
                                                     );
@@ -439,23 +477,25 @@ class DAOPreguntas {
                             if (puntos == 1) puntosAux++;
                             else if (puntos == -1) puntosAux--;
 
-                            var user, tipo, nombre, idPregunta, idRespuesta, fecha;
-                            user = rows[0].autor;
-                            idPregunta = rows[0].idPregunta;
-                            idRespuesta = rows[0].id;
-                            fecha = moment().format("YYYY-MM-DD");
-                            tipo = null;
-                            if (puntosAux == 2) {
-                                tipo = "bronce";
-                                nombre = "Pregunta interesante";
-                            } else if (puntosAux == 4) {
-                                tipo = "plata";
-                                nombre = "Buena respuesta ";
+                            var user, tipo = null,
+                                nombre, idPregunta, idRespuesta, fecha;
+                            if (puntos == 1) {
+                                user = rows[0].autor;
+                                idPregunta = rows[0].idPregunta;
+                                idRespuesta = rows[0].id;
+                                fecha = moment().format("YYYY-MM-DD");
+                                if (puntosAux == 2) {
+                                    tipo = "bronce";
+                                    nombre = "Respuesta interesante";
+                                } else if (puntosAux == 4) {
+                                    tipo = "plata";
+                                    nombre = "Buena respuesta ";
+                                } else if (puntosAux == 6) {
+                                    tipo = "oro";
+                                    nombre = "Excelente respuesta";
+                                }
                             }
-                            else if (puntosAux == 6) {
-                                tipo = "oro";
-                                nombre = "Excelente respuesta";
-                            }
+
 
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
@@ -474,6 +514,7 @@ class DAOPreguntas {
                                                     var nuevaReputacion = rows[0].reputacion;
                                                     if (puntos == 1) nuevaReputacion += 10;
                                                     else if (puntos == -1) nuevaReputacion -= 2;
+                                                    if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
@@ -492,7 +533,7 @@ class DAOPreguntas {
                                                                         function (err, rows) {
                                                                             connection.release(); // devolver al pool la conexión
                                                                             if (err) {
-                                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                                                callback(null, true);
                                                                             } else {
                                                                                 callback(null, true); //no está el usuario con el password proporcionado
                                                                             }
@@ -535,6 +576,26 @@ class DAOPreguntas {
                                 puntosAux--;
                                 puntosAux--;
                             }
+
+                            var user, tipo = null,
+                                nombre, idPregunta, idRespuesta, fecha;
+                            if (puntos == 1) {
+                                user = rows[0].autor;
+                                idPregunta = rows[0].idPregunta;
+                                idRespuesta = rows[0].id;
+                                fecha = moment().format("YYYY-MM-DD");
+                                if (puntosAux == 2) {
+                                    tipo = "bronce";
+                                    nombre = "Respuesta interesante";
+                                } else if (puntosAux == 4) {
+                                    tipo = "plata";
+                                    nombre = "Buena respuesta ";
+                                } else if (puntosAux == 6) {
+                                    tipo = "oro";
+                                    nombre = "Excelente respuesta";
+                                }
+                            }
+
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
                                 [puntosAux, idP, id],
@@ -552,15 +613,32 @@ class DAOPreguntas {
                                                     var nuevaReputacion = rows[0].reputacion;
                                                     if (puntos == 1) nuevaReputacion += 12;
                                                     else if (puntos == -1) nuevaReputacion -= 12;
+                                                    if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
                                                         function (err, rows) {
-                                                            connection.release(); // devolver al pool la conexión
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos"));
                                                             } else {
-                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                /* Para las medallas */
+                                                                if (tipo == null) {
+                                                                    connection.release(); // devolver al pool la conexión
+                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                } else {
+                                                                    connection.query(
+                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                                        [user, tipo, nombre, idPregunta, idRespuesta, fecha],
+                                                                        function (err, rows) {
+                                                                            connection.release(); // devolver al pool la conexión
+                                                                            if (err) {
+                                                                                callback(null, true);
+                                                                            } else {
+                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                            }
+                                                                        }
+                                                                    );
+                                                                }
                                                             }
                                                         }
                                                     );
