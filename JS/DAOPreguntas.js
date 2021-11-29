@@ -740,14 +740,14 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             connection.query(
-                                "SELECT * FROM respuesta WHERE id = (SELECT MAX(id) FROM respuesta) AND idPregunta= ?;",
-                                [idPregunta],
+                                "SELECT * FROM respuesta WHERE (id = (SELECT MAX(id) FROM respuesta) AND idPregunta= ?) OR( idPregunta= ? AND id= ?)",
+                                [idPregunta,idPregunta,1],
                                 function (err, rows) {
                                     if (err) {
                                         callback(new Error("Error de acceso a la base de datos"));
                                     } else {
                                         if (rows.length != 0) {
-                                            id = rows[0].id;
+                                            id = rows[rows.length-1].id;
                                             id++;
                                         }
                                         var hoy = moment().format("YYYY-MM-DD");
