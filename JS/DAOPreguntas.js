@@ -517,6 +517,7 @@ class DAOPreguntas {
                                                                             [user, "bronce", "Pregunta interesante", idPregunta, idRespuesta],
                                                                             function (err, rows) {
                                                                                 if (err) {
+                                                                                    connection.release(); // devolver al pool la conexión
                                                                                     callback(null, true);
                                                                                 } else {
                                                                                     if (puntosAux == 0) {
@@ -533,6 +534,10 @@ class DAOPreguntas {
                                                                                                 }
                                                                                             }
                                                                                         );
+                                                                                    }
+                                                                                    else{
+                                                                                        connection.release(); // devolver al pool la conexión
+                                                                                        callback(null, true);
                                                                                     }
                                                                                 }
                                                                             }
