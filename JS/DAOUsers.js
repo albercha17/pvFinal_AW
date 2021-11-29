@@ -150,7 +150,7 @@ class DAOUsers {
                                     i++;
                             });
                             if(i==rows.length){
-                                if(reputacion<1)reputacion=1;
+                                
                                 callback(null, reputacion);
                             }
                         }

@@ -322,8 +322,10 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                        if (puntos == 1) nuevaReputacion+=12;
+                                                    if(rows[0].reputacion==1 && puntos == 1) nuevaReputacion+=10;
+                                                       else if (puntos == 1) nuevaReputacion+=12;
                                                         else if (puntos == -1) nuevaReputacion-=12;
+                                                        if(nuevaReputacion<1)nuevaReputacion=1;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
