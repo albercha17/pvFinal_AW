@@ -39,36 +39,15 @@ router.get("/usuario/:email", function (request, response) {
                             response.status(500);
                         } else if (result) {
                             var respuestas = result;
-                            DAOUser.getMedallaVisitas(request.params.email, function buscarNombre(err, result) {
-                                if (err) {
-                                    response.status(500);
-                                } else if (result) {
-                                    listaMedallas.visitas= result;
-                                    DAOUser.getMedallaPregunta(request.params.email, function buscarNombre(err, result) {
-                                        if (err) {
-                                            response.status(500);
-                                        } else if (result) {
-                                            listaMedallas.pregunta= result;
-                                            DAOUser.getMedallaRespuesta(request.params.email, function buscarNombre(err, result) {
-                                                if (err) {
-                                                    response.status(500);
-                                                } else if (result) {
-                                                    listaMedallas.respuesta= result;
-                                                            response.status(200);
-                                                            response.render("vistaUsuario", {
-                                                                nombre: request.session.nombre,
-                                                                email: request.session.email,
-                                                                usuario: usuario,
-                                                                preguntas: preguntas,
-                                                                respuestas: respuestas,
-                                                                listaMedallas:listaMedallas,
-                                                            });
-                                                }
-                                        });
-                                    }
-                                    })
-                                }
-                            })
+                            response.status(200);
+                            response.render("vistaUsuario", {
+                                nombre: request.session.nombre,
+                                email: request.session.email,
+                                usuario: usuario,
+                                preguntas: preguntas,
+                                respuestas: respuestas,
+                                listaMedallas:listaMedallas,
+                            });
                         }
                     })
 

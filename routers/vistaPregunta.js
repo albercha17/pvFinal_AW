@@ -59,6 +59,7 @@ router.get("/preguntaInfo/:id", function (request, response) {
     }
   });
 });
+
 router.get("/pregunta/:id", function (request, response) {
   DAOPregunta.visitaPregunta(request.params.id, function buscarNombre(err, result) {
     if (err) {

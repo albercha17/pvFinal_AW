@@ -185,15 +185,48 @@ class DAOPreguntas {
                             } else {
                                 var visitas = rows[0].visitas;
                                 visitas++;
+                                /* Para las medallas */
+                                var user, tipo, nombre, idPregunta, idRespuesta, fecha;
+                                user = rows[0].autor;
+                                idPregunta = rows[0].id;
+                                idRespuesta = 0;
+                                fecha = moment().format("YYYY-MM-DD");
+                                tipo = null;
+                                if (visitas == 2) {
+                                    tipo = "bronce";
+                                    nombre = "Pregunta popular";
+                                } else if (visitas == 4) {
+                                    tipo = "plata";
+                                    nombre = "Pregunta destacada";
+                                } else if (visitas == 6) {
+                                    tipo = "oro";
+                                    nombre = "Pregunta famosa";
+                                }
                                 connection.query(
                                     "UPDATE pregunta SET visitas= ? WHERE id= ?",
                                     [visitas, id],
                                     function (err, rows) {
-                                        connection.release(); // devolver al pool la conexión
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else {
-                                            callback(null, true); //no está el usuario con el password proporcionado
+                                            if (tipo == null) {
+                                                connection.release(); // devolver al pool la conexión
+                                                callback(null, true); //no está el usuario con el password proporcionado
+                                            } else {
+                                                connection.query(
+                                                    "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                    [user, tipo, nombre, idPregunta, idRespuesta, fecha],
+                                                    function (err, rows) {
+                                                        connection.release(); // devolver al pool la conexión
+                                                        if (err) {
+                                                            callback(new Error("Error de acceso a la base de datos"));
+                                                        } else {
+                                                            callback(null, true); //no está el usuario con el password proporcionado
+
+                                                        }
+                                                    }
+                                                );
+                                            }
 
                                         }
                                     }
@@ -246,6 +279,28 @@ class DAOPreguntas {
                             var puntosAux = rows[0].puntos;
                             if (puntos == 1) puntosAux++;
                             else if (puntos == -1) puntosAux--;
+
+                            var user, tipo, nombre, idPregunta, idRespuesta, fecha;
+                            user = rows[0].autor;
+                            idPregunta = rows[0].id;
+                            idRespuesta = 0;
+                            fecha = moment().format("YYYY-MM-DD");
+                            tipo = null;
+                            if (puntosAux == 1) {
+                                tipo = "bronce";
+                                nombre = "Estudiante";
+                            } else if (puntosAux == 2) {
+                                tipo = "bronce";
+                                nombre = "Pregunta interesante";
+                            } else if (puntosAux == 4) {
+                                tipo = "plata";
+                                nombre = "Buena pregunta";
+                            }
+                            else if (puntosAux == 6) {
+                                tipo = "oro";
+                                nombre = "Excelente pregunta ";
+                            }
+
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
@@ -261,17 +316,33 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                        if (puntos == 1) nuevaReputacion+=10;
-                                                        else if (puntos == -1) nuevaReputacion-=2;
+                                                    if (puntos == 1) nuevaReputacion += 10;
+                                                    else if (puntos == -1) nuevaReputacion -= 2;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
                                                         function (err, rows) {
-                                                            connection.release(); // devolver al pool la conexión
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos"));
                                                             } else {
-                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                /* Para las medallas */
+                                                                if (tipo == null) {
+                                                                    connection.release(); // devolver al pool la conexión
+                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                } else {
+                                                                    connection.query(
+                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                                        [user, tipo, nombre, idPregunta, idRespuesta, fecha],
+                                                                        function (err, rows) {
+                                                                            connection.release(); // devolver al pool la conexión
+                                                                            if (err) {
+                                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                                            } else {
+                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                            }
+                                                                        }
+                                                                    );
+                                                                }
                                                             }
                                                         }
                                                     );
@@ -301,12 +372,13 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if (puntos == 1){
-                                puntosAux++;puntosAux++;
-                            } 
-                            else if (puntos == -1){
-                                puntosAux--;puntosAux--;
-                            } 
+                            if (puntos == 1) {
+                                puntosAux++;
+                                puntosAux++;
+                            } else if (puntos == -1) {
+                                puntosAux--;
+                                puntosAux--;
+                            }
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
@@ -322,10 +394,10 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                    if(rows[0].reputacion==1 && puntos == 1) nuevaReputacion+=10;
-                                                       else if (puntos == 1) nuevaReputacion+=12;
-                                                        else if (puntos == -1) nuevaReputacion-=12;
-                                                        if(nuevaReputacion<1)nuevaReputacion=1;
+                                                    if (rows[0].reputacion == 1 && puntos == 1) nuevaReputacion += 10;
+                                                    else if (puntos == 1) nuevaReputacion += 12;
+                                                    else if (puntos == -1) nuevaReputacion -= 12;
+                                                    if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
@@ -366,6 +438,25 @@ class DAOPreguntas {
                             var puntosAux = rows[0].puntos;
                             if (puntos == 1) puntosAux++;
                             else if (puntos == -1) puntosAux--;
+
+                            var user, tipo, nombre, idPregunta, idRespuesta, fecha;
+                            user = rows[0].autor;
+                            idPregunta = rows[0].idPregunta;
+                            idRespuesta = rows[0].id;
+                            fecha = moment().format("YYYY-MM-DD");
+                            tipo = null;
+                            if (puntosAux == 2) {
+                                tipo = "bronce";
+                                nombre = "Pregunta interesante";
+                            } else if (puntosAux == 4) {
+                                tipo = "plata";
+                                nombre = "Buena respuesta ";
+                            }
+                            else if (puntosAux == 6) {
+                                tipo = "oro";
+                                nombre = "Excelente respuesta";
+                            }
+
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
                                 [puntosAux, idP, id],
@@ -381,17 +472,33 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                        if (puntos == 1) nuevaReputacion+=10;
-                                                        else if (puntos == -1) nuevaReputacion-=2;
+                                                    if (puntos == 1) nuevaReputacion += 10;
+                                                    else if (puntos == -1) nuevaReputacion -= 2;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
                                                         function (err, rows) {
-                                                            connection.release(); // devolver al pool la conexión
                                                             if (err) {
                                                                 callback(new Error("Error de acceso a la base de datos"));
                                                             } else {
-                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                /* Para las medallas */
+                                                                if (tipo == null) {
+                                                                    connection.release(); // devolver al pool la conexión
+                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                } else {
+                                                                    connection.query(
+                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                                        [user, tipo, nombre, idPregunta, idRespuesta, fecha],
+                                                                        function (err, rows) {
+                                                                            connection.release(); // devolver al pool la conexión
+                                                                            if (err) {
+                                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                                            } else {
+                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                            }
+                                                                        }
+                                                                    );
+                                                                }
                                                             }
                                                         }
                                                     );
@@ -421,12 +528,13 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if (puntos == 1){
-                                puntosAux++; puntosAux++;
-                            } 
-                            else if (puntos == -1){
-                                puntosAux--;puntosAux--;
-                            } 
+                            if (puntos == 1) {
+                                puntosAux++;
+                                puntosAux++;
+                            } else if (puntos == -1) {
+                                puntosAux--;
+                                puntosAux--;
+                            }
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
                                 [puntosAux, idP, id],
@@ -442,8 +550,8 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                        if (puntos == 1) nuevaReputacion+=12;
-                                                        else if (puntos == -1) nuevaReputacion-=12;
+                                                    if (puntos == 1) nuevaReputacion += 12;
+                                                    else if (puntos == -1) nuevaReputacion -= 12;
                                                     connection.query(
                                                         "UPDATE user SET reputacion= ? WHERE email= ?",
                                                         [nuevaReputacion, email],
@@ -751,13 +859,13 @@ class DAOPreguntas {
                         } else {
                             connection.query(
                                 "SELECT * FROM respuesta WHERE (id = (SELECT MAX(id) FROM respuesta) AND idPregunta= ?) OR( idPregunta= ? AND id= ?)",
-                                [idPregunta,idPregunta,1],
+                                [idPregunta, idPregunta, 1],
                                 function (err, rows) {
                                     if (err) {
                                         callback(new Error("Error de acceso a la base de datos"));
                                     } else {
                                         if (rows.length != 0) {
-                                            id = rows[rows.length-1].id;
+                                            id = rows[rows.length - 1].id;
                                             id++;
                                         }
                                         var hoy = moment().format("YYYY-MM-DD");
