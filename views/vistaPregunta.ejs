@@ -113,6 +113,7 @@ height: 100%;" ;>
                                                 <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>"
                                                     style="float: right;text-align: right;">
                                                     <input type="hidden" name="puntos" value=-1>
+                                                    <input type="hidden" name="email" value= <%= pregunta.autor%>>
                                                     <button type="submit"
                                                         style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                         <i class="bi bi-hand-thumbs-down"
@@ -127,6 +128,7 @@ height: 100%;" ;>
                                             <% if(votado==null){ %>
                                                 <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>" style="float: right;">
                                                     <input type="hidden" name="puntos" value=1>
+                                                    <input type="hidden" name="email" value= <%= pregunta.autor%>>
                                                     <button type="submit"
                                                         style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                         <i class="bi bi-hand-thumbs-up"
@@ -206,6 +208,7 @@ height: 100%;" ;>
                                                 style="float: right;text-align: right;">
                                                 <input type="hidden" name="puntos" value=-1>
                                                 <input type="hidden" name="id" value= <%= respuesta.id%>>
+                                                <input type="hidden" name="email" value= <%= respuesta.autor%>>
                                                 <button type="submit"
                                                     style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                     <i class="bi bi-hand-thumbs-down-fill"
@@ -215,6 +218,7 @@ height: 100%;" ;>
                                                 style="float: right;">
                                                 <input type="hidden" name="puntos" value=1>
                                                 <input type="hidden" name="id" value= <%= respuesta.id%>>
+                                                <input type="hidden" name="email" value= <%= respuesta.autor%>>
                                                 <button type="submit"
                                                     style="border: 0ch;background-color:rgb(252, 252, 252);">
                                                     <i class="bi bi-hand-thumbs-up-fill"

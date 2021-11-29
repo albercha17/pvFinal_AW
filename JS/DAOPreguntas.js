@@ -1,6 +1,8 @@
 "use strict";
 
-const { randomFillSync } = require('crypto');
+const {
+    randomFillSync
+} = require('crypto');
 var moment = require('moment');
 
 class DAOPreguntas {
@@ -203,7 +205,7 @@ class DAOPreguntas {
             }
         });
     }
-    getEstaPuntuada(id,idR, email, callback) { // preguntar si puede ser un pregunta sin tag
+    getEstaPuntuada(id, idR, email, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -219,17 +221,17 @@ class DAOPreguntas {
                             if (rows.length === 0) {
                                 callback(null, "Nada");
                             } else {
-                                if(rows[0].punto==1) callback(null,"1");
-                                if(rows[0].punto==-1) callback(null, "-1");
+                                if (rows[0].punto == 1) callback(null, "1");
+                                if (rows[0].punto == -1) callback(null, "-1");
                             }
                         }
                     });
-                }
-            });
-        }
+            }
+        });
+    }
 
 
-    puntuarPregunta(id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    puntuarPregunta(email, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -242,17 +244,40 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if(puntos==1) puntosAux++;
-                            else if(puntos==-1) puntosAux--;
+                            if (puntos == 1) puntosAux++;
+                            else if (puntos == -1) puntosAux--;
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
                                 function (err, rows) {
-                                    connection.release(); // devolver al pool la conexión
                                     if (err) {
                                         callback(new Error("Error de acceso a la base de datos"));
                                     } else {
-                                        callback(null, true); //no está el usuario con el password proporcionado
+                                        connection.query(
+                                            "SELECT * FROM user WHERE email= ?",
+                                            [email],
+                                            function (err, rows) {
+                                                if (err) {
+                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                } else {
+                                                    var nuevaReputacion = rows[0].reputacion;
+                                                        if (puntos == 1) nuevaReputacion+=10;
+                                                        else if (puntos == -1) nuevaReputacion-=2;
+                                                    connection.query(
+                                                        "UPDATE user SET reputacion= ? WHERE email= ?",
+                                                        [nuevaReputacion, email],
+                                                        function (err, rows) {
+                                                            connection.release(); // devolver al pool la conexión
+                                                            if (err) {
+                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                            } else {
+                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                            }
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        );
                                     }
                                 }
                             );
@@ -263,7 +288,7 @@ class DAOPreguntas {
         });
     }
 
-    volverAPuntuarPregunta(id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    volverAPuntuarPregunta(email, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -276,22 +301,40 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if(puntos==1){
-                                puntosAux++;
-                                puntosAux++;
-                            }else if(puntos==-1){
-                                puntosAux--;
-                                puntosAux--;
-                            } 
+                            if (puntos == 1) puntosAux++;
+                            else if (puntos == -1) puntosAux--;
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
                                 function (err, rows) {
-                                    connection.release(); // devolver al pool la conexión
                                     if (err) {
                                         callback(new Error("Error de acceso a la base de datos"));
                                     } else {
-                                        callback(null, true); //no está el usuario con el password proporcionado
+                                        connection.query(
+                                            "SELECT * FROM user WHERE email= ?",
+                                            [email],
+                                            function (err, rows) {
+                                                if (err) {
+                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                } else {
+                                                    var nuevaReputacion = rows[0].reputacion;
+                                                        if (puntos == 1) nuevaReputacion+=12;
+                                                        else if (puntos == -1) nuevaReputacion-=12;
+                                                    connection.query(
+                                                        "UPDATE user SET reputacion= ? WHERE email= ?",
+                                                        [nuevaReputacion, email],
+                                                        function (err, rows) {
+                                                            connection.release(); // devolver al pool la conexión
+                                                            if (err) {
+                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                            } else {
+                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                            }
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        );
                                     }
                                 }
                             );
@@ -302,30 +345,53 @@ class DAOPreguntas {
         });
     }
 
-    puntuarRespuesta(idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    puntuarRespuesta(email, idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
                     "SELECT * from respuesta WHERE idPregunta= ? AND id= ?",
-                    [idP,id],
+                    [idP, id],
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if(puntos==1) puntosAux++;
-                            else if(puntos==-1) puntosAux--;
+                            if (puntos == 1) puntosAux++;
+                            else if (puntos == -1) puntosAux--;
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
                                 [puntosAux, idP, id],
                                 function (err, rows) {
-                                    connection.release(); // devolver al pool la conexión
                                     if (err) {
                                         callback(new Error("Error de acceso a la base de datos"));
                                     } else {
-                                        callback(null, true); //no está el usuario con el password proporcionado
+                                        connection.query(
+                                            "SELECT * FROM user WHERE email= ?",
+                                            [email],
+                                            function (err, rows) {
+                                                if (err) {
+                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                } else {
+                                                    var nuevaReputacion = rows[0].reputacion;
+                                                        if (puntos == 1) nuevaReputacion+=10;
+                                                        else if (puntos == -1) nuevaReputacion-=2;
+                                                    connection.query(
+                                                        "UPDATE user SET reputacion= ? WHERE email= ?",
+                                                        [nuevaReputacion, email],
+                                                        function (err, rows) {
+                                                            connection.release(); // devolver al pool la conexión
+                                                            if (err) {
+                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                            } else {
+                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                            }
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        );
                                     }
                                 }
                             );
@@ -336,35 +402,53 @@ class DAOPreguntas {
         });
     }
 
-    volverAPuntuarRespuesta(idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    volverAPuntuarRespuesta(email, idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
                     "SELECT * from respuesta WHERE idPregunta= ? AND id= ?",
-                    [idP,id],
+                    [idP, id],
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if(puntos==1){
-                                puntosAux++;
-                                puntosAux++;
-                            }else if(puntos==-1){
-                                puntosAux--;
-                                puntosAux--;
-                            }
+                            if (puntos == 1) puntosAux++;
+                            else if (puntos == -1) puntosAux--;
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
                                 [puntosAux, idP, id],
                                 function (err, rows) {
-                                    connection.release(); // devolver al pool la conexión
                                     if (err) {
                                         callback(new Error("Error de acceso a la base de datos"));
                                     } else {
-                                        callback(null, true); //no está el usuario con el password proporcionado
+                                        connection.query(
+                                            "SELECT * FROM user WHERE email= ?",
+                                            [email],
+                                            function (err, rows) {
+                                                if (err) {
+                                                    callback(new Error("Error de acceso a la base de datos"));
+                                                } else {
+                                                    var nuevaReputacion = rows[0].reputacion;
+                                                        if (puntos == 1) nuevaReputacion+=12;
+                                                        else if (puntos == -1) nuevaReputacion-=12;
+                                                    connection.query(
+                                                        "UPDATE user SET reputacion= ? WHERE email= ?",
+                                                        [nuevaReputacion, email],
+                                                        function (err, rows) {
+                                                            connection.release(); // devolver al pool la conexión
+                                                            if (err) {
+                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                            } else {
+                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                            }
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        );
                                     }
                                 }
                             );
@@ -374,6 +458,7 @@ class DAOPreguntas {
             }
         });
     }
+
 
     getRespuesta(callback) {
         this.pool.getConnection(function (err, connection) {
@@ -700,7 +785,7 @@ class DAOPreguntas {
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
-                        } else {//si no ha habido voto
+                        } else { //si no ha habido voto
                             if (rows.length === 0) {
                                 connection.query(
                                     "INSERT INTO puntos (idPregunta,idRespuesta,user,punto) VALUES (?, ?, ?, ?)",
@@ -722,7 +807,7 @@ class DAOPreguntas {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else if (rows.length === 0) {
                                             connection.query(
-                                                "UPDATE puntos SET punto = ? WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",                                                
+                                                "UPDATE puntos SET punto = ? WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",
                                                 [puntos, idPregunta, idRespuesta, email],
                                                 function (err, rows) {
                                                     if (err) {
@@ -732,13 +817,13 @@ class DAOPreguntas {
                                                     }
                                                 }
                                             );
-                                        } else{//si ya ha puntuado like
+                                        } else { //si ya ha puntuado like
                                             callback(null, "Nada");
                                         }
                                     }
                                 );
                             }
-                           
+
                         }
                     }
                 );

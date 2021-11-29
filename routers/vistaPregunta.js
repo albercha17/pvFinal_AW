@@ -77,7 +77,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
-      DAOPregunta.puntuarPregunta(request.params.id, request.query.puntos, function buscarNombre(err, result) {
+      DAOPregunta.puntuarPregunta( request.query.email ,request.params.id, request.query.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -85,8 +85,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
         }
       });
     } else if (result == "Update") {
-      var puntos = request.query.puntos;
-      DAOPregunta.volverAPuntuarPregunta(request.params.id, puntos, function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarPregunta(request.query.email,request.params.id, request.query.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -110,7 +109,7 @@ router.get("/PuntuarRespuesta/:id", function (request, response) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
-      DAOPregunta.puntuarRespuesta(request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
+      DAOPregunta.puntuarRespuesta(request.query.email,request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -118,8 +117,7 @@ router.get("/PuntuarRespuesta/:id", function (request, response) {
         }
       });
     } else if (result == "Update") {
-      var puntos = request.query.puntos ;
-      DAOPregunta.volverAPuntuarRespuesta(request.params.id, request.query.id, puntos, function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarRespuesta(request.query.email,request.params.id, request.query.id, request.query.puntos , function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
