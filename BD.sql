@@ -37,7 +37,6 @@ insert into respuesta values('2','1','La pseudoclase :nth-child() selecciona los
 'emy@404.es','0','2021-11-23');
 
 create table puntos(idPregunta int(11), idRespuesta int(11), user VARCHAR(100), punto tinyint(1),PRIMARY KEY(idPregunta,idRespuesta,user));
-insert into puntos values('1','0','roberto@404.es','1');
+
 
 create table medallas(user VARCHAR(100), tipo VARCHAR(100),nombre VARCHAR(100),idPregunta int(11), idRespuesta int (11),fecha Date ,PRIMARY KEY(user,tipo,nombre,idPregunta,idRespuesta));
-insert into medallas values('roberto@404.es','bronce','Estudiante','1','0','2020-11-23');
