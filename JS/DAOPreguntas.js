@@ -301,8 +301,12 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if (puntos == 1) puntosAux++;
-                            else if (puntos == -1) puntosAux--;
+                            if (puntos == 1){
+                                puntosAux++;puntosAux++;
+                            } 
+                            else if (puntos == -1){
+                                puntosAux--;puntosAux--;
+                            } 
                             connection.query(
                                 "UPDATE pregunta SET puntos= ? WHERE id= ?",
                                 [puntosAux, id],
@@ -415,8 +419,12 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             var puntosAux = rows[0].puntos;
-                            if (puntos == 1) puntosAux++;
-                            else if (puntos == -1) puntosAux--;
+                            if (puntos == 1){
+                                puntosAux++; puntosAux++;
+                            } 
+                            else if (puntos == -1){
+                                puntosAux--;puntosAux--;
+                            } 
                             connection.query(
                                 "UPDATE respuesta SET puntos= ? WHERE idPregunta= ? AND id= ?",
                                 [puntosAux, idP, id],
