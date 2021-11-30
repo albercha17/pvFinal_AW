@@ -1,42 +1,264 @@
-create table user(email VARCHAR(100), password VARCHAR(100),nombre VARCHAR(100), img VARCHAR(100), reputacion int(11),fechaAlta Date ,PRIMARY KEY(email));
-insert into user values('nico@404.es ','1234','Nico','/Imagenes_de_perfil/nico.png','1','2021-11-23');
-insert into user values('roberto@404.es','1234','Roberto','/Imagenes_de_perfil/roberto.png','1','2021-11-23');
-insert into user values('sfg@404.es','1234','SFG','/Imagenes_de_perfil/sfg.png','1','2021-11-23');
-insert into user values('marta@404.es','1234','Marta','/Imagenes_de_perfil/marta.png','1','2021-11-23');
-insert into user values('lucas@404.es','1234','Lucas','/Imagenes_de_perfil/kuroko.png','1','2021-11-23');
-insert into user values('emy@404.es','1234','Emy','/Imagenes_de_perfil/amy.png','1','2021-11-23');
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-11-2021 a las 20:12:34
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.11
 
-create table pregunta(id int(11), titulo VARCHAR(100), cuerpo text, autor VARCHAR(100),visitas int(11),puntos int(11),fecha Date ,PRIMARY KEY(id));
-insert into pregunta values('1','¿Cual es la diferencia entre position: relative, position: absolute y position: fixed?'
-,'Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página. Séque estas propiedades de CSS sirven para posicionar un elemento dentro de la página.',
-'nico@404.es','0','0','2021-11-23');
-insert into pregunta values('2','¿Cómo funciona exactamente nth-child?','No acabo de comprender muy bien que hace exactamente y qué usos prácticos puede tener',
-'roberto@404.es','0','0','2021-11-23');
-insert into pregunta values('3',' Diferencias entre == y === (comparaciones en JavaScript)','Siempre he visto que en JavaScript hay:asignaciones =comparaciones == y ===Creo entender que == hace algo parecido a comparar el valor de la variable y el === tambiéncompara el tipo (como un equals de java).',
-'sfg@404.es','0','0','2021-11-23');
-insert into pregunta values('4','Problema con asincronismo en Node','Soy nueva en Node... Tengo una modulo que conecta a una BD de postgres por medio de pgnode. En eso no tengo problemas. Mi problema es que al llamar a ese modulo, desde otromodulo, y despues querer usar los datos que salieron de la BD me dice undefined... Estoy casiseguro que es porque la conexion a la BD devuelve una promesa, y los datos no estandisponibles al momento de usarlos.',
-'marta@404.es','0','0','2021-11-23');
-insert into pregunta values('5','¿Qué es la inyección SQL y cómo puedo evitarla?','He encontrado bastantes preguntas en StackOverflow sobre programas o formularios web que guardan información en una base de datos (especialmente en PHP y MySQL) y que contienen graves problemas de seguridad relacionados principalmente con la inyección SQL. Normalmente dejo un comentario y/o un enlace a una referencia externa, pero un comentario no da mucho espacio para mucho y sería positivo que hubiera una referencia interna en SOessobre el tema así que decidí escribir esta pregunta.',
-'lucas@404.es','0','0','2021-11-23');
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-create table etiqueta(idPregunta int(11), tag VARCHAR(100) ,PRIMARY KEY(idPregunta, tag));
-insert into etiqueta values('1','css');
-insert into etiqueta values('1','css3');
-insert into etiqueta values('2','css');
-insert into etiqueta values('2','html');
-insert into etiqueta values('3','JavaScript');
-insert into etiqueta values('4','nodejs');
-insert into etiqueta values('5','mysql');
-insert into etiqueta values('5','sql');
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-create table respuesta(idPregunta int(11),id int(11), texto text, autor VARCHAR(100),puntos int(11), fecha Date ,PRIMARY KEY(idPregunta,id));
-insert into respuesta values('1','1','La propiedad position sirve para posicionar un elemento dentro de la página. Sin embargo, dependiendo de cual sea la propiedad que usemos, el elemento tomará una referencia u otra para posicionarse respecto a ella.Los posibles valores que puede adoptar la propiedad position son: static | relative | absolute |fixed | inherit | initial.',
-'lucas@404.es','0','2021-11-23');
-insert into respuesta values('2','1','La pseudoclase :nth-child() selecciona los hermanos que cumplan cierta condición definida en la fórmula an + b. a y b deben ser números enteros, n es un contador. El grupo an representa un ciclo, cada cuantos elementos se repite; b indica desde donde empezamos a contar.',
-'emy@404.es','0','2021-11-23');
+--
+-- Base de datos: `practica final`
+--
 
-create table puntos(idPregunta int(11), idRespuesta int(11), user VARCHAR(100), punto tinyint(1),PRIMARY KEY(idPregunta,idRespuesta,user));
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `etiqueta`
+--
 
-create table medallas(user VARCHAR(100), tipo VARCHAR(100),nombre VARCHAR(100),idPregunta int(11), idRespuesta int (11),fecha Date ,PRIMARY KEY(user,tipo,nombre,idPregunta,idRespuesta));
+CREATE TABLE `etiqueta` (
+  `idPregunta` int(11) NOT NULL,
+  `tag` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `etiqueta`
+--
+
+INSERT INTO `etiqueta` (`idPregunta`, `tag`) VALUES
+(1, 'css'),
+(1, 'css3'),
+(2, 'css'),
+(2, 'html'),
+(3, 'JavaScript'),
+(4, 'nodejs'),
+(5, 'mysql'),
+(5, 'sql');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `medallas`
+--
+
+CREATE TABLE `medallas` (
+  `user` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `idPregunta` int(11) NOT NULL,
+  `idRespuesta` int(11) NOT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregunta`
+--
+
+CREATE TABLE `pregunta` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(100) DEFAULT NULL,
+  `cuerpo` text DEFAULT NULL,
+  `autor` varchar(100) DEFAULT NULL,
+  `visitas` int(11) DEFAULT 0,
+  `puntos` int(11) DEFAULT 0,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pregunta`
+--
+
+INSERT INTO `pregunta` (`id`, `titulo`, `cuerpo`, `autor`, `visitas`, `puntos`, `fecha`) VALUES
+(1, '¿Cual es la diferencia entre position: relative, position: absolute y position: fixed?', 'Sé que estas propiedades de CSS sirven para posicionar un elemento dentro de la página. Séque estas propiedades de CSS sirven para posicionar un elemento dentro de la página.', 'nico@404.es', 0, 0, '2021-11-23'),
+(2, '¿Cómo funciona exactamente nth-child?', 'No acabo de comprender muy bien que hace exactamente y qué usos prácticos puede tener', 'roberto@404.es', 0, 0, '2021-11-23'),
+(3, ' Diferencias entre == y === (comparaciones en JavaScript)', 'Siempre he visto que en JavaScript hay:asignaciones =comparaciones == y ===Creo entender que == hace algo parecido a comparar el valor de la variable y el === tambiéncompara el tipo (como un equals de java).', 'sfg@404.es', 0, 0, '2021-11-23'),
+(4, 'Problema con asincronismo en Node', 'Soy nueva en Node... Tengo una modulo que conecta a una BD de postgres por medio de pgnode. En eso no tengo problemas. Mi problema es que al llamar a ese modulo, desde otromodulo, y despues querer usar los datos que salieron de la BD me dice undefined... Estoy casiseguro que es porque la conexion a la BD devuelve una promesa, y los datos no estandisponibles al momento de usarlos.', 'marta@404.es', 0, 0, '2021-11-23'),
+(5, '¿Qué es la inyección SQL y cómo puedo evitarla?', 'He encontrado bastantes preguntas en StackOverflow sobre programas o formularios web que guardan información en una base de datos (especialmente en PHP y MySQL) y que contienen graves problemas de seguridad relacionados principalmente con la inyección SQL. Normalmente dejo un comentario y/o un enlace a una referencia externa, pero un comentario no da mucho espacio para mucho y sería positivo que hubiera una referencia interna en SOessobre el tema así que decidí escribir esta pregunta.', 'lucas@404.es', 0, 0, '2021-11-23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puntos`
+--
+
+CREATE TABLE `puntos` (
+  `idPregunta` int(11) NOT NULL,
+  `idRespuesta` int(11) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `punto` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuesta`
+--
+
+CREATE TABLE `respuesta` (
+  `idPregunta` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `texto` text DEFAULT NULL,
+  `autor` varchar(100) DEFAULT NULL,
+  `puntos` int(11) DEFAULT 0,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `respuesta`
+--
+
+INSERT INTO `respuesta` (`idPregunta`, `id`, `texto`, `autor`, `puntos`, `fecha`) VALUES
+(1, 1, 'La propiedad position sirve para posicionar un elemento dentro de la página. Sin embargo, dependiendo de cual sea la propiedad que usemos, el elemento tomará una referencia u otra para posicionarse respecto a ella.Los posibles valores que puede adoptar la propiedad position son: static | relative | absolute |fixed | inherit | initial.', 'lucas@404.es', 0, '2021-11-23'),
+(2, 1, 'La pseudoclase :nth-child() selecciona los hermanos que cumplan cierta condición definida en la fórmula an + b. a y b deben ser números enteros, n es un contador. El grupo an representa un ciclo, cada cuantos elementos se repite; b indica desde donde empezamos a contar.', 'emy@404.es', 0, '2021-11-23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('6Q02KDZ3jcCowQNH2T55WZNM5KAyIF0P', 1638385907, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"identificado\":true,\"nombre\":\"albercha@ucm.es\",\"email\":\"albercha@ucm.es\",\"img\":\"/Imagenes_de_perfil/defecto3.png\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user`
+--
+
+CREATE TABLE `user` (
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `img` varchar(100) DEFAULT NULL,
+  `reputacion` int(11) DEFAULT 1,
+  `fechaAlta` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`email`, `password`, `nombre`, `img`, `reputacion`, `fechaAlta`) VALUES
+('albercha@ucm.es', 'chavelotodo1', 'albercha@ucm.es', '/Imagenes_de_perfil/defecto3.png', 1, '2021-11-30'),
+('emy@404.es', '1234', 'Emy', '/Imagenes_de_perfil/amy.png', 1, '2021-11-23'),
+('lucas@404.es', '1234', 'Lucas', '/Imagenes_de_perfil/kuroko.png', 1, '2021-11-23'),
+('marta@404.es', '1234', 'Marta', '/Imagenes_de_perfil/marta.png', 1, '2021-11-23'),
+('nico@404.es ', '1234', 'Nico', '/Imagenes_de_perfil/nico.png', 11, '2021-11-23'),
+('roberto@404.es', '1234', 'Roberto', '/Imagenes_de_perfil/roberto.png', 1, '2021-11-23'),
+('sfg@404.es', '1234', 'SFG', '/Imagenes_de_perfil/sfg.png', 1, '2021-11-23');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `etiqueta`
+--
+ALTER TABLE `etiqueta`
+  ADD PRIMARY KEY (`idPregunta`,`tag`);
+
+--
+-- Indices de la tabla `medallas`
+--
+ALTER TABLE `medallas`
+  ADD PRIMARY KEY (`user`,`tipo`,`nombre`,`idPregunta`,`idRespuesta`),
+  ADD KEY `pregunta_medalla` (`idPregunta`),
+  ADD KEY `respuesta_medalla` (`idPregunta`,`idRespuesta`);
+
+--
+-- Indices de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `autor_pregunta` (`autor`);
+
+--
+-- Indices de la tabla `puntos`
+--
+ALTER TABLE `puntos`
+  ADD PRIMARY KEY (`idPregunta`,`idRespuesta`,`user`),
+  ADD KEY `autor_p_r` (`user`);
+
+--
+-- Indices de la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  ADD PRIMARY KEY (`idPregunta`,`id`),
+  ADD KEY `autor_respuesta` (`autor`);
+
+--
+-- Indices de la tabla `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indices de la tabla `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `etiqueta`
+--
+ALTER TABLE `etiqueta`
+  ADD CONSTRAINT `etiqueta_de` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `medallas`
+--
+ALTER TABLE `medallas`
+  ADD CONSTRAINT `medalla_de` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pregunta_medalla` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD CONSTRAINT `autor_pregunta` FOREIGN KEY (`autor`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `puntos`
+--
+ALTER TABLE `puntos`
+  ADD CONSTRAINT `autor_p_r` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pregunta_puntos` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  ADD CONSTRAINT `autor_respuesta` FOREIGN KEY (`autor`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

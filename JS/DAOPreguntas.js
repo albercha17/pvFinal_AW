@@ -1101,8 +1101,8 @@ class DAOPreguntas {
                                 id++;
                                 var hoy = moment().format("YYYY-MM-DD");
                                 connection.query(
-                                    "INSERT INTO pregunta (id,titulo,cuerpo,autor,visitas,puntos, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                                    [id, titulo, cuerpo, email, 0, 0, hoy],
+                                    "INSERT INTO pregunta (id,titulo,cuerpo,autor,fecha) VALUES (?, ?, ?, ?, ?)",
+                                    [id, titulo, cuerpo, email, hoy],
                                     function (err, rows) {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
@@ -1158,8 +1158,8 @@ class DAOPreguntas {
                                         }
                                         var hoy = moment().format("YYYY-MM-DD");
                                         connection.query(
-                                            "INSERT INTO respuesta (idpregunta,id,texto,autor,puntos,fecha) VALUES (?, ?, ?, ?, ?, ?)",
-                                            [idPregunta, id, texto, autor, 0, hoy],
+                                            "INSERT INTO respuesta (idpregunta,id,texto,autor,fecha) VALUES (?, ?, ?, ?, ?)",
+                                            [idPregunta, id, texto, autor, hoy],
                                             function (err, rows) {
                                                 connection.release(); // devolver al pool la conexión
                                                 if (err) {

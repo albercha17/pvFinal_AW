@@ -178,8 +178,8 @@ class DAOUsers {
                             if (rows.length === 0) {
                                 var hoy = moment().format("YYYY-MM-DD");
                                 connection.query(
-                                    "INSERT INTO user (email,password,nombre,img,reputacion,fechaAlta) VALUES (?, ?, ?, ?, ? , ?)",
-                                    [email, password, nombre, img, 1,hoy],
+                                    "INSERT INTO user (email,password,nombre,img,fechaAlta) VALUES (?, ?, ?, ?, ?)",
+                                    [email, password, nombre, img, hoy],
                                     function (err, rows) {
                                         connection.release(); // devolver al pool la conexión
                                         if (err) {
