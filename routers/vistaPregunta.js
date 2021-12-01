@@ -35,7 +35,7 @@ router.get("/preguntaInfo/:id", function (request, response) {
         } else if (result) {
           var respuestas = result;
           response.status(200);
-          DAOPregunta.getEstaPuntuada(pregunta.id, 0, request.session.email, function buscarNombre(err, result) {
+          DAOPregunta.getEstaPuntuada(pregunta.id ,0, 0, request.session.email, function buscarNombre(err, result) {
             if (err) {
               response.status(500);
             } else if (result) {
@@ -74,7 +74,7 @@ router.get("/pregunta/:id", function (request, response) {
 router.get("/PuntuarPregunta/:id", function (request, response) {
   votadoN = null;
   votado = null;
-  DAOPregunta.getPuntuado(request.session.email, request.params.id, 0, request.query.puntos, function buscarNombre(err, result) {
+  DAOPregunta.getPuntuado(request.session.email, request.params.id, 0, 0, request.query.puntos, function buscarNombre(err, result) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
@@ -106,7 +106,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
 });
 
 router.get("/PuntuarRespuesta/:id", function (request, response) {
-  DAOPregunta.getPuntuado(request.session.email, request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
+  DAOPregunta.getPuntuado(request.session.email, request.params.id,request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
