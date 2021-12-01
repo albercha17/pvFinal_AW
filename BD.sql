@@ -57,7 +57,8 @@ CREATE TABLE `medallas` (
   `tipo` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `idPregunta` int(11) NOT NULL,
-  `idRespuesta` int(11) NOT NULL,
+  `idPreguntaRespuesta` int(11) DEFAULT 0,
+  `idRespuesta` int(11) DEFAULT 0,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -96,7 +97,8 @@ INSERT INTO `pregunta` (`id`, `titulo`, `cuerpo`, `autor`, `visitas`, `puntos`, 
 
 CREATE TABLE `puntos` (
   `idPregunta` int(11) NOT NULL,
-  `idRespuesta` int(11) NOT NULL,
+  `idPreguntaRespuesta` int(11) DEFAULT 0,
+  `idRespuesta` int(11) DEFAULT 0,
   `user` varchar(100) NOT NULL,
   `punto` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -185,7 +187,7 @@ ALTER TABLE `etiqueta`
 -- Indices de la tabla `medallas`
 --
 ALTER TABLE `medallas`
-  ADD PRIMARY KEY (`user`,`tipo`,`nombre`,`idPregunta`,`idRespuesta`),
+  ADD PRIMARY KEY (`user`,`tipo`,`nombre`,`idPregunta`,`idPreguntaRespuesta`,`idRespuesta`),
   ADD KEY `pregunta_medalla` (`idPregunta`),
   ADD KEY `respuesta_medalla` (`idPregunta`,`idRespuesta`);
 
@@ -200,7 +202,7 @@ ALTER TABLE `pregunta`
 -- Indices de la tabla `puntos`
 --
 ALTER TABLE `puntos`
-  ADD PRIMARY KEY (`idPregunta`,`idRespuesta`,`user`),
+  ADD PRIMARY KEY (`idPregunta`,`idPreguntaRespuesta`,`idRespuesta`,`user`),
   ADD KEY `autor_p_r` (`user`);
 
 --

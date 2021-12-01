@@ -383,6 +383,10 @@ class DAOPreguntas {
                                                                             }
                                                                         );
                                                                     }
+                                                                    else{
+                                                                        connection.release(); // devolver al pool la conexión
+                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                    }
                                                                 } else {
                                                                     connection.query(
                                                                         "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
@@ -558,6 +562,10 @@ class DAOPreguntas {
                                                                             }
                                                                         );
                                                                     }
+                                                                    else{
+                                                                        connection.release(); // devolver al pool la conexión
+                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                    }
                                                                 } else { // aqui el insetar
                                                                     connection.query(
                                                                         "INSERT INTO medallas (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
@@ -693,6 +701,10 @@ class DAOPreguntas {
                                                                                     }
                                                                                 }
                                                                             );
+                                                                        }
+                                                                        else{
+                                                                            connection.release(); // devolver al pool la conexión
+                                                                            callback(null, true); //no está el usuario con el password proporcionado
                                                                         }
                                                                     }
                                                                 } else {
@@ -834,6 +846,10 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
+                                                                    }
+                                                                    else{
+                                                                        connection.release(); // devolver al pool la conexión
+                                                                        callback(null, true); //no está el usuario con el password proporcionado
                                                                     }
                                                                 } else {
                                                                     connection.query(
