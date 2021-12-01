@@ -545,11 +545,28 @@ class DAOPreguntas {
                                                                         "INSERT INTO medallas (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
                                                                         [user, tipo, nombre, idPregunta, fecha],
                                                                         function (err, rows) {
-                                                                            connection.release(); // devolver al pool la conexión
                                                                             if (err) {
                                                                                 callback(null, true);
                                                                             } else {
-                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                                if(puntosAux==2){
+                                                                                    connection.query(
+                                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
+                                                                                        [user, "bronce", "Estudiante", idPregunta, fecha],
+                                                                                        function (err, rows) {
+                                                                                            connection.release(); // devolver al pool la conexión
+                                                                                            if (err) {
+                                                                                                callback(null, true);
+                                                                                            } else {
+                                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                                            }
+                                                                                        }
+                                                                                    );
+                                                                                }
+                                                                                else{
+                                                                                    connection.release(); // devolver al pool la conexión
+                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                }
+                                                                                
                                                                             }
                                                                         }
                                                                     );
