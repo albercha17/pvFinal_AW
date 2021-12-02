@@ -1,0 +1,72 @@
+#cartaP{
+    border-color: rgb(3, 3, 27);
+}
+#cuerpoP{
+    margin-top: 40px;font-size: larger;
+}
+#cuerpoR{
+    font-size: larger;
+}
+#etiquetas{
+    font-size: 25px; 
+    color: rgb(190, 117, 20);
+    text-decoration:none; 
+    margin-left: 20px;
+}
+#autor{
+    text-decoration:none;
+    color:rgb(67, 68, 70);
+}
+#colFecha{
+    text-align: left;
+}
+#fecha{
+    margin-right: 40px; 
+    color: rgb(158, 158, 158);
+}
+#visitas{
+    font-size: larger; 
+    margin-left: 15px;
+}
+#formDislike{
+    float: right;
+    text-align: right;
+}
+#botonLike{
+    border: 0ch;
+    background-color:rgb(252, 252, 252);
+}
+#emoteDislike{
+    color: rgb(131, 12, 12);
+    font-size: large;
+}
+#yaVotado{
+    border: 0ch;
+    background-color:rgb(252, 252, 252); 
+    float: right;
+}
+#emoteLike{
+    color: rgb(19, 122, 10);
+     font-size: large;
+}
+#puntos{
+    float: right;
+    font-size: larger;
+}
+#votadoD{
+    float: right;
+     color: rgb(224, 28, 28);
+}
+#votadoL{
+    float: right;
+     color: rgb(13, 119, 18);
+}
+
+#cartaRespuesta{
+    border-color: blue;
+     width: auto;
+}
+
+#centro{
+    text-align: center;
+}

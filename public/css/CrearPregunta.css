@@ -1,0 +1,11 @@
+#margen{
+    margin: auto;
+}
+#carta{
+    width: 50rem;
+    border-width: 1px;
+     border-color: black;
+}
+#centrarBoton{
+    text-align: center;
+}

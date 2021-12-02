@@ -12,14 +12,11 @@
   <title>404-Iniciar sesion</title>
   <link rel="shortcut icon"  type="image/png" href="/Images/icono.png"/>
   <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/login_singUp.css">
 </head>
 
-<body style="background-image: url(/Images/fondo1.jpg);background-position: center center;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-size: cover;
-height: 100%;";>
-<div style="text-align: center;"> <img src="/Images/logo.png" id="iconoHeader" width="360px" style="margin-top: 80px;"></div>
+<body id="body">
+<div id="cuerpo"> <img src="/Images/logo.png" id="foto" width="360px"></div>
   <br>
   <br>
   <div class="container espacio"></div>
@@ -37,7 +34,7 @@ height: 100%;";>
           <input type="password" name="password" class="form-control">
         </div>
         <br>
-        <p style="color: red;"><%= errorLogin %></p>
+        <p id="error"><%= errorLogin %></p>
         <br>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button class="btn btn-primary" type="submit">Iniciar sesion</button>

@@ -11,6 +11,7 @@
   <title>404-Usuarios</title>
   <link rel="shortcut icon"  type="image/png" href="/Images/icono.png"/>
   <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/usuariosRegistrados.css">
 </head>
 
 
@@ -20,53 +21,52 @@
   <div id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <img src="/Images/logo.png" id="iconoHeader" width="150px">
-          <a class="navbar-brand" href="http://localhost:3000/" style="font-size:x-large; margin-left: 50px;">Inicio</a>            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <img src="/Images/logo.png"  width="150px">
+            <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder" style="font-size:x-large;"> Preguntas sin
+                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"
+                            > Preguntas sin
                             responder</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="http://localhost:3000/usuarios" style="font-size:x-large;">Usuarios</a>
+                        <a class="nav-link active" href="http://localhost:3000/usuarios"
+                            >Usuarios</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav  mb-4 mb-lg-0">
                     <div class="container">
                         <div class="row">
                             <div class="col col-3">
-                             <img src="/Images/nico.png" id="iconoHeader"  width="70" height="66" style="border-radius: 60%; margin-top: 10px;">
+                                <img src="/Images/nico.png" id="iconoHeader" width="70" height="66">
                             </div>
                             <div class="col col-3">
-                             <a class="nav-link active" aria-current="page" style="font-size:x-large; margin-top: 10px;"
-                             href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
+                                <a class="nav-link active" aria-current="page" id="nombreUsuario"
+                                    href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
                             </div>
                             <div class="col col-6">
-                             <form method="get" action="/desconectarse">
-                                 <button class="btn btn-danger" type="submit" style="margin-top: 20px;float: right; border-width: 1px; border-color: black;">Cerrar Sesion</button>
-                             </form>
-                         </div>
+                                <form method="get" action="/desconectarse">
+                                    <button class="btn btn-danger" type="submit" id="btn_cerrarSesion">Cerrar Sesion</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </ul>
             </div>
         </div>
     </nav>
-    </div>
+</div>
  
    
   <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
   <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
-  <body style="background-image: url(/Images/fondo1.jpg);  background-position: center center;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-size: cover;
-height: 100%;";>
+  <body id="body";>
   <br>
   <h1 class="text-center">Todos los usuarios</h1>
   <br>
@@ -79,43 +79,38 @@ height: 100%;";>
       <div class="col col-6">
         <form class="d-flex" method="get" action="/BuscarUsuario">
           <input class="form-control me-2" type="search" placeholder="Buscar por nombre o correo"
-              aria-label="Search" name="filtro" style="border-width: 1px; border-color: black;">
+              aria-label="Search" name="filtro" id="filtro">
               <button class="btn btn-outline-light" type="submit"> Buscar</button>
       </form>
       </div>
       <% usuarios.forEach(function(usuario) { %>
       <div class="col col-4">
-        <div class="card" style="border-width: 1px; border-color: black; font-size:large; height: auto;">
+        <div class="card" id="cartaUsers">
           <div class="card-body">
             <div class="container">
               <div class="row">
                 <div class="col col-3">
-                  <img src="/Images/amy.png" id="iconoHeader" width="80" height="80" style="border-radius: 50%;">
+                  <img src="/Images/amy.png" id="iconoHeader" width="80" height="80" id="fotos">
                 </div>
                 <div class="col col-1"></div>
                 <div class="col col-8">
                   <h5 class="card-title" href="#" ><%= usuario.nombre%></h5>
-                  <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= usuario.email%>"
-                    style="text-decoration:none;"><%= usuario.email%></a>
-                  <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 10px;">Reputacion: <%= usuario.reputacion%></h6>
+                  <a class="card-subtitle mb-2 text-muted" href="http://localhost:3000/usuario/<%= usuario.email%>" id="email"><%= usuario.email%></a>
+                  <h6 class="card-subtitle mb-2 text-muted" id="reputacion">Reputacion: <%= usuario.reputacion%></h6>
                 </div>
               </div>
               <br>
-              <div class="row" style=" text-align: center; color: rgb(133, 31, 18);;
-              margin-left: 60px; margin-right: 60px;">
-              <div class="card" style="border-width: 1px; border-color: black; background-color: rgb(242, 248, 250) ;font-size:large;">
+              <div class="row" id="tarjeE">
+              <div class="card" id="cartaE">
                 <% if(usuario.tag!=null){ %>
-                  <p class="card-text" style="font-size:medium;"
-                  >Etiqueta más utilizada: </p>
+                  <p class="card-text" id="etiqueta">Etiqueta más utilizada: </p>
                   <h6 class="card-text"
                   style="margin-bottom: 10px; font-size:large;"><%= usuario.tag%></h6>
                                                           
                           <% } ; %>
                     <% if(usuario.tag==null){ %>
-                      <p class="card-text" style="font-size:medium;"
-                      >Etiqueta más utilizada: </p>
-                      <h6 class="card-text"
-                      style="margin-bottom: 10px; font-size:large; color: rgb(202, 202, 202);"> no tiene preguntas </h6>             
+                      <p class="card-text" id="etiqueta">Etiqueta más utilizada: </p>
+                      <h6 class="card-text"id="noE"> no tiene preguntas </h6>             
                                     <% } ; %>
                 
               </div>

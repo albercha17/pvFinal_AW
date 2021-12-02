@@ -1,0 +1,39 @@
+#filtro{
+    border-width: 1px; 
+    border-color: black;
+}
+#cartaUsers{
+    border-width: 1px;
+     border-color: black; 
+     font-size:large;
+      height: auto;
+}
+#fotos{
+      border-radius: 50%;
+}
+#email{
+    text-decoration:none;
+}
+#reputacion{
+    margin-top: 10px;
+}
+#tarjeE{
+    text-align: center; 
+    color: rgb(133, 31, 18);
+     margin-left: 60px; 
+     margin-right: 60px;
+}
+#cartaE{
+    border-width: 1px; 
+    border-color: black; 
+    background-color: rgb(242, 248, 250) ;
+    font-size:large;
+}
+#etiqueta{
+    font-size:medium;
+}
+#noE{
+    margin-bottom: 10px; 
+    font-size:large; 
+    color: rgb(202, 202, 202);
+}
