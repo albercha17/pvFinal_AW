@@ -11,8 +11,7 @@ const {
 //DAOS   -----------------------------------------------------
 
 const FactoryDao = require("../JS/FactoriaDao");
-let Factorydao = new FactoryDao();
-var DAOPregunta = Factorydao.DAOPreguntas();
+const DAOPregunta= FactoryDao.getDaoPregunta();
 
 
 var votadoN = null;

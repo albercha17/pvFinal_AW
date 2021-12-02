@@ -12,16 +12,10 @@ const pool = mysql.createPool({
 });
 
 
-class FactoriaDao {
-    constructor() {
-        this.daoUser = new DAOUsers(pool);
-        this.DAOP = new DAOPreguntas(pool);
-    }
-     DaoUser() {
-        return this.daoUser;
-    }
-    DAOPreguntas(){
-        return this.DAOP;
-    }
+const daoUser= new DAOUsers(pool);
+const daoPregunta= new DAOPreguntas(pool);
+
+module.exports={
+getDaoUsers: function getDaoUsers(){ return daoUser},
+getDaoPregunta: function getDaoPregunta(){ return daoPregunta}
 }
-module.exports = FactoriaDao

@@ -7,8 +7,7 @@ const { response } = require("express");
 //DAOS   -----------------------------------------------------
 
 const FactoryDao = require("../JS/FactoriaDao");
-let Factorydao = new FactoryDao();
-var DAOP= Factorydao.DAOPreguntas();
+const DAOP= FactoryDao.getDaoPregunta();
 
 var filtroE =null;
 var filtroC =null;
