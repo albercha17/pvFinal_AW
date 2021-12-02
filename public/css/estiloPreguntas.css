@@ -1,0 +1,58 @@
+.btn-warning{
+    margin-left: 30px; 
+    border-width: 1px; 
+    border-color: black;
+}
+
+#cartaPreguntas{
+    width: 80rem;
+				 border-width: 1px; 
+					border-color: black;
+}
+
+#tituloPregunta{
+	text-decoration:none;
+	color:rgb(0, 0, 0);
+	font-size:x-large;
+}
+#iconoUser{
+	border-radius: 50%;
+}
+#autor{
+	text-decoration:none;
+	color:rgb(67, 68, 70);
+}
+
+#etiquetas{
+	color: rgb(190, 117, 20);
+	text-decoration:none;
+	 margin-right: 20px; 
+		font-size: x-large;
+}
+
+#p_v{
+	text-align: right;
+}
+
+#visitas{
+	margin-right: 40px;
+	 color: rgb(111, 0, 255);
+}
+
+#votos{
+	color: rgb(5, 102, 5);
+}
+
+#fechaP{
+	margin-right: 40px; color: rgb(158, 158, 158);
+}
+
+#busqueda{
+	text-align: left;
+}
+#barraBusqueda{
+	border-width: 1px; border-color: black;
+}
+#CrearPregunta{
+	border-width: 1px; border-color: black;
+}

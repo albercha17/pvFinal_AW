@@ -1,0 +1,27 @@
+/* Header */
+.navbar-brand{
+    font-size:x-large;
+     margin-left: 50px;
+}
+.nav-link {
+    font-size:x-large;
+}
+#iconoHeader{
+    border-radius: 60%; 
+    margin-top: 10px;
+}
+#nombreUsuario{
+    font-size:x-large; margin-top: 10px;
+}
+#btn_cerrarSesion{
+    margin-top: 20px; float: right;border-width: 1px; border-color: black;
+}
+/* body */
+#body{
+    background-image: url(/Images/fondo1.jpg);
+    background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+height: 100%;
+}
