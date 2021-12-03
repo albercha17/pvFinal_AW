@@ -190,13 +190,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `password`, `nombre`, `img`, `reputacion`, `fechaAlta`) VALUES
-('albercha@ucm.es', 'chavelotodo1', 'albercha@ucm.es', '/Imagenes_de_perfil/defecto3.png', 1, '2021-11-30'),
-('emy@404.es', '1234', 'Emy', '/Imagenes_de_perfil/amy.png', 1, '2021-11-23'),
-('lucas@404.es', '1234', 'Lucas', '/Imagenes_de_perfil/kuroko.png', 1, '2021-11-23'),
-('marta@404.es', '1234', 'Marta', '/Imagenes_de_perfil/marta.png', 1, '2021-11-23'),
-('nico@404.es ', '1234', 'Nico', '/Imagenes_de_perfil/nico.png', 1, '2021-11-23'),
-('roberto@404.es', '1234', 'Roberto', '/Imagenes_de_perfil/roberto.png', 1, '2021-11-23'),
-('sfg@404.es', '1234', 'SFG', '/Imagenes_de_perfil/sfg.png', 1, '2021-11-23');
+('albercha@ucm.es', 'chavelotodo1', 'albercha@ucm.es', '/Images/defecto3.png', 1, '2021-11-30'),
+('emy@404.es', '1234', 'Emy', '/Images/amy.png', 1, '2021-11-23'),
+('lucas@404.es', '1234', 'Lucas', '/Images/kuroko.png', 1, '2021-11-23'),
+('marta@404.es', '1234', 'Marta', '/Images/marta.png', 1, '2021-11-23'),
+('nico@404.es ', '1234', 'Nico', '/Images/nico.png', 1, '2021-11-23'),
+('roberto@404.es', '1234', 'Roberto', '/Images/roberto.png', 1, '2021-11-23'),
+('sfg@404.es', '1234', 'SFG', '/Images/sfg.png', 1, '2021-11-23');
 
 --
 -- Índices para tablas volcadas

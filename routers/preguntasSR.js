@@ -34,6 +34,7 @@ router.use(express.static(__dirname + '/public'));
             Lista=Sinresponder(preguntas,respuestas);
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
+              img:request.session.img,
               email:request.session.email,
               preguntas: Lista, 
               filtroE : filtroE,
@@ -45,6 +46,7 @@ router.use(express.static(__dirname + '/public'));
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
                 email:request.session.email,
+                img:request.session.img,
                 preguntas: Lista, 
                 filtroE : filtroE,
           filtroC : filtroC,
@@ -56,6 +58,7 @@ router.use(express.static(__dirname + '/public'));
         response.status(200);
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
+            img:request.session.img,
             email:request.session.email,
             preguntas: Lista, 
             filtroE : filtroE,
@@ -83,6 +86,7 @@ router.use(express.static(__dirname + '/public'));
             Lista=Sinresponder(preguntas,respuestas);
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
+              img:request.session.img,
               email:request.session.email,
               preguntas: Lista, 
               filtroE : filtroE,
@@ -93,6 +97,7 @@ router.use(express.static(__dirname + '/public'));
             response.status(200);
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
+                img:request.session.img,
                 email:request.session.email,
                 preguntas: Lista,
                 filtroE : filtroE,
@@ -106,6 +111,7 @@ router.use(express.static(__dirname + '/public'));
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
             email:request.session.email,
+            img:request.session.img,
             preguntas: Lista, 
             filtroE : filtroE,
           filtroC : filtroC,
@@ -132,6 +138,7 @@ router.use(express.static(__dirname + '/public'));
             Lista=Sinresponder(preguntas,respuestas);
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
+              img:request.session.img,
               email:request.session.email,
               preguntas: Lista, 
               filtroE : filtroE,
@@ -143,6 +150,7 @@ router.use(express.static(__dirname + '/public'));
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
                 email:request.session.email,
+                img:request.session.img,
                 preguntas: Lista,
                 filtroE : filtroE,
           filtroC : filtroC,
@@ -154,6 +162,7 @@ router.use(express.static(__dirname + '/public'));
         response.status(200);
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
+            img:request.session.img,
             email:request.session.email,
             preguntas: Lista, 
             filtroE : filtroE,
@@ -183,6 +192,7 @@ router.use(express.static(__dirname + '/public'));
             response.render("preguntasSinResponder", {
               nombre: request.session.nombre,
               email:request.session.email,
+              img:request.session.img,
               preguntas: Lista, 
               filtroE : filtroE,
           filtroC : filtroC,
@@ -194,6 +204,7 @@ router.use(express.static(__dirname + '/public'));
                 nombre: request.session.nombre,
                 email:request.session.email,
                 preguntas: Lista, 
+                img:request.session.img,
                 filtroE : filtroE,
           filtroC : filtroC,
               });
@@ -205,6 +216,7 @@ router.use(express.static(__dirname + '/public'));
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
             email:request.session.email,
+            img:request.session.img,
             preguntas: Lista, 
             filtroE : filtroE,
           filtroC : filtroC,
@@ -234,6 +246,7 @@ router.use(express.static(__dirname + '/public'));
               nombre: request.session.nombre,
               email:request.session.email,
               preguntas: Lista, 
+              img:request.session.img,
               filtroE : filtroE,
           filtroC : filtroC,
             });
@@ -243,6 +256,7 @@ router.use(express.static(__dirname + '/public'));
             response.render("preguntasSinResponder", {
                 nombre: request.session.nombre,
                 email:request.session.email,
+                img:request.session.img,
                 preguntas: Lista, 
                 filtroE : filtroE,
           filtroC : filtroC,
@@ -255,6 +269,7 @@ router.use(express.static(__dirname + '/public'));
         response.render("preguntasSinResponder", {
             nombre: request.session.nombre,
             email:request.session.email,
+            img:request.session.img,
             preguntas: Lista, 
             filtroE : filtroE,
           filtroC : filtroC,

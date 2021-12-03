@@ -46,6 +46,7 @@ router.get("/usuario/:email", function (request, response) {
                                 preguntas: preguntas,
                                 respuestas: respuestas,
                                 listaMedallas:listaMedallas,
+                                img:request.session.img,
                             });
                         }
                     })

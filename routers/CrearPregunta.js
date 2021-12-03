@@ -22,6 +22,7 @@ router.use(express.static(__dirname + '/public'));
     response.render("crearPregunta", {
         nombre: request.session.nombre,
         email:request.session.email,
+        img:request.session.img,
         error: error,
       });
   });
@@ -33,6 +34,7 @@ router.use(express.static(__dirname + '/public'));
         response.render("crearPregunta", {
             nombre: request.session.nombre,
             email:request.session.email,
+            img:request.session.img,
             error:error,
           });
           error=null;

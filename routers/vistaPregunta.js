@@ -43,6 +43,7 @@ router.get("/preguntaInfo/:id", function (request, response) {
               response.status(200);
               response.render("vistaPregunta", {
                 nombre: request.session.nombre,
+                img:request.session.img,
                 email: request.session.email,
                 pregunta: pregunta,
                 respuestas: respuestas,

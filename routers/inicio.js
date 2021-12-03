@@ -33,6 +33,7 @@ router.get("/", function (request, response) {
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
+          img:request.session.img,
           preguntas: preguntas, 
           filtroE : filtroE,
           filtroC : filtroC,
@@ -44,6 +45,7 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          img:request.session.img,
           filtroE : filtroE,
           filtroC : filtroC,
         });
@@ -64,6 +66,7 @@ router.get("/", function (request, response) {
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
+          img:request.session.img,
           preguntas: preguntas, 
           filtroE : filtroE,
           filtroC : filtroC,
@@ -75,6 +78,7 @@ router.get("/", function (request, response) {
           nombre: request.session.nombre,
           email:request.session.email,
           preguntas: preguntas, 
+          img:request.session.img,
           filtroE : filtroE,
           filtroC : filtroC,
         });
@@ -96,6 +100,7 @@ router.get("/", function (request, response) {
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
+          img:request.session.img,
           preguntas: preguntas, 
           filtroE : filtroE,
           filtroC : filtroC,
@@ -106,6 +111,7 @@ router.get("/", function (request, response) {
         response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
+          img:request.session.img,
           preguntas: preguntas, 
           filtroE : filtroE,
           filtroC : filtroC,
