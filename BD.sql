@@ -239,7 +239,7 @@ ALTER TABLE `puntospregunta`
 -- Indices de la tabla `puntosrespuesta`
 --
 ALTER TABLE `puntosrespuesta`
-  ADD PRIMARY KEY (`idPregunta`,`idRespuesta`),
+  ADD PRIMARY KEY (`idPregunta`,`idRespuesta`,`user`),
   ADD KEY `puntosR_de` (`user`);
 
 --
