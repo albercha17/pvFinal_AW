@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2021 a las 11:56:25
+-- Tiempo de generación: 03-12-2021 a las 12:32:00
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `practica final`
+-- Base de datos: `404`
 --
 
 -- --------------------------------------------------------
@@ -167,7 +167,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('6Q02KDZ3jcCowQNH2T55WZNM5KAyIF0P', 1638385907, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"identificado\":true,\"nombre\":\"albercha@ucm.es\",\"email\":\"albercha@ucm.es\",\"img\":\"/Imagenes_de_perfil/defecto3.png\"}');
+('6Q02KDZ3jcCowQNH2T55WZNM5KAyIF0P', 1638385907, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"identificado\":true,\"nombre\":\"albercha@ucm.es\",\"email\":\"albercha@ucm.es\",\"img\":\"/Imagenes_de_perfil/defecto3.png\"}'),
+('OFoyA5XTKE0gi8pgtF6tLRpqAW9K1OyL', 1638617153, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"identificado\":true,\"nombre\":\"albercha@ucm.es\",\"email\":\"albercha@ucm.es\",\"img\":\"/Imagenes_de_perfil/defecto3.png\"}');
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,7 @@ INSERT INTO `user` (`email`, `password`, `nombre`, `img`, `reputacion`, `fechaAl
 ('emy@404.es', '1234', 'Emy', '/Imagenes_de_perfil/amy.png', 1, '2021-11-23'),
 ('lucas@404.es', '1234', 'Lucas', '/Imagenes_de_perfil/kuroko.png', 1, '2021-11-23'),
 ('marta@404.es', '1234', 'Marta', '/Imagenes_de_perfil/marta.png', 1, '2021-11-23'),
-('nico@404.es ', '1234', 'Nico', '/Imagenes_de_perfil/nico.png', 11, '2021-11-23'),
+('nico@404.es ', '1234', 'Nico', '/Imagenes_de_perfil/nico.png', 1, '2021-11-23'),
 ('roberto@404.es', '1234', 'Roberto', '/Imagenes_de_perfil/roberto.png', 1, '2021-11-23'),
 ('sfg@404.es', '1234', 'SFG', '/Imagenes_de_perfil/sfg.png', 1, '2021-11-23');
 
@@ -304,6 +305,13 @@ ALTER TABLE `puntospregunta`
 ALTER TABLE `puntosrespuesta`
   ADD CONSTRAINT `puntosR_de` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `r_puntos` FOREIGN KEY (`idPregunta`,`idRespuesta`) REFERENCES `respuesta` (`idPregunta`, `id`);
+
+--
+-- Filtros para la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  ADD CONSTRAINT `autor_respuesta` FOREIGN KEY (`autor`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `preguntaID` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
