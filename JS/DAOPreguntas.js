@@ -212,7 +212,7 @@ class DAOPreguntas {
                                                 callback(null, true); //no está el usuario con el password proporcionado
                                             } else {
                                                 connection.query(
-                                                    "INSERT INTO medallas (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
+                                                    "INSERT INTO medallaspregunta (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
                                                     [user, tipo, nombre, idPregunta, fecha],
                                                     function (err, rows) {
                                                         connection.release(); // devolver al pool la conexión
@@ -303,8 +303,8 @@ class DAOPreguntas {
                                                                 if (tipo == null) {
                                                                     if (puntosAux == 5) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "oro", "Excelente pregunta", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "oro", "Excelente pregunta", idPregunta,],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -317,8 +317,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 3) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "plata", "Buena pregunta", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "plata", "Buena pregunta", idPregunta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -331,8 +331,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 1) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "bronce", "Pregunta interesante", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "bronce", "Pregunta interesante", idPregunta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -345,8 +345,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 0) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "bronce", "Estudiante", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "bronce", "Estudiante", idPregunta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -363,7 +363,7 @@ class DAOPreguntas {
                                                                     }
                                                                 } else {
                                                                     connection.query(
-                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
+                                                                        "INSERT INTO medallaspregunta (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
                                                                         [user, tipo, nombre, idPregunta, fecha],
                                                                         function (err, rows) {
                                                                             connection.release(); // devolver al pool la conexión
@@ -463,8 +463,8 @@ class DAOPreguntas {
                                                                 if (tipo == null) {
                                                                     if (puntosAux == 5 || puntosAux == 4) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "oro", "Excelente pregunta", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "oro", "Excelente pregunta", idPregunta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -477,8 +477,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 3 || puntosAux == 2) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "plata", "Buena pregunta", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "plata", "Buena pregunta", idPregunta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -491,8 +491,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 1 || puntosAux == 0) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "bronce", "Pregunta interesante", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "bronce", "Pregunta interesante", idPregunta],
                                                                             function (err, rows) {
                                                                                 if (err) {
                                                                                     connection.release(); // devolver al pool la conexión
@@ -500,8 +500,8 @@ class DAOPreguntas {
                                                                                 } else {
                                                                                     if (puntosAux == 0) {
                                                                                         connection.query(
-                                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                                            [user, "bronce", "Estudiante", idPregunta, idRespuesta],
+                                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                                            [user, "bronce", "Estudiante", idPregunta],
                                                                                             function (err, rows) {
 
                                                                                                 connection.release(); // devolver al pool la conexión
@@ -523,8 +523,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == -1) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
-                                                                            [user, "bronce", "Estudiante", idPregunta, idRespuesta],
+                                                                            "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
+                                                                            [user, "bronce", "Estudiante", idPregunta],
                                                                             function (err, rows) {
 
                                                                                 connection.release(); // devolver al pool la conexión
@@ -542,7 +542,7 @@ class DAOPreguntas {
                                                                     }
                                                                 } else { // aqui el insetar
                                                                     connection.query(
-                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
+                                                                        "INSERT INTO medallaspregunta (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
                                                                         [user, tipo, nombre, idPregunta, fecha],
                                                                         function (err, rows) {
                                                                             if (err) {
@@ -550,7 +550,7 @@ class DAOPreguntas {
                                                                             } else {
                                                                                 if(puntosAux==2){
                                                                                     connection.query(
-                                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
+                                                                                        "INSERT INTO medallaspregunta (user,tipo,nombre,idPregunta, fecha) VALUES (?, ?, ?, ?, ?)",
                                                                                         [user, "bronce", "Estudiante", idPregunta, fecha],
                                                                                         function (err, rows) {
                                                                                             connection.release(); // devolver al pool la conexión
@@ -653,8 +653,8 @@ class DAOPreguntas {
                                                                     if (tipo == null) {
                                                                         if (puntosAux == 5) {
                                                                             connection.query(
-                                                                                "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? AND idPreguntaRespuesta= ?;",
-                                                                                [user, "oro", "Excelente respuesta", idPregunta, idRespuesta. idPregunta],
+                                                                                "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
+                                                                                [user, "oro", "Excelente respuesta", idPregunta, idRespuesta],
                                                                                 function (err, rows) {
                                                                                     connection.release(); // devolver al pool la conexión
                                                                                     if (err) {
@@ -667,8 +667,8 @@ class DAOPreguntas {
                                                                         }
                                                                         else if (puntosAux == 3) {
                                                                             connection.query(
-                                                                                "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? AND idPreguntaRespuesta= ? ;",
-                                                                                [user, "plata", "Buena respuesta", idPregunta, idRespuesta, idPregunta],
+                                                                                "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
+                                                                                [user, "plata", "Buena respuesta", idPregunta, idRespuesta],
                                                                                 function (err, rows) {
                                                                                     connection.release(); // devolver al pool la conexión
                                                                                     if (err) {
@@ -681,8 +681,8 @@ class DAOPreguntas {
                                                                         }
                                                                         else if (puntosAux == 1) {
                                                                             connection.query(
-                                                                                "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? AND idPreguntaRespuesta= ?;",
-                                                                                [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta, idPregunta],
+                                                                                "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
+                                                                                [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta],
                                                                                 function (err, rows) {
                                                                                     connection.release(); // devolver al pool la conexión
                                                                                     if (err) {
@@ -700,8 +700,8 @@ class DAOPreguntas {
                                                                     }
                                                                 } else {
                                                                     connection.query(
-                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,idPreguntaRespuesta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                                                                        [user, tipo, nombre, idPregunta, idPregunta, idRespuesta, fecha],
+                                                                        "INSERT INTO medallasrespuesta (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                                        [user, tipo, nombre, idPregunta, idPregunta, fecha],
                                                                         function (err, rows) {
                                                                             connection.release(); // devolver al pool la conexión
                                                                             if (err) {
@@ -798,8 +798,8 @@ class DAOPreguntas {
                                                                 if (tipo == null) {
                                                                     if (puntosAux == 5 || puntosAux == 4) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? AND idPreguntaRespuesta= ?;",
-                                                                            [user, "oro", "Excelente respuesta", idPregunta, idRespuesta, idPregunta],
+                                                                            "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
+                                                                            [user, "oro", "Excelente respuesta", idPregunta, idRespuesta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -812,8 +812,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 3 || puntosAux == 2) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? AND idPreguntaRespuesta= ? ;",
-                                                                            [user, "plata", "Buena respuesta", idPregunta, idRespuesta, idPregunta],
+                                                                            "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
+                                                                            [user, "plata", "Buena respuesta", idPregunta, idRespuesta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -826,8 +826,8 @@ class DAOPreguntas {
                                                                     }
                                                                     else if (puntosAux == 1 || puntosAux == 0) {
                                                                         connection.query(
-                                                                            "DELETE FROM medallas WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? AND idPreguntaRespuesta= ? ;",
-                                                                            [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta, idPregunta],
+                                                                            "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
+                                                                            [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -844,8 +844,8 @@ class DAOPreguntas {
                                                                     }
                                                                 } else {
                                                                     connection.query(
-                                                                        "INSERT INTO medallas (user,tipo,nombre,idPregunta,idPreguntaRespuesta, idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                                                                        [user, tipo, nombre, idPregunta,idPregunta, idRespuesta, fecha],
+                                                                        "INSERT INTO medallasrespuesta (user,tipo,nombre,idPregunta, idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
+                                                                        [user, tipo, nombre, idPregunta, idRespuesta, fecha],
                                                                         function (err, rows) {
                                                                             connection.release(); // devolver al pool la conexión
                                                                             if (err) {
@@ -1125,8 +1125,18 @@ class DAOPreguntas {
                                                     }
                                                 );
                                             });
-                                            connection.release(); // devolver al pool la conexión
-                                            callback(null, true);
+                                            connection.query(
+                                                "INSERT INTO pregunta_y_respuesta (idpregunta,idPrespuesta,idrespuesta) VALUES (?, ?, ?)",
+                                                [id, 0, 0],
+                                                function (err, rows) {
+                                                    if (err) {
+                                                        callback(new Error("Error de acceso a la base de datos"));
+                                                    } else {
+                                                        connection.release(); // devolver al pool la conexión
+                                                        callback(null, true);
+                                                    }
+                                                }
+                                            );
                                         }
                                     }
                                 );
@@ -1172,7 +1182,18 @@ class DAOPreguntas {
                                                 if (err) {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
-                                                    callback(null, true);
+                                                    connection.query(
+                                                        "INSERT INTO pregunta_y_respuesta (idpregunta,idPrespuesta,idrespuesta) VALUES (?, ?, ?)",
+                                                        [idPregunta, idPregunta, id],
+                                                        function (err, rows) {
+                                                            connection.release(); // devolver al pool la conexión
+                                                            if (err) {
+                                                                callback(new Error("Error de acceso a la base de datos"));
+                                                            } else {
+                                                                callback(null, true);
+                                                            }
+                                                        }
+                                                    );
                                                 }
                                             }
                                         );
@@ -1186,14 +1207,14 @@ class DAOPreguntas {
     }
 
 
-getEstaPuntuada(id, idRP, idR, email, callback) { // preguntar si puede ser un pregunta sin tag
+    getPreguntaEstaPuntuada(id, email, callback) { // preguntar si puede ser un pregunta sin tag
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * from puntos WHERE idPregunta= ? AND idPreguntaRespuesta= ? AND idRespuesta= ? AND user= ?",
-                    [id, idRP, idR, email],
+                    "SELECT * from puntosPregunta WHERE idPregunta= ? AND user= ?",
+                    [id, email],
                     function (err, rows) {
                         connection.release(); // devolver al pool la conexión
                         if (err) {
@@ -1211,22 +1232,26 @@ getEstaPuntuada(id, idRP, idR, email, callback) { // preguntar si puede ser un p
         });
     }
 
-    getPuntuado(email, idPregunta, idPreguntaRespuesta, idRespuesta, puntos, callback) {
+
+
+
+
+    getRepuestaPuntuada(email, idPregunta, idRespuesta, puntos, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT  * FROM puntos WHERE idPregunta = ? AND idPreguntaRespuesta = ? AND idRespuesta = ? AND user = ?",
-                    [idPregunta,idPreguntaRespuesta, idRespuesta, email],
+                    "SELECT  * FROM puntosrespuesta WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",
+                    [idPregunta, idRespuesta, email],
                     function (err, rows) {
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else { //si no ha habido voto
                             if (rows.length === 0) {
                                 connection.query(
-                                    "INSERT INTO puntos (idPregunta,idPreguntaRespuesta,idRespuesta,user,punto) VALUES (?, ?, ?, ?, ?)",
-                                    [idPregunta,idPreguntaRespuesta, idRespuesta, email, puntos],
+                                    "INSERT INTO puntosrespuesta (idPregunta,idRespuesta,user,punto) VALUES (?, ?, ?, ?)",
+                                    [idPregunta, idRespuesta, email, puntos],
                                     function (err, rows) {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
@@ -1237,15 +1262,73 @@ getEstaPuntuada(id, idRP, idR, email, callback) { // preguntar si puede ser un p
                                 );
                             } else {
                                 connection.query(
-                                    "SELECT  * FROM puntos WHERE idPregunta = ? AND idPreguntaRespuesta= ? AND idRespuesta = ? AND user = ? AND punto = ?",
-                                    [idPregunta,idPreguntaRespuesta, idRespuesta, email, puntos],
+                                    "SELECT  * FROM puntosrespuesta WHERE idPregunta = ? AND idRespuesta = ? AND user = ? AND punto = ?",
+                                    [idPregunta, idRespuesta, email, puntos],
                                     function (err, rows) {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else if (rows.length === 0) {
                                             connection.query(
-                                                "UPDATE puntos SET punto = ? WHERE idPregunta = ? AND idPreguntaRespuesta= ? AND idRespuesta = ? AND user = ?",
-                                                [puntos,idPregunta, idPreguntaRespuesta, idRespuesta, email],
+                                                "UPDATE puntosrespuesta SET punto = ? WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",
+                                                [puntos,idPregunta, idRespuesta, email],
+                                                function (err, rows) {
+                                                    if (err) {
+                                                        callback(new Error("Error de acceso a la base de datos"));
+                                                    } else {
+                                                        callback(null, "Update");
+                                                    }
+                                                }
+                                            );
+                                        } else { //si ya ha puntuado like
+                                            callback(null, "Nada");
+                                        }
+                                    }
+                                );
+                            }
+
+                        }
+                    }
+                );
+                connection.release(); // devolver al pool la conexión
+            }
+        });
+    }
+
+    getPreguntaPuntuada(email, idPregunta, puntos, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(new Error("Error de conexión a la base de datos"));
+            } else {
+                connection.query(
+                    "SELECT  * FROM puntospregunta WHERE idPregunta = ? AND user = ?",
+                    [idPregunta, email],
+                    function (err, rows) {
+                        if (err) {
+                            callback(new Error("Error de acceso a la base de datos"));
+                        } else { //si no ha habido voto
+                            if (rows.length === 0) {
+                                connection.query(
+                                    "INSERT INTO puntospregunta (idPregunta,user,punto) VALUES (?, ?, ?)",
+                                    [idPregunta, email, puntos],
+                                    function (err, rows) {
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else {
+                                            callback(null, "Insertar");
+                                        }
+                                    }
+                                );
+                            } else {
+                                connection.query(
+                                    "SELECT  * FROM puntospregunta WHERE idPregunta = ? AND user = ? AND punto = ?",
+                                    [idPregunta, email, puntos],
+                                    function (err, rows) {
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else if (rows.length === 0) {
+                                            connection.query(
+                                                "UPDATE puntospregunta SET punto = ? WHERE idPregunta = ? AND user = ?",
+                                                [puntos,idPregunta, email],
                                                 function (err, rows) {
                                                     if (err) {
                                                         callback(new Error("Error de acceso a la base de datos"));

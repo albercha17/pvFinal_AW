@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2021 a las 20:12:34
+-- Tiempo de generación: 03-12-2021 a las 11:56:25
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -49,16 +49,29 @@ INSERT INTO `etiqueta` (`idPregunta`, `tag`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `medallas`
+-- Estructura de tabla para la tabla `medallaspregunta`
 --
 
-CREATE TABLE `medallas` (
+CREATE TABLE `medallaspregunta` (
   `user` varchar(100) NOT NULL,
   `tipo` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `idPregunta` int(11) NOT NULL,
-  `idPreguntaRespuesta` int(11) DEFAULT 0,
-  `idRespuesta` int(11) DEFAULT 0,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `medallasrespuesta`
+--
+
+CREATE TABLE `medallasrespuesta` (
+  `user` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `idPregunta` int(11) NOT NULL,
+  `idRespuesta` int(11) NOT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,13 +105,24 @@ INSERT INTO `pregunta` (`id`, `titulo`, `cuerpo`, `autor`, `visitas`, `puntos`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `puntos`
+-- Estructura de tabla para la tabla `puntospregunta`
 --
 
-CREATE TABLE `puntos` (
+CREATE TABLE `puntospregunta` (
   `idPregunta` int(11) NOT NULL,
-  `idPreguntaRespuesta` int(11) DEFAULT 0,
-  `idRespuesta` int(11) DEFAULT 0,
+  `user` varchar(100) NOT NULL,
+  `punto` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puntosrespuesta`
+--
+
+CREATE TABLE `puntosrespuesta` (
+  `idPregunta` int(11) NOT NULL,
+  `idRespuesta` int(11) NOT NULL,
   `user` varchar(100) NOT NULL,
   `punto` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -184,11 +208,17 @@ ALTER TABLE `etiqueta`
   ADD PRIMARY KEY (`idPregunta`,`tag`);
 
 --
--- Indices de la tabla `medallas`
+-- Indices de la tabla `medallaspregunta`
 --
-ALTER TABLE `medallas`
-  ADD PRIMARY KEY (`user`,`tipo`,`nombre`,`idPregunta`,`idPreguntaRespuesta`,`idRespuesta`),
-  ADD KEY `pregunta_medalla` (`idPregunta`),
+ALTER TABLE `medallaspregunta`
+  ADD PRIMARY KEY (`user`,`tipo`,`nombre`,`idPregunta`),
+  ADD KEY `pregunta_medalla` (`idPregunta`);
+
+--
+-- Indices de la tabla `medallasrespuesta`
+--
+ALTER TABLE `medallasrespuesta`
+  ADD PRIMARY KEY (`user`,`tipo`,`nombre`,`idPregunta`,`idRespuesta`),
   ADD KEY `respuesta_medalla` (`idPregunta`,`idRespuesta`);
 
 --
@@ -199,11 +229,18 @@ ALTER TABLE `pregunta`
   ADD KEY `autor_pregunta` (`autor`);
 
 --
--- Indices de la tabla `puntos`
+-- Indices de la tabla `puntospregunta`
 --
-ALTER TABLE `puntos`
-  ADD PRIMARY KEY (`idPregunta`,`idPreguntaRespuesta`,`idRespuesta`,`user`),
+ALTER TABLE `puntospregunta`
+  ADD PRIMARY KEY (`idPregunta`,`user`),
   ADD KEY `autor_p_r` (`user`);
+
+--
+-- Indices de la tabla `puntosrespuesta`
+--
+ALTER TABLE `puntosrespuesta`
+  ADD PRIMARY KEY (`idPregunta`,`idRespuesta`),
+  ADD KEY `puntosR_de` (`user`);
 
 --
 -- Indices de la tabla `respuesta`
@@ -235,11 +272,18 @@ ALTER TABLE `etiqueta`
   ADD CONSTRAINT `etiqueta_de` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `medallas`
+-- Filtros para la tabla `medallaspregunta`
 --
-ALTER TABLE `medallas`
-  ADD CONSTRAINT `medalla_de` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+ALTER TABLE `medallaspregunta`
+  ADD CONSTRAINT `autorMedallaP` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pregunta_medalla` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `medallasrespuesta`
+--
+ALTER TABLE `medallasrespuesta`
+  ADD CONSTRAINT `autor_respuestaP` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `respuesta_medalla` FOREIGN KEY (`idPregunta`,`idRespuesta`) REFERENCES `respuesta` (`idPregunta`, `id`);
 
 --
 -- Filtros para la tabla `pregunta`
@@ -248,17 +292,18 @@ ALTER TABLE `pregunta`
   ADD CONSTRAINT `autor_pregunta` FOREIGN KEY (`autor`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `puntos`
+-- Filtros para la tabla `puntospregunta`
 --
-ALTER TABLE `puntos`
-  ADD CONSTRAINT `autor_p_r` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pregunta_puntos` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `puntospregunta`
+  ADD CONSTRAINT `pr_puntos` FOREIGN KEY (`idPregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `puntosP_de` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `respuesta`
+-- Filtros para la tabla `puntosrespuesta`
 --
-ALTER TABLE `respuesta`
-  ADD CONSTRAINT `autor_respuesta` FOREIGN KEY (`autor`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `puntosrespuesta`
+  ADD CONSTRAINT `puntosR_de` FOREIGN KEY (`user`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `r_puntos` FOREIGN KEY (`idPregunta`,`idRespuesta`) REFERENCES `respuesta` (`idPregunta`, `id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
