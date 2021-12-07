@@ -1179,18 +1179,7 @@ class DAOPreguntas {
                                                 if (err) {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
-                                                    connection.query(
-                                                        "INSERT INTO pregunta_y_respuesta (idpregunta,idPrespuesta,idrespuesta) VALUES (?, ?, ?)",
-                                                        [idPregunta, idPregunta, id],
-                                                        function (err, rows) {
-                                                            connection.release(); // devolver al pool la conexión
-                                                            if (err) {
-                                                                callback(new Error("Error de acceso a la base de datos"));
-                                                            } else {
-                                                                callback(null, true);
-                                                            }
-                                                        }
-                                                    );
+                                                    callback(null, true);
                                                 }
                                             }
                                         );

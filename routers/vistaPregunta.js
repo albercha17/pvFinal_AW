@@ -132,8 +132,8 @@ router.get("/PuntuarRespuesta/:id", function (request, response) {
   });
 });
 
-router.get("/CrearRespuesta/:id", function (request, response) {
-  DAOPregunta.insertRespuesta(request.params.id, request.query.texto, request.session.email, function buscarNombre(err, result) {
+router.post("/CrearRespuesta/:id", function (request, response) {
+  DAOPregunta.insertRespuesta(request.params.id, request.body.texto, request.session.email, function buscarNombre(err, result) {
     if (err) {
       response.status(500);
     } else if (result) {

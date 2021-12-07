@@ -130,7 +130,7 @@ app.get("/usuario/:email",identificador,router_verUsuario);
 // router_verPregunta
 app.get("/preguntaInfo/:id",identificador,router_verPregunta);
 app.get("/pregunta/:id",identificador,router_verPregunta);
-app.get("/CrearRespuesta/:id",identificador,router_verPregunta);
+app.post("/CrearRespuesta/:id",identificador,router_verPregunta);
 app.get("/PuntuarPregunta/:id",identificador,router_verPregunta);
 app.get("/PuntuarRespuesta/:id",identificador,router_verPregunta);
 //Errores
