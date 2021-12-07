@@ -1114,6 +1114,7 @@ class DAOPreguntas {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else {
+                                            var i=0;
                                             etiquetas.forEach(etiqueta => {
                                                 connection.query(
                                                     "INSERT INTO etiqueta (idPregunta ,tag) VALUES (?, ?)",
@@ -1122,21 +1123,17 @@ class DAOPreguntas {
                                                         if (err) {
                                                             callback(new Error("Error de acceso a la base de datos"));
                                                         }
+                                                        
                                                     }
                                                 );
+                                                i++;
                                             });
-                                            connection.query(
-                                                "INSERT INTO pregunta_y_respuesta (idpregunta,idPrespuesta,idrespuesta) VALUES (?, ?, ?)",
-                                                [id, 0, 0],
-                                                function (err, rows) {
-                                                    if (err) {
-                                                        callback(new Error("Error de acceso a la base de datos"));
-                                                    } else {
-                                                        connection.release(); // devolver al pool la conexión
-                                                        callback(null, true);
-                                                    }
-                                                }
-                                            );
+                                            if(i==etiquetas.length){
+                                                connection.release(); // devolver al pool la conexión
+                                                callback(null, true);
+                                            }
+                                                
+                                            
                                         }
                                     }
                                 );

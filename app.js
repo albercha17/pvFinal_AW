@@ -10,6 +10,9 @@ const {
 } = require("express");
 const app = express();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+
 //-------------------------------------------------------PLANTILLAS------------------------------------
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -89,7 +92,7 @@ function identificador(request, response, next) {
 app.get("/login",router_user);
 app.get("/loguearse",router_user);
 app.get("/SingUp",router_user);
-app.get("/crearUsuario",router_user);
+app.post("/crearUsuario",router_user);
 
 
 //router_inicio
@@ -116,7 +119,7 @@ app.get("/filtrarVisitasSR",identificador,router_pSR);
 // router router_crearPregunta
 
 app.get("/FormularPregunta",identificador,router_crearPregunta);
-app.get("/CrearPregunta",identificador,router_crearPregunta);
+app.post("/CrearPregunta",identificador,router_crearPregunta);
 
 
 // router_verUsuario

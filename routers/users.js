@@ -83,20 +83,21 @@ router.get("/loguearse", function (request, response) {
 
 //--------------------------------------  crear usuario ---------------------------------------------------------
 
-router.get("/crearUsuario", function (request, response) {
+router.post("/crearUsuario", function (request, response) {
   //validar datos
-  var img = imagenPerfil(request.query.img);
+
+  var img = imagenPerfil(request.body.img);
   var datosValidados = validarDatos(
-    request.query.email,
-    request.query.password,
-    request.query.password_r
+    request.body.email,
+    request.body.password,
+    request.body.password_r
   );
 
   if (datosValidados) {
     daoUser.insertUser(
-      request.query.email,
-      request.query.password,
-      request.query.nombre,
+      request.body.email,
+      request.body.password,
+      request.body.nombre,
       img,
       function crearusuario(err, result) {
         if (err) {

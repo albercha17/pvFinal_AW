@@ -26,9 +26,9 @@ router.use(express.static(__dirname + '/public'));
         error: error,
       });
   });
-  router.get("/CrearPregunta", function (request, response) {
-      var validarD= validarDatos(request.query.titulo,request.query.cuerpo);
-      var validarEiquetas=validarEiqueta(request.query.etiquetas);
+  router.post("/CrearPregunta", function (request, response) {
+      var validarD= validarDatos(request.body.titulo,request.body.cuerpo);
+      var validarEiquetas=validarEiqueta(request.body.etiquetas);
       if(!validarD || !validarEiquetas){
         response.status(200);
         response.render("crearPregunta", {
@@ -41,7 +41,7 @@ router.use(express.static(__dirname + '/public'));
           Etiquetas= new Array();
       }
       else{
-        DAOP.insertPregunta(request.session.email,request.query.titulo,request.query.cuerpo,Etiquetas,function buscarNombre(err, result) {
+        DAOP.insertPregunta(request.session.email,request.body.titulo,request.body.cuerpo,Etiquetas,function buscarNombre(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {
