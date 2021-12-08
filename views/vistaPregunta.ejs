@@ -253,7 +253,14 @@
                                                     </form>
                                                      <% } ; %>
                                     <p id="puntos"> Votos: <%= respuesta.puntos%></p>
+                                    <% if(respuesta.votado=="-1"){ %>
+                                        <p class="text-center" id="votadoD">Ya has votado negativamente esta respuesta.</p>
+                                    <% } ; %>
+                                    <% if(respuesta.votado=="1"){ %>
+                                        <p class="text-center" id="votadoL">Ya has votado positivamente esta respuesta</p>
+                                    <% } ; %>
                                     </div>
+                                    
                                            
                                     </div>
                                 </div>
