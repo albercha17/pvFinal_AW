@@ -304,7 +304,7 @@ class DAOPreguntas {
                                                                     if (puntosAux == 5) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
-                                                                            [user, "oro", "Excelente pregunta", idPregunta,],
+                                                                            [user, "oro", "Excelente pregunta", idPregunta, ],
                                                                             function (err, rows) {
                                                                                 connection.release(); // devolver al pool la conexión
                                                                                 if (err) {
@@ -314,8 +314,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 3) {
+                                                                    } else if (puntosAux == 3) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
                                                                             [user, "plata", "Buena pregunta", idPregunta],
@@ -328,8 +327,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 1) {
+                                                                    } else if (puntosAux == 1) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
                                                                             [user, "bronce", "Pregunta interesante", idPregunta],
@@ -342,8 +340,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 0) {
+                                                                    } else if (puntosAux == 0) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
                                                                             [user, "bronce", "Estudiante", idPregunta],
@@ -356,8 +353,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else{
+                                                                    } else {
                                                                         connection.release(); // devolver al pool la conexión
                                                                         callback(null, true); //no está el usuario con el password proporcionado
                                                                     }
@@ -474,8 +470,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 3 || puntosAux == 2) {
+                                                                    } else if (puntosAux == 3 || puntosAux == 2) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
                                                                             [user, "plata", "Buena pregunta", idPregunta],
@@ -488,8 +483,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 1 || puntosAux == 0) {
+                                                                    } else if (puntosAux == 1 || puntosAux == 0) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
                                                                             [user, "bronce", "Pregunta interesante", idPregunta],
@@ -512,16 +506,14 @@ class DAOPreguntas {
                                                                                                 }
                                                                                             }
                                                                                         );
-                                                                                    }
-                                                                                    else{
+                                                                                    } else {
                                                                                         connection.release(); // devolver al pool la conexión
                                                                                         callback(null, true);
                                                                                     }
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == -1) {
+                                                                    } else if (puntosAux == -1) {
                                                                         connection.query(
                                                                             "DELETE FROM medallaspregunta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ?;",
                                                                             [user, "bronce", "Estudiante", idPregunta],
@@ -535,8 +527,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else{
+                                                                    } else {
                                                                         connection.release(); // devolver al pool la conexión
                                                                         callback(null, true); //no está el usuario con el password proporcionado
                                                                     }
@@ -548,7 +539,7 @@ class DAOPreguntas {
                                                                             if (err) {
                                                                                 callback(null, true);
                                                                             } else {
-                                                                                if(puntosAux==2){
+                                                                                if (puntosAux == 2) {
                                                                                     connection.query(
                                                                                         "INSERT INTO medallaspregunta (user,tipo,nombre,idPregunta, fecha) VALUES (?, ?, ?, ?, ?)",
                                                                                         [user, "bronce", "Estudiante", idPregunta, fecha],
@@ -561,12 +552,11 @@ class DAOPreguntas {
                                                                                             }
                                                                                         }
                                                                                     );
-                                                                                }
-                                                                                else{
+                                                                                } else {
                                                                                     connection.release(); // devolver al pool la conexión
                                                                                     callback(null, true); //no está el usuario con el password proporcionado
                                                                                 }
-                                                                                
+
                                                                             }
                                                                         }
                                                                     );
@@ -664,8 +654,7 @@ class DAOPreguntas {
                                                                                     }
                                                                                 }
                                                                             );
-                                                                        }
-                                                                        else if (puntosAux == 3) {
+                                                                        } else if (puntosAux == 3) {
                                                                             connection.query(
                                                                                 "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
                                                                                 [user, "plata", "Buena respuesta", idPregunta, idRespuesta],
@@ -678,8 +667,7 @@ class DAOPreguntas {
                                                                                     }
                                                                                 }
                                                                             );
-                                                                        }
-                                                                        else if (puntosAux == 1) {
+                                                                        } else if (puntosAux == 1) {
                                                                             connection.query(
                                                                                 "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
                                                                                 [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta],
@@ -692,8 +680,7 @@ class DAOPreguntas {
                                                                                     }
                                                                                 }
                                                                             );
-                                                                        }
-                                                                        else{
+                                                                        } else {
                                                                             connection.release(); // devolver al pool la conexión
                                                                             callback(null, true); //no está el usuario con el password proporcionado
                                                                         }
@@ -809,8 +796,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 3 || puntosAux == 2) {
+                                                                    } else if (puntosAux == 3 || puntosAux == 2) {
                                                                         connection.query(
                                                                             "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ?;",
                                                                             [user, "plata", "Buena respuesta", idPregunta, idRespuesta],
@@ -823,8 +809,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else if (puntosAux == 1 || puntosAux == 0) {
+                                                                    } else if (puntosAux == 1 || puntosAux == 0) {
                                                                         connection.query(
                                                                             "DELETE FROM medallasrespuesta WHERE user=? AND tipo=? AND nombre=? AND idPregunta= ? AND idRespuesta= ? ;",
                                                                             [user, "bronce", "Respuesta interesante", idPregunta, idRespuesta],
@@ -837,8 +822,7 @@ class DAOPreguntas {
                                                                                 }
                                                                             }
                                                                         );
-                                                                    }
-                                                                    else{
+                                                                    } else {
                                                                         connection.release(); // devolver al pool la conexión
                                                                         callback(null, true); //no está el usuario con el password proporcionado
                                                                     }
@@ -896,7 +880,7 @@ class DAOPreguntas {
             }
         });
     }
-    getRespuestaId(id, callback) {
+    getRespuestaId(id, user, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -905,7 +889,6 @@ class DAOPreguntas {
                     "SELECT * FROM respuesta WHERE idPregunta= ? ORDER BY puntos DESC",
                     [id],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
@@ -913,11 +896,35 @@ class DAOPreguntas {
                                 var lista = new Array();
                                 callback(null, lista);
                             } else {
+                                var i = 0;
                                 rows.forEach(function (row) {
                                     var fecha = row.fecha.toDateString();
                                     row.fecha = fecha;
+                                    connection.query(
+                                        "SELECT * FROM puntosRespuesta WHERE idPregunta= ? AND idRespuesta= ? AND user= ?",
+                                        [id, row.id, user],
+                                        function (err, rows1) {
+                                            if (err) {
+                                                callback(new Error("Error de acceso a la base de datos"));
+                                            } else {
+                                                if (rows1.length === 0) {
+                                                    row.votado = "NO";
+                                                } else {
+                                                    if (rows1[0].punto == '1') {
+                                                        row.votado = "1";
+                                                    } else row.votado = "-1";
+                                                }
+                                            }
+                                            i++;
+
+                                            if (i == rows.length) {
+                                                connection.release(); // devolver al pool la conexión
+                                                callback(null, rows);
+                                            }
+                                        }
+                                    );
                                 });
-                                callback(null, rows);
+
                             }
                         }
                     }
@@ -1114,7 +1121,7 @@ class DAOPreguntas {
                                         if (err) {
                                             callback(new Error("Error de acceso a la base de datos"));
                                         } else {
-                                            var i=0;
+                                            var i = 0;
                                             etiquetas.forEach(etiqueta => {
                                                 connection.query(
                                                     "INSERT INTO etiqueta (idPregunta ,tag) VALUES (?, ?)",
@@ -1123,17 +1130,17 @@ class DAOPreguntas {
                                                         if (err) {
                                                             callback(new Error("Error de acceso a la base de datos"));
                                                         }
-                                                        
+
                                                     }
                                                 );
                                                 i++;
                                             });
-                                            if(i==etiquetas.length){
+                                            if (i == etiquetas.length) {
                                                 connection.release(); // devolver al pool la conexión
                                                 callback(null, true);
                                             }
-                                                
-                                            
+
+
                                         }
                                     }
                                 );
@@ -1256,7 +1263,7 @@ class DAOPreguntas {
                                         } else if (rows.length === 0) {
                                             connection.query(
                                                 "UPDATE puntosrespuesta SET punto = ? WHERE idPregunta = ? AND idRespuesta = ? AND user = ?",
-                                                [puntos,idPregunta, idRespuesta, email],
+                                                [puntos, idPregunta, idRespuesta, email],
                                                 function (err, rows) {
                                                     if (err) {
                                                         callback(new Error("Error de acceso a la base de datos"));
@@ -1314,7 +1321,7 @@ class DAOPreguntas {
                                         } else if (rows.length === 0) {
                                             connection.query(
                                                 "UPDATE puntospregunta SET punto = ? WHERE idPregunta = ? AND user = ?",
-                                                [puntos,idPregunta, email],
+                                                [puntos, idPregunta, email],
                                                 function (err, rows) {
                                                     if (err) {
                                                         callback(new Error("Error de acceso a la base de datos"));

@@ -28,7 +28,7 @@ router.get("/preguntaInfo/:id", function (request, response) {
     } else if (result) {
       var preguntas = result;
       var pregunta = preguntas[0];
-      DAOPregunta.getRespuestaId(pregunta.id, function buscarNombre(err, result) {
+      DAOPregunta.getRespuestaId(pregunta.id, request.session.email, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
