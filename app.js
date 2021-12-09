@@ -8,6 +8,9 @@ const {
 const {
     response
 } = require("express");
+const multer  = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -103,7 +106,7 @@ app.get("/filtrarVisitas",identificador,router_inicio);
 app.get("/desconectarse",identificador,router_inicio);
 app.get("/BuscarEtiqueta",identificador,router_inicio);
 app.get("/BuscarTexto",identificador,router_inicio);
-
+app.get("/imagen/:email",router_inicio);
 //router usuarios
 app.get("/usuarios",identificador,router_usuarios);
 app.get("/BuscarUsuario",identificador,router_usuarios);

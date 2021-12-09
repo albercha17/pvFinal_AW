@@ -3,6 +3,10 @@ var router = express.Router(); // creo el router
 const path = require("path");
 const { request } = require("http");
 const { response } = require("express");
+
+const multer  = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 //DAOS   -----------------------------------------------------
 
 const FactoryDao = require("../JS/FactoriaDao");
@@ -83,10 +87,15 @@ router.get("/loguearse", function (request, response) {
 
 //--------------------------------------  crear usuario ---------------------------------------------------------
 
-router.post("/crearUsuario", function (request, response) {
+router.post("/crearUsuario", upload.single('img') ,function (request, response) {
   //validar datos
-
-  var img = imagenPerfil(request.body.img);
+  if(request.file){
+    var img= request.file.buffer;
+  }
+  else{
+    var img = imagenPerfil();
+  }
+  
   var datosValidados = validarDatos(
     request.body.email,
     request.body.password,
@@ -152,24 +161,14 @@ function validarEmail(email) {
   } else return true;
 }
 
-function imagenPerfil(img) {
-  if (img) {
-    return img;
-  } else {
+function imagenPerfil() {
     var listaImagenes = [
-      "/Images/sfg.png",
-      "/Images/roberto.png",
-      "/Images/nico.png",
-      "/Images/marta.png",
-      "/Images/kuroko.png",
       "/Images/defecto3.png",
       "/Images/defecto2.png",
       "/Images/defecto1.png",
-      "/Images/amy.png",
     ];
     var numero = Math.floor(Math.random() * (listaImagenes.length - 0));
     return listaImagenes[numero];
-  }
 }
 
 module.exports = router;

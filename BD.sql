@@ -180,7 +180,7 @@ CREATE TABLE `user` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
-  `img` varchar(100) DEFAULT NULL,
+  `img` MEDIUMBLOB DEFAULT NULL,
   `reputacion` int(11) DEFAULT 1,
   `fechaAlta` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

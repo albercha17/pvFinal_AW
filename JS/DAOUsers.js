@@ -527,5 +527,27 @@ class DAOUsers {
             }
         });
     }
+
+    obtenerImagen(id, callback) {
+        this.pool.getConnection(function(err, con) {
+        if (err)
+        callback(err);
+        else {
+        let sql = "SELECT img FROM user WHERE email = ?";
+        con.query(sql, [id], function(err, result) {
+        con.release();
+        if (err) {
+        callback(err);
+        } else
+        // Comprobar si existe una persona con el Id dado.
+        if (result.length === 0)
+        callback("No existe");
+        else
+        callback(null, result[0].img);
+        });
+        }
+        });
+        }
+        
 }
 module.exports = DAOUsers

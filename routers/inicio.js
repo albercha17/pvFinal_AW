@@ -8,6 +8,7 @@ const { response } = require("express");
 
 const FactoryDao = require("../JS/FactoriaDao");
 const DAOP= FactoryDao.getDaoPregunta();
+const DAOR= FactoryDao.getDaoUsers();
 
 var filtroE =null;
 var filtroC =null;
@@ -19,7 +20,17 @@ var filtroC =null;
 router.get("/", function (request, response) {
     response.redirect("/inicio");
   });
-
+router.get("/imagen/:email", function(request, response) {
+  DAOR.obtenerImagen(request.params.email, function(err, imagen) {
+    if (imagen) {
+    response.end(imagen);
+    } else {
+    response.status(404);
+    response.end("Not found");
+    }
+    });
+    });
+    
   router.get("/inicio", function (request, response) {
     var preguntas= new Array();
     filtroE =null;
@@ -29,15 +40,23 @@ router.get("/", function (request, response) {
         response.status(500);
       } else if (result) {
         preguntas = result;
-        response.status(200);
-        response.render("inicio", {
+        
+        DAOR.obtenerImagen(request.session.email,(function buscarNombre(err, result) {
+          if (err) {
+            response.status(500);
+          } else if (result) {
+            var img= result;
+            response.status(200);
+          response.render("inicio", {
           nombre: request.session.nombre,
           email:request.session.email,
-          img:request.session.img,
           preguntas: preguntas, 
           filtroE : filtroE,
           filtroC : filtroC,
         });
+          }
+        }));
+        
       }
       else{
         response.status(200);

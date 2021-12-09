@@ -289,7 +289,9 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                    if (puntos == 1) nuevaReputacion += 10;
+
+                                                    if (puntos == 1 && rows[0].reputacion>1 ) nuevaReputacion += 10;
+                                                    else if (puntos == 1 && rows[0].reputacion==1 ) nuevaReputacion += 9;
                                                     else if (puntos == -1) nuevaReputacion -= 2;
                                                     if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
@@ -444,7 +446,7 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                    if (rows[0].reputacion == 1 && puntos == 1) nuevaReputacion += 10;
+                                                    if (puntos == 1 && rows[0].reputacion==1 ) nuevaReputacion += 9;
                                                     else if (puntos == 1) nuevaReputacion += 12;
                                                     else if (puntos == -1) nuevaReputacion -= 12;
                                                     if (nuevaReputacion < 1) nuevaReputacion = 1;
@@ -628,7 +630,8 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                    if (puntos == 1) nuevaReputacion += 10;
+                                                    if (puntos == 1 && rows[0].reputacion>1 ) nuevaReputacion += 10;
+                                                    else if (puntos == 1 && rows[0].reputacion==1 ) nuevaReputacion += 9;
                                                     else if (puntos == -1) nuevaReputacion -= 2;
                                                     if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
@@ -771,7 +774,8 @@ class DAOPreguntas {
                                                     callback(new Error("Error de acceso a la base de datos"));
                                                 } else {
                                                     var nuevaReputacion = rows[0].reputacion;
-                                                    if (puntos == 1) nuevaReputacion += 12;
+                                                    if (puntos == 1 && rows[0].reputacion>1 ) nuevaReputacion += 12;
+                                                    else if (puntos == 1 && rows[0].reputacion==1 ) nuevaReputacion += 9;
                                                     else if (puntos == -1) nuevaReputacion -= 12;
                                                     if (nuevaReputacion < 1) nuevaReputacion = 1;
                                                     connection.query(
