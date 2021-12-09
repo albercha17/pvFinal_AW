@@ -1113,10 +1113,11 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, false); //no está el usuario con el password proporcionado
+                                var id = 1;
                             } else {
                                 var id = rows[0].id;
                                 id++;
+                            }
                                 var hoy = moment().format("YYYY-MM-DD");
                                 connection.query(
                                     "INSERT INTO pregunta (id,titulo,cuerpo,autor,fecha) VALUES (?, ?, ?, ?, ?)",
@@ -1148,7 +1149,6 @@ class DAOPreguntas {
                                         }
                                     }
                                 );
-                            }
                         }
                     }
                 );

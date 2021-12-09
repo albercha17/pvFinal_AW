@@ -3,7 +3,7 @@ var router = express.Router(); // creo el router
 const path = require("path");
 const { request } = require("http");
 const { response } = require("express");
-
+const fs = require('fs');
 const multer  = require('multer')
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
@@ -163,12 +163,13 @@ function validarEmail(email) {
 
 function imagenPerfil() {
     var listaImagenes = [
-      "/Images/defecto3.png",
-      "/Images/defecto2.png",
-      "/Images/defecto1.png",
+      "public/Images/defecto3.png",
+      "public/Images/defecto2.png",
+      "public/Images/defecto1.png",
     ];
     var numero = Math.floor(Math.random() * (listaImagenes.length - 0));
-    return listaImagenes[numero];
+    let buf = fs.readFileSync(listaImagenes[numero]);
+    return buf;
 }
 
 module.exports = router;

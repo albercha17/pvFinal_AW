@@ -45,6 +45,10 @@ const cookieParser=require("cookie-parser")
 app.use(cookieParser());
 
 
+//DAOS
+const FactoryDao = require("./JS/FactoriaDao");
+const DAOR= FactoryDao.getDaoUsers();
+
 //-----------------------------------------------------------------------------------------------------
 //-------------------------- ROUTERS---------------------
 var router_user = require("./routers/users")
@@ -106,7 +110,7 @@ app.get("/filtrarVisitas",identificador,router_inicio);
 app.get("/desconectarse",identificador,router_inicio);
 app.get("/BuscarEtiqueta",identificador,router_inicio);
 app.get("/BuscarTexto",identificador,router_inicio);
-app.get("/imagen/:email",router_inicio);
+
 //router usuarios
 app.get("/usuarios",identificador,router_usuarios);
 app.get("/BuscarUsuario",identificador,router_usuarios);
@@ -137,6 +141,18 @@ app.post("/CrearRespuesta/:id",identificador,router_verPregunta);
 app.get("/PuntuarPregunta/:id",identificador,router_verPregunta);
 app.get("/PuntuarRespuesta/:id",identificador,router_verPregunta);
 //Errores
+
+app.get("/imagen/:email", function(request, response) {
+    DAOR.obtenerImagen(request.params.email, function(err, imagen) {
+      if (imagen) {
+      response.end(imagen);
+      } else {
+      response.status(404);
+      response.end("Not found");
+      }
+      });
+      });
+
 
 app.use(middelware404Error);
 app.use(middelware500Error);
