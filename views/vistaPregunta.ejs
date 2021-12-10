@@ -104,7 +104,7 @@
                                         <a id="visitas"><i class="bi bi-eye"></i>
                                             Visitas: <%= pregunta.visitas%></a>
                                             <% if(votadoN==null){ %>
-                                                <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>"
+                                                <form method="post" action="/PuntuarPregunta/<%= pregunta.id%>"
                                                     id="formDislike">
                                                     <input type="hidden" name="puntos" value=-1>
                                                     <input type="hidden" name="email" value= <%= pregunta.autor%>>
@@ -120,7 +120,7 @@
                                                             <i class="bi bi-hand-thumbs-down-fill"
                                                                 id="emoteDislike"></i></button>                                        <% } ; %>
                                             <% if(votado==null){ %>
-                                                <form method="get" action="/PuntuarPregunta/<%= pregunta.id%>" id="formDislike">
+                                                <form method="post" action="/PuntuarPregunta/<%= pregunta.id%>" id="formDislike">
                                                     <input type="hidden" name="puntos" value=1>
                                                     <input type="hidden" name="email" value= <%= pregunta.autor%>>
                                                     <button type="submit"
@@ -197,7 +197,7 @@
                                     </div>
                                     <div class="col col-6">
                                         <% if(respuesta.votado=="NO"){ %>
-                                            <form method="get" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>"id="formDislike">
+                                            <form method="post" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>"id="formDislike">
                                                 <input type="hidden" name="puntos" value=-1>
                                                 <input type="hidden" name="id" value= <%= respuesta.id%>>
                                                 <input type="hidden" name="email" value= <%= respuesta.autor%>>
@@ -206,7 +206,7 @@
                                                     <i class="bi bi-hand-thumbs-down"
                                                         id="emoteDislike"></i></button>
                                             </form>
-                                            <form method="get" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>" id="formDislike">
+                                            <form method="post" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>" id="formDislike">
                                                 <input type="hidden" name="puntos" value=1>
                                                 <input type="hidden" name="id" value= <%= respuesta.id%>>
                                                 <input type="hidden" name="email" value= <%= respuesta.autor%>>
@@ -218,7 +218,7 @@
                                              <% } ; %>
 
                                              <% if(respuesta.votado=="1"){ %>
-                                                <form method="get" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>"id="formDislike">
+                                                <form method="post" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>"id="formDislike">
                                                     <input type="hidden" name="puntos" value=-1>
                                                     <input type="hidden" name="id" value= <%= respuesta.id%>>
                                                     <input type="hidden" name="email" value= <%= respuesta.autor%>>
@@ -227,7 +227,7 @@
                                                         <i class="bi bi-hand-thumbs-down"
                                                             id="emoteDislike"></i></button>
                                                 </form>
-                                                <form method="get" action="" id="formDislike">
+                                                <form method="post" action="" id="formDislike">
                                                     <button type="submit"
                                                         id="botonLike">
                                                         <i class="bi bi-hand-thumbs-up-fill"
@@ -236,13 +236,13 @@
                                                  <% } ; %>
 
                                                  <% if(respuesta.votado=="-1"){ %>
-                                                    <form method="get" action=""id="formDislike">
+                                                    <form method="post" action=""id="formDislike">
                                                         <button type="submit"
                                                             id="botonLike">
                                                             <i class="bi bi-hand-thumbs-down-fill"
                                                                 id="emoteDislike"></i></button>
                                                     </form>
-                                                    <form method="get" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>" id="formDislike">
+                                                    <form method="post" action="/PuntuarRespuesta/<%= respuesta.idPregunta%>" id="formDislike">
                                                         <input type="hidden" name="puntos" value=1>
                                                         <input type="hidden" name="id" value= <%= respuesta.id%>>
                                                         <input type="hidden" name="email" value= <%= respuesta.autor%>>

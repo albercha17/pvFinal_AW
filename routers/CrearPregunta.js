@@ -57,11 +57,11 @@ router.use(express.static(__dirname + '/public'));
 
   function validarDatos(titulo, cuerpo) {
     var valido = false;
-    if (titulo.length<10 ||titulo.length>100) {
-      error= "El título tiene que tener por lo menos 10 caracteres y un maximo de 100";
+    if (titulo.length<10 ||titulo.length>200) {
+      error= "El título tiene que tener por lo menos 10 caracteres y un maximo de 200";
     } 
-    else if (cuerpo.length<20 || cuerpo.length>200){
-        error= "El cuerpo tiene que tener por lo menos 20 caracteres y un maximo de 200";
+    else if (cuerpo.length<20 || cuerpo.length>600){
+        error= "El cuerpo tiene que tener por lo menos 20 caracteres y un maximo de 600";
     }
     else valido=true;
     return valido;

@@ -138,8 +138,8 @@ app.get("/usuario/:email",identificador,router_verUsuario);
 app.get("/preguntaInfo/:id",identificador,router_verPregunta);
 app.get("/pregunta/:id",identificador,router_verPregunta);
 app.post("/CrearRespuesta/:id",identificador,router_verPregunta);
-app.get("/PuntuarPregunta/:id",identificador,router_verPregunta);
-app.get("/PuntuarRespuesta/:id",identificador,router_verPregunta);
+app.post("/PuntuarPregunta/:id",identificador,router_verPregunta);
+app.post("/PuntuarRespuesta/:id",identificador,router_verPregunta);
 //Errores
 
 app.get("/imagen/:email", function(request, response) {

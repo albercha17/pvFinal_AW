@@ -71,14 +71,14 @@ router.get("/pregunta/:id", function (request, response) {
 });
 
 
-router.get("/PuntuarPregunta/:id", function (request, response) {
+router.post("/PuntuarPregunta/:id", function (request, response) {
   votadoN = null;
   votado = null;
-  DAOPregunta.getPreguntaPuntuada(request.session.email, request.params.id, request.query.puntos, function buscarNombre(err, result) {
+  DAOPregunta.getPreguntaPuntuada(request.session.email, request.params.id, request.body.puntos, function buscarNombre(err, result) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
-      DAOPregunta.puntuarPregunta( request.query.email ,request.params.id, request.query.puntos, function buscarNombre(err, result) {
+      DAOPregunta.puntuarPregunta( request.body.email ,request.params.id, request.body.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -86,7 +86,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
         }
       });
     } else if (result == "Update") {
-      DAOPregunta.volverAPuntuarPregunta(request.query.email,request.params.id, request.query.puntos, function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarPregunta(request.body.email,request.params.id, request.body.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -94,7 +94,7 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
         }
       });
     } else {
-      var puntos = request.query.puntos;
+      var puntos = request.body.puntos;
       if (puntos > 0) {
         votado = 1;
       } else {
@@ -105,12 +105,12 @@ router.get("/PuntuarPregunta/:id", function (request, response) {
   });
 });
 
-router.get("/PuntuarRespuesta/:id", function (request, response) {
-  DAOPregunta.getRepuestaPuntuada(request.session.email, request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
+router.post("/PuntuarRespuesta/:id", function (request, response) {
+  DAOPregunta.getRepuestaPuntuada(request.session.email, request.params.id, request.body.id, request.body.puntos, function buscarNombre(err, result) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
-      DAOPregunta.puntuarRespuesta(request.query.email,request.params.id, request.query.id, request.query.puntos, function buscarNombre(err, result) {
+      DAOPregunta.puntuarRespuesta(request.body.email,request.params.id, request.body.id, request.body.puntos, function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -118,7 +118,7 @@ router.get("/PuntuarRespuesta/:id", function (request, response) {
         }
       });
     } else if (result == "Update") {
-      DAOPregunta.volverAPuntuarRespuesta(request.query.email,request.params.id, request.query.id, request.query.puntos , function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarRespuesta(request.body.email,request.params.id, request.body.id, request.body.puntos , function buscarNombre(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -126,7 +126,7 @@ router.get("/PuntuarRespuesta/:id", function (request, response) {
         }
       });
     } else {
-      var puntos = request.query.puntos;
+      var puntos = request.body.puntos;
       response.redirect("/preguntaInfo/" + request.params.id)
     }
   });
