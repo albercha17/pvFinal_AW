@@ -49,10 +49,10 @@ router.get("/SingUp", function (request, response) {
 //--------------------------------------  F U N C I O N E S ---------------------------------------------------------
 
 //--------------------------------------  loguear usuario ---------------------------------------------------------
-router.get("/loguearse", function (request, response) {
+router.post("/loguearse", function (request, response) {
   daoUser.isUserCorrect(
-    request.query.email,
-    request.query.password,
+    request.body.email,
+    request.body.password,
     function cb_isUserCorrect(err, result) {
       if (err) {
         identificado = false;

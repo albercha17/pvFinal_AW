@@ -97,7 +97,7 @@ function identificador(request, response, next) {
 //router_user
 
 app.get("/login",router_user);
-app.get("/loguearse",router_user);
+app.post("/loguearse",router_user);
 app.get("/SingUp",router_user);
 app.post("/crearUsuario",router_user);
 
