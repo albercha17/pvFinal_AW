@@ -1,0 +1,80 @@
+#carta{
+    background-color: rgba(70, 32, 209, 0.144);
+    width: 80rem;
+}
+
+#fotoPerfil{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 150px;
+    border: 1px solid;
+}
+.campos{
+    margin-top: 20px;
+    text-align: center;
+    border-color: black;
+}
+.estadisticas{
+    width: auto;
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size:large;
+    text-align: center;
+    background-color: rgb(204, 235, 236);
+    border-color: rgb(0, 0, 0);
+}
+#info{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+#Est{
+    margin-top: 10px;
+}
+#Medallas{
+    margin-top: 20px;
+    border-color: black;
+}
+#TituloM{
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgb(165, 231, 236);
+}
+.tituloMedalla{
+    margin-top: 10px;
+}
+.bronce{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(175, 154, 154);
+    border-color: black;
+}
+.plata{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(185, 185, 185);
+    border-color: black;
+}
+.oro{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(243, 227, 138);
+    border-color: black;
+}
+.medalla{
+    background-color: rgb(46, 45, 45);
+    border-color: rgb(253, 0, 0);
+    color: beige;
+    border-width: 2px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+.iconoM{
+    margin-left: 10px;
+    width: 30px;
+}

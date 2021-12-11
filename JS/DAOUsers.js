@@ -375,48 +375,34 @@ class DAOUsers {
             }
         });
     }
-    getMedallaVisitas(email, callback) {
+    getMedallaBronce(email, callback) {
         var listaMedallas= new Array();
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM pregunta WHERE autor = ?",
-                    [email],
+                    "SELECT nombre FROM medallasPregunta WHERE user = ? AND tipo= ?",
+                    [email, "bronce"],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
+                            connection.release(); // devolver al pool la conexión
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
-                            if (rows.length === 0) {
-                                callback(null, listaMedallas);
-                            } else {
-                                var i=0;
-                                rows.forEach(function (row) {
-                                    if(row.visitas>=2 && row.visitas<=3){
-                                        var medalla= new Object;
-                                        medalla.metal="bronce";
-                                        medalla.nombre="Pregunta popular";
-                                        listaMedallas.push(medalla);
+                                listaMedallas= rows;
+                                connection.query(
+                                    "SELECT nombre FROM medallasRespuesta WHERE user = ? AND tipo= ?",
+                                    [email, "bronce"],
+                                    function (err, rows2) {
+                                        connection.release(); // devolver al pool la conexión
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else {
+                                                listaMedallas = listaMedallas.concat(rows2);
+                                                callback(null,listaMedallas);
+                                        }
                                     }
-                                    else if(row.visitas>=4 && row.visitas<=5){
-                                        var medalla= new Object;
-                                        medalla.metal="plata";
-                                        medalla.nombre="Pregunta destacada";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    else if(row.visitas>=6 ){
-                                        var medalla= new Object;
-                                        medalla.metal="oro";
-                                        medalla.nombre="Pregunta famosa";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    
-                                    i++;
-                                });
-                                if(i==rows.length)callback(null, listaMedallas);
-                            }
+                                );
                         }
                     }
                 );
@@ -424,54 +410,34 @@ class DAOUsers {
         });
     }
 
-    getMedallaPregunta(email, callback) {
+    getMedallaPlata(email, callback) {
         var listaMedallas= new Array();
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM pregunta WHERE autor = ?",
-                    [email],
+                    "SELECT nombre FROM medallasPregunta WHERE user = ? AND tipo= ?",
+                    [email, "plata"],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
+                            connection.release(); // devolver al pool la conexión
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
-                            if (rows.length === 0) {
-                                callback(null, listaMedallas);
-                            } else {
-                                var i=0;
-                                rows.forEach(function (row) {
-                                    if(row.puntos==1){
-                                        var medalla= new Object;
-                                        medalla.metal="bronce";
-                                        medalla.nombre="Estudiante";
-                                        listaMedallas.push(medalla);
+                                listaMedallas= rows;
+                                connection.query(
+                                    "SELECT nombre FROM medallasRespuesta WHERE user = ? AND tipo= ?",
+                                    [email, "plata"],
+                                    function (err, rows2) {
+                                        connection.release(); // devolver al pool la conexión
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else {
+                                                listaMedallas = listaMedallas.concat(rows2);
+                                                callback(null,listaMedallas);
+                                        }
                                     }
-                                    else if(row.puntos==2 || row.puntos==3 ){
-                                        var medalla= new Object;
-                                        medalla.metal="bronce";
-                                        medalla.nombre="Pregunta interesante";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    else if(row.puntos==4 || row.puntos==5){
-                                        var medalla= new Object;
-                                        medalla.metal="plata";
-                                        medalla.nombre="Buena pregunta";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    else if(row.puntos>=6){
-                                        var medalla= new Object;
-                                        medalla.metal="oro";
-                                        medalla.nombre="Excelente pregunta";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    
-                                    i++;
-                                });
-                                if(i==rows.length)callback(null, listaMedallas);
-                            }
+                                );
                         }
                     }
                 );
@@ -479,48 +445,34 @@ class DAOUsers {
         });
     }
 
-    getMedallaRespuesta(email, callback) {
+    getMedallaOro(email, callback) {
         var listaMedallas= new Array();
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
                 connection.query(
-                    "SELECT * FROM respuesta WHERE autor = ?",
-                    [email],
+                    "SELECT nombre FROM medallasPregunta WHERE user = ? AND tipo= ?",
+                    [email, "oro"],
                     function (err, rows) {
-                        connection.release(); // devolver al pool la conexión
                         if (err) {
+                            connection.release(); // devolver al pool la conexión
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
-                            if (rows.length === 0) {
-                                callback(null, listaMedallas);
-                            } else {
-                                var i=0;
-                                rows.forEach(function (row) {
-                                    if(row.puntos==2||row.puntos==3){
-                                        var medalla= new Object;
-                                        medalla.metal="bronce";
-                                        medalla.nombre="Respuesta interesante";
-                                        listaMedallas.push(medalla);
+                                listaMedallas= rows;
+                                connection.query(
+                                    "SELECT nombre FROM medallasRespuesta WHERE user = ? AND tipo= ?",
+                                    [email, "oro"],
+                                    function (err, rows2) {
+                                        connection.release(); // devolver al pool la conexión
+                                        if (err) {
+                                            callback(new Error("Error de acceso a la base de datos"));
+                                        } else {
+                                                listaMedallas = listaMedallas.concat(rows2);
+                                                callback(null,listaMedallas);
+                                        }
                                     }
-                                    else if(row.puntos==4 || row.puntos==5 ){
-                                        var medalla= new Object;
-                                        medalla.metal="plata";
-                                        medalla.nombre="Buena respuesta";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    else if(row.puntos>=6){
-                                        var medalla= new Object;
-                                        medalla.metal="oro";
-                                        medalla.nombre="Excelente respuesta";
-                                        listaMedallas.push(medalla);
-                                    }
-                                    
-                                    i++;
-                                });
-                                if(i==rows.length)callback(null, listaMedallas);
-                            }
+                                );
                         }
                     }
                 );

@@ -13,7 +13,7 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 const app = express();
 
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');   //// para poder utilizar los post
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //-------------------------------------------------------PLANTILLAS------------------------------------

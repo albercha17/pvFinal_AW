@@ -10,8 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404-Usuario</title>
-    <link rel="shortcut icon"  type="image/png" href="/Images/icono.png"/>
+    <link rel="shortcut icon" type="image/png" href="/Images/icono.png" />
     <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/vistaUser.css">
 </head>
 <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
 
@@ -19,23 +20,22 @@
 <div id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <img src="/Images/logo.png"  width="150px">
+            <img src="/Images/logo.png" width="150px">
             <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"
-                            > Preguntas sin
+                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder">
+                            Preguntas sin
                             responder</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="http://localhost:3000/usuarios"
-                            >Usuarios</a>
+                        <a class="nav-link active" href="http://localhost:3000/usuarios">Usuarios</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav  mb-4 mb-lg-0">
@@ -50,7 +50,8 @@
                             </div>
                             <div class="col col-6">
                                 <form method="get" action="/desconectarse">
-                                    <button class="btn btn-danger" type="submit" id="btn_cerrarSesion">Cerrar Sesion</button>
+                                    <button class="btn btn-danger" type="submit" id="btn_cerrarSesion">Cerrar
+                                        Sesion</button>
                                 </form>
                             </div>
                         </div>
@@ -60,25 +61,141 @@
         </div>
     </nav>
 </div>
- 
- 
-   
+
+
+
 <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <body style="background-image: url(/Images/fondo1.jpg);background-position: center center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-size: cover;
-height: 100%;";>
+height: 100%;" ;>
     <br>
-    <h1 class="text-center"><%= usuario.nombre%></h1>
+    <h1 class="text-center">Información del usuario</h1>
     <br>
     <br>
     <div class="container">
         <div class="row">
-            <p>Preguntas: <%= preguntas.length%></p>
-            <p>Respuestas: <%= respuestas.length%></p>
+            <div class="card" id="carta">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-5">
+                            <div class="card campos">
+                                <div class="row">
+                                    <div class="col col-5">
+                                        <img src="/imagen/<%= usuario.email%>" id="fotoPerfil" id="fotos">
+                                    </div>
+                                    <div class="col col-7" id="info">
+                                        <h4>Información</h4>
+                                        <p>Nombre: <%= usuario.nombre%></p>
+                                        <p>Email: <%= usuario.email%></p>
+                                        <p>Miembro desde <%= usuario.fechaAlta%></p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col col-md-7">
+                            <div class="card campos">
+                                <div class="row">
+                                    <h2 id="Est"> Estadísticas</h2>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col col-md-1"></div>
+                                    <div class="col col-md-3">
+                                        <div class="card estadisticas">
+                                            <h4>Reputación</h4>
+                                            <p><%= usuario.reputacion%></p>
+                                        </div>
+                                    </div>
+                                    <div class="col col-3">
+                                        <div class="card estadisticas">
+                                            <h4>Preguntas</h4>
+                                            <p><%= preguntas.length%></p>
+                                        </div>
+                                    </div>
+                                    <div class="col col-3">
+                                        <div class="card estadisticas">
+                                            <h4>Respuestas</h4>
+                                            <p><%= respuestas.length%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card" id="Medallas">
+                            <h3 id="TituloM"> Medallas</h3>
+                            <div class="row">
+                                <div class="col col-md-4">
+                                    <div class="card bronce">
+                                        <h4 class="tituloMedalla">Bronce: <%= listaMedallas.bronce.cont%></h4>
+                                    </div>
+                                    <% listaMedallas.bronce.lista.forEach(function(bronce) { %>
+                                        <% if(bronce.cont==1){ %>
+                                            <div class="card medalla">
+                                                <h4 class="tituloMedalla"><img src="/Images/bronce.png" class="iconoM">  <%= bronce.nombre%></h4>
+                                            </div>
+                                            <% }; %>
+                                            <% if(bronce.cont>1){ %>
+                                                <div class="card medalla">
+                                                    <h5 class="tituloMedalla"><img src="/Images/bronce.png" class="iconoM">  <%= bronce.nombre%> x<%= bronce.cont%> </h5>
+                                                </div>
+                                                <% }; %>
+                                        
+                                        <% }); %>
+                                </div>
+
+                                <div class="col col-md-4">
+                                    <div class="card plata">
+                                        <h4 class="tituloMedalla">Plata: <%= listaMedallas.plata.cont%></h4>
+                                    </div>
+                                    <% listaMedallas.plata.lista.forEach(function(plata) { %>
+                                        <% if(plata.cont==1){ %>
+                                            <div class="card medalla">
+                                                <h4 class="tituloMedalla"><img src="/Images/plata.png" class="iconoM">  <%= plata.nombre%></h4>
+                                            </div>
+                                            <% }; %>
+                                            <% if(plata.cont>1){ %>
+                                                <div class="card medalla">
+                                                    <h4 class="tituloMedalla"><img src="/Images/plata.png" class="iconoM">  <%= plata.nombre%> x<%= plata.cont%>   </h4>
+                                                </div>
+                                                <% }; %>
+                                        
+                                        <% }); %>
+                                </div>
+
+                                <div class="col col-md-4">
+                                    <div class="card oro">
+                                        <h4 class="tituloMedalla">Oro: <%= listaMedallas.oro.cont%></h4>
+                                    </div>
+                                    <% listaMedallas.oro.lista.forEach(function(oro) { %>
+                                        <% if(oro.cont==1){ %>
+                                            <div class="card medalla">
+                                                <h4 class="tituloMedalla"><img src="/Images/oro.png" class="iconoM">  <%= oro.nombre%></h4>
+                                            </div>
+                                            <% }; %>
+                                            <% if(oro.cont>1){ %>
+                                                <div class="card medalla">
+                                                    <h4 class="tituloMedalla"><img src="/Images/oro.png" class="iconoM">  <%= oro.nombre%> x<%= oro.cont%> </h4>
+                                                </div>
+                                                <% }; %>
+                                        
+                                        <% }); %>
+                                </div>
+                               
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
     </div>
 
