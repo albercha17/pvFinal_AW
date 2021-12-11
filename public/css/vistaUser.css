@@ -31,6 +31,10 @@
 }
 #Est{
     margin-top: 10px;
+    text-align: center;
+    background-color: rgb(165, 231, 236);
+    margin-left: 10px;
+    margin-right: 10px;
 }
 #Medallas{
     margin-top: 20px;

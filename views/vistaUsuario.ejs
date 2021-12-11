@@ -99,10 +99,8 @@ height: 100%;" ;>
                         </div>
                         <div class="col col-md-7">
                             <div class="card campos">
-                                <div class="row">
                                     <h2 id="Est"> Estadísticas</h2>
 
-                                </div>
                                 <div class="row">
                                     <div class="col col-md-1"></div>
                                     <div class="col col-md-3">
@@ -138,7 +136,7 @@ height: 100%;" ;>
                                     <% listaMedallas.bronce.lista.forEach(function(bronce) { %>
                                         <% if(bronce.cont==1){ %>
                                             <div class="card medalla">
-                                                <h4 class="tituloMedalla"><img src="/Images/bronce.png" class="iconoM">  <%= bronce.nombre%></h4>
+                                                <h5 class="tituloMedalla"><img src="/Images/bronce.png" class="iconoM">  <%= bronce.nombre%></h5>
                                             </div>
                                             <% }; %>
                                             <% if(bronce.cont>1){ %>
@@ -157,7 +155,7 @@ height: 100%;" ;>
                                     <% listaMedallas.plata.lista.forEach(function(plata) { %>
                                         <% if(plata.cont==1){ %>
                                             <div class="card medalla">
-                                                <h4 class="tituloMedalla"><img src="/Images/plata.png" class="iconoM">  <%= plata.nombre%></h4>
+                                                <h5 class="tituloMedalla"><img src="/Images/plata.png" class="iconoM">  <%= plata.nombre%></h5>
                                             </div>
                                             <% }; %>
                                             <% if(plata.cont>1){ %>
@@ -176,7 +174,7 @@ height: 100%;" ;>
                                     <% listaMedallas.oro.lista.forEach(function(oro) { %>
                                         <% if(oro.cont==1){ %>
                                             <div class="card medalla">
-                                                <h4 class="tituloMedalla"><img src="/Images/oro.png" class="iconoM">  <%= oro.nombre%></h4>
+                                                <h5 class="tituloMedalla"><img src="/Images/oro.png" class="iconoM">  <%= oro.nombre%></h5>
                                             </div>
                                             <% }; %>
                                             <% if(oro.cont>1){ %>
