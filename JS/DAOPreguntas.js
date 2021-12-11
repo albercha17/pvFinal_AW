@@ -271,7 +271,7 @@ class DAOPreguntas {
                                     nombre = "Buena pregunta";
                                 } else if (puntosAux == 6) {
                                     tipo = "oro";
-                                    nombre = "Excelente pregunta ";
+                                    nombre = "Excelente pregunta";
                                 }
                             }
                             connection.query(
@@ -428,7 +428,7 @@ class DAOPreguntas {
                                     nombre = "Buena pregunta";
                                 } else if (puntosAux >= 6) {
                                     tipo = "oro";
-                                    nombre = "Excelente pregunta ";
+                                    nombre = "Excelente pregunta";
                                 }
                             }
                             connection.query(
@@ -607,7 +607,7 @@ class DAOPreguntas {
                                     nombre = "Respuesta interesante";
                                 } else if (puntosAux == 4) {
                                     tipo = "plata";
-                                    nombre = "Buena respuesta ";
+                                    nombre = "Buena respuesta";
                                 } else if (puntosAux == 6) {
                                     tipo = "oro";
                                     nombre = "Excelente respuesta";
@@ -752,7 +752,7 @@ class DAOPreguntas {
                                     nombre = "Respuesta interesante";
                                 } else if (puntosAux == 4 || puntosAux == 5) {
                                     tipo = "plata";
-                                    nombre = "Buena respuesta ";
+                                    nombre = "Buena respuesta";
                                 } else if (puntosAux >= 6) {
                                     tipo = "oro";
                                     nombre = "Excelente respuesta";
