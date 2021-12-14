@@ -1,5 +1,6 @@
 #cartaP{
     border-color: rgb(3, 3, 27);
+    margin-top: 30px;
 }
 #cuerpoP{
     margin-top: 40px;font-size: larger;
@@ -67,6 +68,7 @@
 #cartaRespuesta{
     border-color: blue;
      width: auto;
+     margin-top: 30px;
 }
 
 #centro{
