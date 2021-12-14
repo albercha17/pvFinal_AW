@@ -34,3 +34,34 @@ height: 100%;
 #error{
     color: red;
 }
+
+.bronce{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(175, 154, 154);
+    border-color: black;
+}
+.plata{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(185, 185, 185);
+    border-color: black;
+}
+.oro{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size:x-large;
+    background-color: rgb(243, 227, 138);
+    border-color: black;
+}
+.medalla{
+    background-color: rgb(17, 17, 17);
+    border-color: rgb(253, 0, 0);
+    color: beige;
+    border-width: 2px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
