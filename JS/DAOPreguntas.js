@@ -691,7 +691,7 @@ class DAOPreguntas {
                                                                 } else {
                                                                     connection.query(
                                                                         "INSERT INTO medallasrespuesta (user,tipo,nombre,idPregunta,idRespuesta,fecha) VALUES (?, ?, ?, ?, ?, ?)",
-                                                                        [user, tipo, nombre, idPregunta, idPregunta, fecha],
+                                                                        [user, tipo, nombre, idPregunta, idRespuesta, fecha],
                                                                         function (err, rows) {
                                                                             connection.release(); // devolver al pool la conexión
                                                                             if (err) {
