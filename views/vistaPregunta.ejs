@@ -17,50 +17,7 @@
 <!-- ------------------------------------------   HEADER  ------------------------------------------------------------------------------------------- -->
 
 
-<div id="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <img src="/Images/logo.png"  width="150px">
-            <a class="navbar-brand" href="http://localhost:3000/">Inicio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="http://localhost:3000/SinResponder"
-                            > Preguntas sin
-                            responder</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="http://localhost:3000/usuarios"
-                            >Usuarios</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav  mb-4 mb-lg-0">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col col-3">
-                                <img src="/imagen/<%= email%>" id="iconoHeader" width="70" height="66">
-                            </div>
-                            <div class="col col-3">
-                                <a class="nav-link active" aria-current="page" id="nombreUsuario"
-                                    href="http://localhost:3000/usuario/<%= email%>"><%= nombre%></a>
-                            </div>
-                            <div class="col col-6">
-                                <form method="get" action="/desconectarse">
-                                    <button class="btn btn-danger" type="submit" id="btn_cerrarSesion">Cerrar Sesion</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
+<%- include("header") %>
  
 
 
