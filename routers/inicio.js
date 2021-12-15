@@ -25,7 +25,7 @@ router.get("/", function (request, response) {
     var preguntas= new Array();
     filtroE =null;
     filtroC =null;
-    DAOP.getPreguntas(function buscarNombre(err, result) {
+    DAOP.getPreguntas(function getP(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
@@ -59,7 +59,7 @@ router.get("/", function (request, response) {
     var preguntas= new Array();
     filtroE =null;
     filtroC =null;
-    DAOP.filtrarVisitas(function buscarNombre(err, result) {
+    DAOP.filtrarVisitas(function filtrarV(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
@@ -93,7 +93,7 @@ router.get("/", function (request, response) {
     var preguntas= new Array();
     filtroE =null;
     filtroC =null;
-    DAOP.filtrarFecha(function buscarNombre(err, result) {
+    DAOP.filtrarFecha(function filtrarF(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
@@ -134,7 +134,7 @@ router.get("/", function (request, response) {
     var tag= request.query.tag;
     filtroE =tag;
     filtroC =null;
-    DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
+    DAOP.getPreguntas_por_etiqueta(tag,function filtrarE(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
@@ -165,7 +165,7 @@ router.get("/", function (request, response) {
     var tag= request.query.tag;
     filtroE =null;
     filtroC =tag;
-    DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
+    DAOP.getPreguntas_por_texto(tag,function filtrarT(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {

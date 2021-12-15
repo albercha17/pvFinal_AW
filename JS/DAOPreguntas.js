@@ -10,7 +10,7 @@ class DAOPreguntas {
         this.pool = pool
     }
 
-    getPreguntas(callback) { // preguntar si puede ser un pregunta sin tag
+    getPreguntas(callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -23,7 +23,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var listaP = new Array();
                                 var i = 0;
@@ -62,7 +62,7 @@ class DAOPreguntas {
             }
         });
     }
-    filtrarVisitas(callback) { // preguntar si puede ser un pregunta sin tag
+    filtrarVisitas(callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -75,7 +75,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var listaP = new Array();
                                 var i = 0;
@@ -114,7 +114,7 @@ class DAOPreguntas {
             }
         });
     }
-    filtrarFecha(callback) { // preguntar si puede ser un pregunta sin tag
+    filtrarFecha(callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -127,7 +127,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var listaP = new Array();
                                 var i = 0;
@@ -166,7 +166,7 @@ class DAOPreguntas {
             }
         });
     }
-    visitaPregunta(id, callback) { // preguntar si puede ser un pregunta sin tag
+    visitaPregunta(id, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -179,11 +179,10 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var visitas = rows[0].visitas;
                                 visitas++;
-                                /* Para las medallas */
                                 var user, tipo, nombre, idPregunta, idRespuesta, fecha;
                                 user = rows[0].autor;
                                 idPregunta = rows[0].id;
@@ -209,7 +208,7 @@ class DAOPreguntas {
                                         } else {
                                             if (tipo == null) {
                                                 connection.release(); // devolver al pool la conexión
-                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                callback(null, true); 
                                             } else {
                                                 connection.query(
                                                     "INSERT INTO medallaspregunta (user,tipo,nombre,idPregunta,fecha) VALUES (?, ?, ?, ?, ?)",
@@ -219,7 +218,7 @@ class DAOPreguntas {
                                                         if (err) {
                                                             callback(new Error("Error de acceso a la base de datos"));
                                                         } else {
-                                                            callback(null, true); //no está el usuario con el password proporcionado
+                                                            callback(null, true);
 
                                                         }
                                                     }
@@ -238,7 +237,7 @@ class DAOPreguntas {
     }
 
 
-    puntuarPregunta(email, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    puntuarPregunta(email, id, puntos, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -312,7 +311,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -325,7 +324,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -338,7 +337,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -351,13 +350,13 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
                                                                     } else {
                                                                         connection.release(); // devolver al pool la conexión
-                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                        callback(null, true); 
                                                                     }
                                                                 } else {
                                                                     connection.query(
@@ -368,7 +367,7 @@ class DAOPreguntas {
                                                                             if (err) {
                                                                                 callback(null, true);
                                                                             } else {
-                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                                callback(null, true); 
                                                                             }
                                                                         }
                                                                     );
@@ -389,7 +388,7 @@ class DAOPreguntas {
         });
     }
 
-    volverAPuntuarPregunta(email, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    volverAPuntuarPregunta(email, id, puntos, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -468,7 +467,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -481,7 +480,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -504,7 +503,7 @@ class DAOPreguntas {
                                                                                                 if (err) {
                                                                                                     callback(null, true);
                                                                                                 } else {
-                                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                                    callback(null, true); 
                                                                                                 }
                                                                                             }
                                                                                         );
@@ -525,13 +524,13 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
                                                                     } else {
                                                                         connection.release(); // devolver al pool la conexión
-                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                        callback(null, true); 
                                                                     }
                                                                 } else { // aqui el insetar
                                                                     connection.query(
@@ -550,13 +549,13 @@ class DAOPreguntas {
                                                                                             if (err) {
                                                                                                 callback(null, true);
                                                                                             } else {
-                                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                                                callback(null, true); 
                                                                                             }
                                                                                         }
                                                                                     );
                                                                                 } else {
                                                                                     connection.release(); // devolver al pool la conexión
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
 
                                                                             }
@@ -579,7 +578,7 @@ class DAOPreguntas {
         });
     }
 
-    puntuarRespuesta(email, idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    puntuarRespuesta(email, idP, id, puntos, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -653,7 +652,7 @@ class DAOPreguntas {
                                                                                     if (err) {
                                                                                         callback(null, true);
                                                                                     } else {
-                                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                                        callback(null, true);
                                                                                     }
                                                                                 }
                                                                             );
@@ -666,7 +665,7 @@ class DAOPreguntas {
                                                                                     if (err) {
                                                                                         callback(null, true);
                                                                                     } else {
-                                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                                        callback(null, true);
                                                                                     }
                                                                                 }
                                                                             );
@@ -679,13 +678,13 @@ class DAOPreguntas {
                                                                                     if (err) {
                                                                                         callback(null, true);
                                                                                     } else {
-                                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                                        callback(null, true); 
                                                                                     }
                                                                                 }
                                                                             );
                                                                         } else {
                                                                             connection.release(); // devolver al pool la conexión
-                                                                            callback(null, true); //no está el usuario con el password proporcionado
+                                                                            callback(null, true); 
                                                                         }
                                                                     }
                                                                 } else {
@@ -697,7 +696,7 @@ class DAOPreguntas {
                                                                             if (err) {
                                                                                 callback(null, true);
                                                                             } else {
-                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                                callback(null, true); 
                                                                             }
                                                                         }
                                                                     );
@@ -718,7 +717,7 @@ class DAOPreguntas {
         });
     }
 
-    volverAPuntuarRespuesta(email, idP, id, puntos, callback) { // preguntar si puede ser un pregunta sin tag
+    volverAPuntuarRespuesta(email, idP, id, puntos, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -796,7 +795,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -809,7 +808,7 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
@@ -822,13 +821,13 @@ class DAOPreguntas {
                                                                                 if (err) {
                                                                                     callback(null, true);
                                                                                 } else {
-                                                                                    callback(null, true); //no está el usuario con el password proporcionado
+                                                                                    callback(null, true); 
                                                                                 }
                                                                             }
                                                                         );
                                                                     } else {
                                                                         connection.release(); // devolver al pool la conexión
-                                                                        callback(null, true); //no está el usuario con el password proporcionado
+                                                                        callback(null, true); 
                                                                     }
                                                                 } else {
                                                                     connection.query(
@@ -839,7 +838,7 @@ class DAOPreguntas {
                                                                             if (err) {
                                                                                 callback(null, true);
                                                                             } else {
-                                                                                callback(null, true); //no está el usuario con el password proporcionado
+                                                                                callback(null, true); 
                                                                             }
                                                                         }
                                                                     );
@@ -939,7 +938,7 @@ class DAOPreguntas {
 
 
 
-    getPreguntasId(id, callback) { // preguntar si puede ser un pregunta sin tag
+    getPreguntasId(id, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -953,7 +952,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var listaP = new Array();
                                 var i = 0;
@@ -993,7 +992,7 @@ class DAOPreguntas {
         });
     }
 
-    getPreguntas_por_etiqueta(task, callback) { // preguntar si puede ser un pregunta sin tag
+    getPreguntas_por_etiqueta(task, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -1007,7 +1006,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var listaP = new Array();
                                 var i = 0;
@@ -1047,7 +1046,7 @@ class DAOPreguntas {
         });
     }
 
-    getPreguntas_por_texto(task, callback) { // preguntar si puede ser un pregunta sin tag
+    getPreguntas_por_texto(task, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -1060,7 +1059,7 @@ class DAOPreguntas {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 var listaP = new Array();
                                 var i = 0;
@@ -1204,7 +1203,7 @@ class DAOPreguntas {
     }
 
 
-    getPreguntaEstaPuntuada(id, email, callback) { // preguntar si puede ser un pregunta sin tag
+    getPreguntaEstaPuntuada(id, email, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));

@@ -41,7 +41,7 @@ router.use(express.static(__dirname + '/public'));
           Etiquetas= new Array();
       }
       else{
-        DAOP.insertPregunta(request.session.email,request.body.titulo,request.body.cuerpo,Etiquetas,function buscarNombre(err, result) {
+        DAOP.insertPregunta(request.session.email,request.body.titulo,request.body.cuerpo,Etiquetas,function insertarPregunta(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {

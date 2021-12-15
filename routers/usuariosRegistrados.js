@@ -15,7 +15,7 @@ router.use(express.static(__dirname + '/public'));
 
 //--------------------------------------  R U T A S ---------------------------------------------------------
   router.get("/usuarios", function (request, response) {
-    DAOUser.getUsuarios(function buscarNombre(err, result) {
+    DAOUser.getUsuarios(function buscarUsers(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
@@ -31,7 +31,7 @@ router.use(express.static(__dirname + '/public'));
     })
   });
   router.get("/BuscarUsuario", function (request, response) {
-    DAOUser.getUsuarios_filtro(request.query.filtro,function buscarNombre(err, result) {
+    DAOUser.getUsuarios_filtro(request.query.filtro,function filtrarU(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {

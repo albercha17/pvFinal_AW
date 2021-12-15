@@ -19,7 +19,7 @@ class DAOUsers {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 callback(null, rows[0]);
                             }
@@ -44,7 +44,7 @@ class DAOUsers {
                             callback(new Error("Error de acceso a la base de datos"));
                         } else {
                             if (rows.length === 0) {
-                                callback(null, null); //no está el usuario con el password proporcionado
+                                callback(null, null); 
                             } else {
                                 callback(null, rows[0].img);
                             }
@@ -163,7 +163,7 @@ class DAOUsers {
 
     
 
-    insertUser(email, password, nombre, img, callback) { // si falla el insert del tag se hace rollback?????
+    insertUser(email, password, nombre, img, callback) { 
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 error = new Error("Error de acceso a la base de datos");

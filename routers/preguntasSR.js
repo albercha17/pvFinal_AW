@@ -20,12 +20,12 @@ router.use(express.static(__dirname + '/public'));
     var Lista= new Array();
     filtroE =null;
     filtroC =null;
-    DAOP.getPreguntas(function buscarNombre(err, result) {
+    DAOP.getPreguntas(function getP(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
         var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
+        DAOP.getRespuesta(function getR(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {
@@ -72,12 +72,12 @@ router.use(express.static(__dirname + '/public'));
     var Lista= new Array();
     filtroE =null;
     filtroC =null;
-    DAOP.filtrarVisitas(function buscarNombre(err, result) {
+    DAOP.filtrarVisitas(function filtrarV(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
         var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
+        DAOP.getRespuesta(function getR(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {
@@ -124,12 +124,12 @@ router.use(express.static(__dirname + '/public'));
     var Lista= new Array();
     filtroE =null;
     filtroC =null;
-    DAOP.filtrarFecha(function buscarNombre(err, result) {
+    DAOP.filtrarFecha(function filtrarF(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
         var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
+        DAOP.getRespuesta(function getR(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {
@@ -177,12 +177,12 @@ router.use(express.static(__dirname + '/public'));
     filtroE =request.query.tag;
     filtroC =null;
     var tag=request.query.tag;
-    DAOP.getPreguntas_por_etiqueta(tag,function buscarNombre(err, result) {
+    DAOP.getPreguntas_por_etiqueta(tag,function filtrarE(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
         var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
+        DAOP.getRespuesta(function getR(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {
@@ -230,12 +230,12 @@ router.use(express.static(__dirname + '/public'));
     filtroE =null;
     filtroC =request.query.tag;
     var tag=request.query.tag;
-    DAOP.getPreguntas_por_texto(tag,function buscarNombre(err, result) {
+    DAOP.getPreguntas_por_texto(tag,function filtrarT(err, result) {
       if (err) {
         response.status(500);
       } else if (result) {
         var preguntas = result;
-        DAOP.getRespuesta(function buscarNombre(err, result) {
+        DAOP.getRespuesta(function getR(err, result) {
           if (err) {
             response.status(500);
           } else if (result) {

@@ -28,27 +28,27 @@ router.get("/usuario/:email", function (request, response) {
             response.status(500);
         } else if (result) {
             var usuario = result;
-            DAOUser.getPreguntasUsuario(request.params.email, function buscarNombre(err, result) {
+            DAOUser.getPreguntasUsuario(request.params.email, function buscarP(err, result) {
                 if (err) {
                     response.status(500);
                 } else if (result) {
                     var preguntas = result;
-                    DAOUser.getRespuestasUsuario(request.params.email, function buscarNombre(err, result) {
+                    DAOUser.getRespuestasUsuario(request.params.email, function buscarR(err, result) {
                         if (err) {
                             response.status(500);
                         } else if (result) {
                             var respuestas = result;
-                            DAOUser.getMedallaBronce(request.params.email, function buscarNombre(err, result) {
+                            DAOUser.getMedallaBronce(request.params.email, function bronceM(err, result) {
                                 if (err) {
                                     response.status(500);
                                 } else if (result) {
                                     listaMedallas.bronce= contarBronce(result);
-                                    DAOUser.getMedallaPlata(request.params.email, function buscarNombre(err, result) {
+                                    DAOUser.getMedallaPlata(request.params.email, function plataP(err, result) {
                                         if (err) {
                                             response.status(500);
                                         } else if (result) {
                                             listaMedallas.plata= contarPlata(result);
-                                            DAOUser.getMedallaOro(request.params.email, function buscarNombre(err, result) {
+                                            DAOUser.getMedallaOro(request.params.email, function oroP(err, result) {
                                                 if (err) {
                                                     response.status(500);
                                                 } else if (result) {

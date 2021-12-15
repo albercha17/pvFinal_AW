@@ -22,19 +22,19 @@ router.use(express.static(__dirname + '/public'));
 
 //--------------------------------------  R U T A S ---------------------------------------------------------
 router.get("/preguntaInfo/:id", function (request, response) {
-  DAOPregunta.getPreguntasId(request.params.id, function buscarNombre(err, result) {
+  DAOPregunta.getPreguntasId(request.params.id, function getP(err, result) {
     if (err) {
       response.status(500);
     } else if (result) {
       var preguntas = result;
       var pregunta = preguntas[0];
-      DAOPregunta.getRespuestaId(pregunta.id, request.session.email, function buscarNombre(err, result) {
+      DAOPregunta.getRespuestaId(pregunta.id, request.session.email, function getR(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
           var respuestas = result;
           response.status(200);
-          DAOPregunta.getPreguntaEstaPuntuada(pregunta.id ,request.session.email, function buscarNombre(err, result) {
+          DAOPregunta.getPreguntaEstaPuntuada(pregunta.id ,request.session.email, function getPV(err, result) {
             if (err) {
               response.status(500);
             } else if (result) {
@@ -61,7 +61,7 @@ router.get("/preguntaInfo/:id", function (request, response) {
 });
 
 router.get("/pregunta/:id", function (request, response) {
-  DAOPregunta.visitaPregunta(request.params.id, function buscarNombre(err, result) {
+  DAOPregunta.visitaPregunta(request.params.id, function visita(err, result) {
     if (err) {
       response.status(500);
     } else if (result) {
@@ -74,11 +74,11 @@ router.get("/pregunta/:id", function (request, response) {
 router.post("/PuntuarPregunta/:id", function (request, response) {
   votadoN = null;
   votado = null;
-  DAOPregunta.getPreguntaPuntuada(request.session.email, request.params.id, request.body.puntos, function buscarNombre(err, result) {
+  DAOPregunta.getPreguntaPuntuada(request.session.email, request.params.id, request.body.puntos, function getPV(err, result) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
-      DAOPregunta.puntuarPregunta( request.body.email ,request.params.id, request.body.puntos, function buscarNombre(err, result) {
+      DAOPregunta.puntuarPregunta( request.body.email ,request.params.id, request.body.puntos, function puntuarP(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -86,7 +86,7 @@ router.post("/PuntuarPregunta/:id", function (request, response) {
         }
       });
     } else if (result == "Update") {
-      DAOPregunta.volverAPuntuarPregunta(request.body.email,request.params.id, request.body.puntos, function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarPregunta(request.body.email,request.params.id, request.body.puntos, function puntuarP(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -106,11 +106,11 @@ router.post("/PuntuarPregunta/:id", function (request, response) {
 });
 
 router.post("/PuntuarRespuesta/:id", function (request, response) {
-  DAOPregunta.getRepuestaPuntuada(request.session.email, request.params.id, request.body.id, request.body.puntos, function buscarNombre(err, result) {
+  DAOPregunta.getRepuestaPuntuada(request.session.email, request.params.id, request.body.id, request.body.puntos, function respuestaV(err, result) {
     if (err) {
       response.status(500);
     } else if (result == "Insertar") {
-      DAOPregunta.puntuarRespuesta(request.body.email,request.params.id, request.body.id, request.body.puntos, function buscarNombre(err, result) {
+      DAOPregunta.puntuarRespuesta(request.body.email,request.params.id, request.body.id, request.body.puntos, function puntuarV(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -118,7 +118,7 @@ router.post("/PuntuarRespuesta/:id", function (request, response) {
         }
       });
     } else if (result == "Update") {
-      DAOPregunta.volverAPuntuarRespuesta(request.body.email,request.params.id, request.body.id, request.body.puntos , function buscarNombre(err, result) {
+      DAOPregunta.volverAPuntuarRespuesta(request.body.email,request.params.id, request.body.id, request.body.puntos , function puntuarV(err, result) {
         if (err) {
           response.status(500);
         } else if (result) {
@@ -133,7 +133,7 @@ router.post("/PuntuarRespuesta/:id", function (request, response) {
 });
 
 router.post("/CrearRespuesta/:id", function (request, response) {
-  DAOPregunta.insertRespuesta(request.params.id, request.body.texto, request.session.email, function buscarNombre(err, result) {
+  DAOPregunta.insertRespuesta(request.params.id, request.body.texto, request.session.email, function crearR(err, result) {
     if (err) {
       response.status(500);
     } else if (result) {
